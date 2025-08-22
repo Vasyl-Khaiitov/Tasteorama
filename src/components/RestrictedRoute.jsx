@@ -1,12 +1,13 @@
-// !! як приклад для використання
-//import { useSelector } from "react-redux";
-// import { selectIsLoggedIn } from "../redux/auth/selectors";
-// import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectUser } from "../redux/auth/selectors.js";
 
-// export default function RestrictedRoute({
-//   component: Component,
-//   redirectTo = "/",
-// }) {
-//   const isLoggedIn = useSelector(selectIsLoggedIn);
-//   return isLoggedIn ? <Navigate to={redirectTo} /> : Component;
-// }
+export const RestrictedRoute = ({ component }) => {
+  const isUserLoggedIn = useSelector(selectUser);
+  const Component = component;
+  return !isUserLoggedIn ? (
+    <Component />
+  ) : (
+    <Navigate to="/auth/login" replace />
+  );
+};
