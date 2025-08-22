@@ -1,5 +1,8 @@
+import { useParams } from "react-router-dom";
+import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
+
 export default function AuthPage() {
-  <>
-    <h2>I auth page</h2>
-  </>;
+  const { authType } = useParams();
+
+  return <>{authType === "register" && <RegistrationForm />}</>;
 }

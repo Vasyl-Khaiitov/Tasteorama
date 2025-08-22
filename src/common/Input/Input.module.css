@@ -1,0 +1,76 @@
+.labelName {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  color: #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  min-width: 100%;
+}
+
+.inputName {
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 8px;
+  max-height: 41px;
+  width: 100%;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 155%;
+  color: #000000;
+  outline: none;
+  transition: box-shadow 300ms ease, border 300ms ease;
+}
+
+.inputName::placeholder {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 155%;
+  color: #9f9f9f;
+}
+
+.inputName:focus,
+.inputName:hover {
+  box-shadow: 0 0 0 4px rgba(78, 70, 180, 0.2);
+  border: 1px solid #9b6c43;
+}
+
+.inputError {
+  border: 1.5px solid #c80000;
+  border-radius: 8px;
+  padding: 8px;
+  max-height: 41px;
+  width: 100%;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 155%;
+  color: #000000;
+  outline: none;
+  transition: border 300ms ease;
+}
+
+.inputError::placeholder {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 155%;
+  color: #c80000;
+}
+
+.inputError:hover,
+.inputError:focus {
+  border: 1.5px solid #c80000;
+}
+
+.error {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  color: #c80000;
+}
