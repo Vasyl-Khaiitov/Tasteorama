@@ -19,17 +19,6 @@
   margin-bottom: 20px;
 }
 
-.paragraph {
-  font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 155%;
-  text-align: center;
-  color: #000000;
-  margin-bottom: 20px;
-  max-width: 260px;
-}
-
 .form {
   display: flex;
   flex-direction: column;
@@ -64,23 +53,15 @@
   .formContainer {
     max-width: 522px;
   }
-
-  .paragraph {
-    max-width: 430px;
-  }
 }
 
 @media screen and (min-width: 1280px) {
   .formContainer {
     max-width: 420px;
   }
-
-  .paragraph {
-    max-width: 330px;
-  }
 }
 
-@media (max-width: 340px) {
+@media (max-width: 320px) {
   .footer {
     flex-direction: column;
   }

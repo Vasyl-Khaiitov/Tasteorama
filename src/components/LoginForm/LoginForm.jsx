@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import css from "./RegistrationForm.module.css";
+import css from "./LoginForm.module.css";
 
 import Input from "../../common/Input/Input";
 import { useState } from "react";
@@ -8,16 +8,11 @@ import Button from "../../common/Button/Button";
 import { NavLink } from "react-router-dom";
 
 const initialValues = {
-  name: "",
   email: "",
   password: "",
 };
 
 const registerSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, "Too short!")
-    .max(16, "Too long!")
-    .required("Required"),
   email: Yup.string()
     .email("Must be a valid email!")
     .max(128, "Too long!")
@@ -26,20 +21,13 @@ const registerSchema = Yup.object().shape({
     .min(8, "Too Short!")
     .max(128, "Too Long!")
     .required("Required"),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password"), null], "Passwords must match")
-    .required("Required"),
 });
 
-export default function RegistrationForm() {
+export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <div className={css.formContainer}>
-      <h1 className={css.title}>Register</h1>
-      <p className={css.paragraph}>
-        Join our community of culinary enthusiasts, save your favorite recipes,
-        and share your cooking creations
-      </p>
+      <h1 className={css.title}>Login</h1>
 
       <Formik initialValues={initialValues} validationSchema={registerSchema}>
         <Form className={css.form}>
@@ -49,12 +37,7 @@ export default function RegistrationForm() {
             placeholder="email@gmail.com"
             labelText="Enter your email address"
           />
-          <Input
-            name="name"
-            type="text"
-            placeholder="Max"
-            labelText="Enter your name"
-          />
+
           <Input
             name="password"
             type="password"
@@ -64,23 +47,14 @@ export default function RegistrationForm() {
             show={showPassword}
             onToggle={() => setShowPassword(!showPassword)}
           />
-          <Input
-            name="confirmPassword"
-            type="password"
-            placeholder="********"
-            labelText="Repeat your password"
-            showToggle={true}
-            show={showPassword}
-            onToggle={() => setShowPassword(!showPassword)}
-          />
 
-          <Button type="submit" name="Create account" />
+          <Button type="submit" name="Login" />
         </Form>
       </Formik>
       <p className={css.footer}>
-        Already have an account?
-        <NavLink to="/auth/login" className={css.linkPrimary}>
-          Log in
+        Don't have an account?
+        <NavLink to="/auth/register" className={css.linkPrimary}>
+          Register
         </NavLink>
       </p>
     </div>
