@@ -25,6 +25,9 @@
   outline: none;
   transition: box-shadow 300ms ease, border 300ms ease;
   position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .inputName::placeholder {
@@ -33,6 +36,9 @@
   font-size: 16px;
   line-height: 155%;
   color: #9f9f9f;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .inputName:focus,
