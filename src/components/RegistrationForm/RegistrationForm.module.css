@@ -36,3 +36,8 @@
   justify-content: center;
   min-width: 100%;
 }
+
+.fullWidth {
+  width: 100vw;
+  /* max-width: none; */
+}
