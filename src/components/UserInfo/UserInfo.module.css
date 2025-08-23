@@ -1,4 +1,4 @@
-container {
+.container {
   display: flex;
   align-items: center;
 }
@@ -11,7 +11,7 @@ container {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #A06D48;
+  background-color: #a06d48;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,7 +25,7 @@ container {
   color: black;
 }
 
-.user_div{
-    display: flex;
-    align-items: center;
+.user_div {
+  display: flex;
+  align-items: center;
 }
