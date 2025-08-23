@@ -6,16 +6,15 @@ import Layout from "../components/layout/Layout";
 
 import { RestrictedRoute } from "./RestrictedRoute";
 
+
 import Header from "./Header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrentUser } from "../redux/auth/operations";
-import {
-  selectAuthIsLoading,
-  selectUserIsRefresh,
-} from "../redux/auth/selectors";
+import { selectUserIsRefresh,selectIsLoggedIn } from "../redux/auth/selectors";
 
+import { lsGetToken } from "../utils/localStorage";
+import { setAuthorizationToken } from "../api/api";
 import { ToastContainer } from "react-toastify";
-import Loader from "./Loader/Loader";
 
 const MainPage = lazy(() => import("../pages/MainPage/MainPage"));
 const AddRecipePage = lazy(() =>
@@ -28,11 +27,18 @@ const AuthPage = lazy(() => import("../pages/AuthPage/AuthPage"));
 export default function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectUserIsRefresh);
-  const isLoading = useSelector(selectAuthIsLoading);
+  // const isLoading = useSelector(selectAuthIsLoading);
+const isLoggedIn = useSelector(selectIsLoggedIn); 
+ useEffect(() => {
+    const token = lsGetToken();
 
-  useEffect(() => {
-    dispatch(fetchCurrentUser());
-  }, [dispatch]);
+    const isValidToken = token && token !== "undefined" && token !== "null";
+
+    if (isValidToken && !isLoggedIn) {
+      setAuthorizationToken(token);
+      dispatch(fetchCurrentUser());
+    }
+  }, [dispatch, isLoggedIn]);
 
   return isRefreshing ? (
     <strong>Refreshing user...</strong>
@@ -41,17 +47,13 @@ export default function App() {
       <Header />
       <Layout>
         <Suspense fallback={null}>
-          {isLoading === true ? (
-            <Loader />
-          ) : (
-            <Routes>
-              <Route path="/" element={<MainPage />} />
-              <Route path="/auth/:authType" element={<AuthPage />} />
-              <Route path="/recipes/:id" element={<RecipePage />} />
-              <Route path="/add-recipe" element={<AddRecipePage />} />
-              <Route path="/profile/:recipeType" element={<ProfilePage />} />
-            </Routes>
-          )}
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/auth/:authType" element={<AuthPage />} />
+            <Route path="/recipes/:id" element={<RecipePage />} />
+            <Route path="/add-recipe" element={<AddRecipePage />} />
+            <Route path="/profile/:recipeType" element={<ProfilePage />} />
+          </Routes>
         </Suspense>
       </Layout>
       <ToastContainer position="top-right" autoClose={2000} />

@@ -1,26 +1,15 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchCurrentUser } from "../../redux/auth/operations";
-import { selectUser, selectIsLoggedIn } from "../../redux/auth/selectors";
+
+import { useSelector} from "react-redux";
+
+import { selectUser} from "../../redux/auth/selectors";
 import css from "../../components/UserInfo/UserInfo.module.css";
-import { lsGetToken } from "../../utils/localStorage";
-import { setAuthorizationToken } from "../../api/api";
+
 
 const UserInfo = () => {
-  const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  useEffect(() => {
-    const token = lsGetToken();
 
-    const isValidToken = token && token !== "undefined" && token !== "null";
 
-    if (isValidToken && !isLoggedIn) {
-      setAuthorizationToken(token);
-      dispatch(fetchCurrentUser());
-    }
-  }, [dispatch, isLoggedIn]);
 
   const firstLetter = user?.name?.charAt(0).toUpperCase() || "";
 
