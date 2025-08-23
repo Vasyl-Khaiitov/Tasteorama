@@ -77,9 +77,7 @@ export const fetchCurrentUser = createAsyncThunk(
     setAuthorizationToken(token);
 
     try {
-      const res = await apiClient.get("/users", {
-        headers: { "Cache-Control": "no-cache" },
-      });
+      const res = await apiClient.get("/users");
       console.log("API /users response:", res);
       return res.data.data.info;
     } catch (err) {

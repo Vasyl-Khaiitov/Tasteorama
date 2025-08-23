@@ -14,8 +14,7 @@ const UserInfo = () => {
   useEffect(() => {
     const token = lsGetToken();
 
-    const isValidToken =
-      token && token !== "undefined" && token !== "null";
+    const isValidToken = token && token !== "undefined" && token !== "null";
 
     if (isValidToken && !isLoggedIn) {
       setAuthorizationToken(token);

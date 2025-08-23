@@ -6,14 +6,16 @@ import Layout from "../components/layout/Layout";
 
 import { RestrictedRoute } from "./RestrictedRoute";
 
-
 import Header from "./Header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrentUser } from "../redux/auth/operations";
-import { selectUserIsRefresh } from "../redux/auth/selectors";
-
+import {
+  selectAuthIsLoading,
+  selectUserIsRefresh,
+} from "../redux/auth/selectors";
 
 import { ToastContainer } from "react-toastify";
+import Loader from "./Loader/Loader";
 
 const MainPage = lazy(() => import("../pages/MainPage/MainPage"));
 const AddRecipePage = lazy(() =>
@@ -26,7 +28,7 @@ const AuthPage = lazy(() => import("../pages/AuthPage/AuthPage"));
 export default function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectUserIsRefresh);
-  // const isLoading = useSelector(selectAuthIsLoading);
+  const isLoading = useSelector(selectAuthIsLoading);
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
@@ -39,13 +41,17 @@ export default function App() {
       <Header />
       <Layout>
         <Suspense fallback={null}>
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/auth/:authType" element={<AuthPage />} />
-            <Route path="/recipes/:id" element={<RecipePage />} />
-            <Route path="/add-recipe" element={<AddRecipePage />} />
-            <Route path="/profile/:recipeType" element={<ProfilePage />} />
-          </Routes>
+          {isLoading === true ? (
+            <Loader />
+          ) : (
+            <Routes>
+              <Route path="/" element={<MainPage />} />
+              <Route path="/auth/:authType" element={<AuthPage />} />
+              <Route path="/recipes/:id" element={<RecipePage />} />
+              <Route path="/add-recipe" element={<AddRecipePage />} />
+              <Route path="/profile/:recipeType" element={<ProfilePage />} />
+            </Routes>
+          )}
         </Suspense>
       </Layout>
       <ToastContainer position="top-right" autoClose={2000} />
