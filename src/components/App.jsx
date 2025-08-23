@@ -6,10 +6,14 @@ import Layout from "../components/layout/Layout";
 
 import { RestrictedRoute } from "./RestrictedRoute";
 
+
 import Header from "./Header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrentUser } from "../redux/auth/operations";
 import { selectUserIsRefresh } from "../redux/auth/selectors";
+
+
+import { ToastContainer } from "react-toastify";
 
 const MainPage = lazy(() => import("../pages/MainPage/MainPage"));
 const AddRecipePage = lazy(() =>
@@ -44,7 +48,7 @@ export default function App() {
           </Routes>
         </Suspense>
       </Layout>
-      ;
+      <ToastContainer position="top-right" autoClose={2000} />
     </>
   );
 }
