@@ -6,14 +6,11 @@ import Layout from "../components/layout/Layout";
 
 import { RestrictedRoute } from "./RestrictedRoute";
 
-
 import Header from "./Header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrentUser } from "../redux/auth/operations";
-import { selectUserIsRefresh,selectIsLoggedIn } from "../redux/auth/selectors";
+import { selectUserIsRefresh, selectIsLoggedIn } from "../redux/auth/selectors";
 
-import { lsGetToken } from "../utils/localStorage";
-import { setAuthorizationToken } from "../api/api";
 import { ToastContainer } from "react-toastify";
 
 const MainPage = lazy(() => import("../pages/MainPage/MainPage"));
@@ -28,14 +25,9 @@ export default function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectUserIsRefresh);
   // const isLoading = useSelector(selectAuthIsLoading);
-const isLoggedIn = useSelector(selectIsLoggedIn); 
- useEffect(() => {
-    const token = lsGetToken();
-
-    const isValidToken = token && token !== "undefined" && token !== "null";
-
-    if (isValidToken && !isLoggedIn) {
-      setAuthorizationToken(token);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  useEffect(() => {
+    if (isLoggedIn) {
       dispatch(fetchCurrentUser());
     }
   }, [dispatch, isLoggedIn]);
