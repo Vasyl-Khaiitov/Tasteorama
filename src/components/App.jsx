@@ -4,6 +4,7 @@ import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import { RestrictedRoute } from "./RestrictedRoute";
+import { ToastContainer } from "react-toastify";
 const MainPage = lazy(() => import("../pages/MainPage/MainPage"));
 const AddRecipePage = lazy(() =>
   import("../pages/AddRecipePage/AddRecipePage")
@@ -26,7 +27,7 @@ export default function App() {
           </Routes>
         </Suspense>
       </Layout>
-      ;
+      <ToastContainer position="top-right" autoClose={2000} />
     </>
   );
 }
