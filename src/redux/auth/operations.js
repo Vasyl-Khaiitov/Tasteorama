@@ -72,7 +72,10 @@ export const fetchCurrentUser = createAsyncThunk(
 
     console.log("Current token:", token);
 
-    if (!token) return thunkAPI.rejectWithValue("No token found");
+    if (!token || token === "undefined" || token === "null"){ 
+      deleteAuthorizationToken()
+      return thunkAPI.rejectWithValue("No token found");
+    }
 
     setAuthorizationToken(token);
 
