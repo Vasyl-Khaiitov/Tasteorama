@@ -41,16 +41,19 @@ export default function App() {
       <Header />
       <Layout>
         <Suspense fallback={null}>
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/auth/:authType" element={<AuthPage />} />
-            <Route path="/recipes/:id" element={<RecipePage />} />
-            <Route path="/add-recipe" element={<AddRecipePage />} />
-            <Route path="/profile/:recipeType" element={<ProfilePage />} />
-          </Routes>
+          {isLoading === true ? (
+            <Loader />
+          ) : (
+            <Routes>
+              <Route path="/" element={<MainPage />} />
+              <Route path="/auth/:authType" element={<AuthPage />} />
+              <Route path="/recipes/:id" element={<RecipePage />} />
+              <Route path="/add-recipe" element={<AddRecipePage />} />
+              <Route path="/profile/:recipeType" element={<ProfilePage />} />
+            </Routes>
+          )}
         </Suspense>
       </Layout>
-      {isLoading === true && <Loader />}
       <ToastContainer position="top-right" autoClose={2000} />
     </>
   );
