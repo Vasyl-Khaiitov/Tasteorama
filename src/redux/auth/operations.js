@@ -15,7 +15,10 @@ export const fetchRegisterUser = createAsyncThunk(
       setAuthorizationToken(accessToken);
 
       const dataUser = await apiClient.get("/users");
-      return dataUser.data.data;
+      return {
+        user: dataUser.data.data.info, // тут точно лежить { name, email, id, ... }
+        token: accessToken,
+      };
     } catch (err) {
       console.error("Register error:", err);
       return thunkAPI.rejectWithValue(err.response?.data || err.message);
@@ -26,6 +29,7 @@ export const fetchRegisterUser = createAsyncThunk(
 export const fetchLoginUser = createAsyncThunk(
   "auth/fetchLoginUser",
   async (credentials, thunkAPI) => {
+    console.log("THUNK STARTED", credentials);
     try {
       const res = await apiClient.post("/auth/login", credentials);
       console.log("LOGIN RESPONSE:", res);
@@ -34,7 +38,10 @@ export const fetchLoginUser = createAsyncThunk(
       setAuthorizationToken(accessToken);
 
       const dataUser = await apiClient.get("/users");
-      return dataUser.data.data;
+      return {
+        user: dataUser.data.data.info, // тут точно лежить { name, email, id, ... }
+        token: accessToken,
+      };
     } catch (err) {
       console.error("Login error:", err);
       return thunkAPI.rejectWithValue(
@@ -56,13 +63,11 @@ export const fetchLogoutUser = createAsyncThunk(
   }
 );
 
-
-
 export const fetchCurrentUser = createAsyncThunk(
   "auth/fetchCurrentUser",
   async (_, thunkAPI) => {
     const tokenFromState = thunkAPI.getState().auth.token;
-    const tokenFromLS = localStorage.getItem("token"); 
+    const tokenFromLS = localStorage.getItem("token");
     const token = tokenFromState || tokenFromLS;
 
     console.log("Current token:", token);
@@ -83,5 +88,3 @@ export const fetchCurrentUser = createAsyncThunk(
     }
   }
 );
-
-

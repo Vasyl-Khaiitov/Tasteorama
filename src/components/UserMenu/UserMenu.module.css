@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.divider {
+  width: 1px;
+  height: 39px;
+  background-color: #ffffff;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.logoutBtn {
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background-color 0.2s ease;
+}
+
+.logoutBtn:hover {
+  background-color: #9b6c43;
+}
+
+.logoutIcon {
+  width: 24px;
+  height: 24px;
+  stroke: white;
+  fill: transparent;
+}
