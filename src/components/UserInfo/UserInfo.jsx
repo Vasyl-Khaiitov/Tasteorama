@@ -1,22 +1,29 @@
-// import { useEffect } from "react";
-import { useSelector } from "react-redux";
-// import { fetchCurrentUser } from "../../redux/auth/operations";
-import { selectUser } from "../../redux/auth/selectors";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchCurrentUser } from "../../redux/auth/operations";
+import { selectUser, selectIsLoggedIn } from "../../redux/auth/selectors";
 import css from "../../components/UserInfo/UserInfo.module.css";
+import { lsGetToken } from "../../utils/localStorage";
+import { setAuthorizationToken } from "../../api/api";
 
 const UserInfo = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  console.log(user?.name);
-  // const isLoading = useSelector(selectAuthIsLoading);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  // useEffect(() => {
-  //   if (!user) dispatch(fetchCurrentUser());
-  // }, [dispatch, user]);
+  useEffect(() => {
+    const token = lsGetToken();
+
+    const isValidToken =
+      token && token !== "undefined" && token !== "null";
+
+    if (isValidToken && !isLoggedIn) {
+      setAuthorizationToken(token);
+      dispatch(fetchCurrentUser());
+    }
+  }, [dispatch, isLoggedIn]);
 
   const firstLetter = user?.name?.charAt(0).toUpperCase() || "";
-
-  // if (isLoading) return <div>Loading...</div>;
 
   return (
     <div className={css.user_div}>
