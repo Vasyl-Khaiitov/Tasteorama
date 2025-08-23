@@ -1,6 +1,6 @@
 import css from "./Header.module.css";
 import Navigation from "../Navigation/Navigation";
-import Logo from "../logo/Logo";
+import Logo from "../Logo/Logo";
 import UserMenu from "../UserMenu/UserMenu";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
