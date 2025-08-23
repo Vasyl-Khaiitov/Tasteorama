@@ -25,12 +25,9 @@ const errorHandlersMap = new Map([
   ["fetchLogoutUser", () => "Logout failed."],
 ]);
 
-const silentErrors = ["fetchCurrentUser"];
-
 export const toastMiddleware = () => (next) => (action) => {
   if (isRejected(action)) {
     let errorMessage;
-
     for (const [key, handler] of errorHandlersMap.entries()) {
       if (action.type.includes(key)) {
         errorMessage =
@@ -38,18 +35,13 @@ export const toastMiddleware = () => (next) => (action) => {
         break;
       }
     }
-
     if (!errorMessage) {
       errorMessage =
         action.payload?.message ||
         action.error?.message ||
         "Something went wrong.";
     }
-
-    const isSilent = silentErrors.some((s) => action.type.includes(s));
-    if (errorMessage && !isSilent) {
-      toast.error(errorMessage);
-    }
+    toast.error(errorMessage);
   }
 
   if (isFulfilled(action)) {
