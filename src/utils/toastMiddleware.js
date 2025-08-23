@@ -5,7 +5,7 @@ const successMessagesMap = new Map([
   ["fetchRegisterUser", "Registration successful!"],
   [
     "fetchLoginUser",
-    (action) => `Welcome, ${action.payload?.info?.name || "user"}!`,
+    (action) => `Welcome, ${action.payload?.user?.name || "user"}!`,
   ],
   ["fetchLogoutUser", "See you soon!"],
 ]);
