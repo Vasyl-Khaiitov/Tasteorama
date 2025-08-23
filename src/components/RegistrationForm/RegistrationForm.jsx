@@ -102,7 +102,7 @@ export default function RegistrationForm() {
 
             <Button
               type="submit"
-              styleType="transparent"
+              styleType="brown"
               paddingsY={8}
               name="Create account"
               disabled={!isValid || !dirty || isSubmitting}

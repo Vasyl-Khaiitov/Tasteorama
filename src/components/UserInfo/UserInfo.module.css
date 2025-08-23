@@ -1,4 +1,4 @@
-container {
+.container {
   display: flex;
   align-items: center;
 }
@@ -28,5 +28,7 @@ container {
 .user_div {
   display: flex;
   align-items: center;
-  gap: 8px;
+
+gap: 8px;
 }
+
