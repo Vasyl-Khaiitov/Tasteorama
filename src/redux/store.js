@@ -11,11 +11,12 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { authReducer } from "./auth/slice";
+import { toastMiddleware } from "../utils/toastMiddleware";
 
 const authPersistConfig = {
   key: "auth",
   storage,
-  whiteList: ["token"],
+  whitelist: ["token"],
 };
 
 export const store = configureStore({
@@ -27,7 +28,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(toastMiddleware),
 });
 
 export const persistor = persistStore(store);
