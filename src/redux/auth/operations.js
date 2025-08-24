@@ -66,24 +66,15 @@ export const fetchLogoutUser = createAsyncThunk(
 export const fetchCurrentUser = createAsyncThunk(
   "auth/fetchCurrentUser",
   async (_, thunkAPI) => {
-    const tokenFromState = thunkAPI.getState().auth.token;
-    const tokenFromLS = localStorage.getItem("token");
-    const token = tokenFromState || tokenFromLS;
-
-    console.log("Current token:", token);
-
-    if (!token) return thunkAPI.rejectWithValue("No token found");
-
-    setAuthorizationToken(token);
-
     try {
-      const res = await apiClient.get("/users", {
-        headers: { "Cache-Control": "no-cache" },
-      });
+      const res = await apiClient.get("/users");
       console.log("API /users response:", res);
       return res.data.data.info;
     } catch (err) {
-      console.error("fetchCurrentUser error:", err);
+      if (err.response?.status === 401) {
+        deleteAuthorizationToken();
+        return thunkAPI.rejectWithValue("Session expired. Please login again.");
+      }
       return thunkAPI.rejectWithValue(err.response?.data || err.message);
     }
   }

@@ -6,14 +6,18 @@ import Layout from "../components/layout/Layout";
 
 import { RestrictedRoute } from "./RestrictedRoute";
 
+import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
+
 import Header from "./Header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrentUser } from "../redux/auth/operations";
+import Footer from "./Footer/Footer";
 import { selectUserIsRefresh } from "../redux/auth/selectors";
 
-import Footer from "./Footer/Footer";
-
 import { ToastContainer } from "react-toastify";
+import Loader from "./Loader/Loader";
+import { deleteAuthorizationToken, setAuthorizationToken } from "../api/api";
+import { lsGetToken } from "../utils/localStorage";
 
 const MainPage = lazy(() => import("../pages/MainPage/MainPage"));
 const AddRecipePage = lazy(() =>
@@ -26,10 +30,17 @@ const AuthPage = lazy(() => import("../pages/AuthPage/AuthPage"));
 export default function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectUserIsRefresh);
-  // const isLoading = useSelector(selectAuthIsLoading);
 
   useEffect(() => {
-    dispatch(fetchCurrentUser());
+    const token = lsGetToken();
+    if (token) {
+      setAuthorizationToken(token);
+      dispatch(fetchCurrentUser())
+        .unwrap()
+        .catch(() => {
+          deleteAuthorizationToken();
+        });
+    }
   }, [dispatch]);
 
   return isRefreshing ? (
@@ -38,13 +49,14 @@ export default function App() {
     <>
       <Header />
       <Layout>
-        <Suspense fallback={null}>
+        <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/auth/:authType" element={<AuthPage />} />
             <Route path="/recipes/:id" element={<RecipePage />} />
             <Route path="/add-recipe" element={<AddRecipePage />} />
             <Route path="/profile/:recipeType" element={<ProfilePage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
       </Layout>

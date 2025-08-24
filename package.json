@@ -19,6 +19,7 @@
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.1",
+    "react-spinners": "^0.17.0",
     "react-toastify": "^11.0.5",
     "redux-persist": "^6.0.0",
     "use-debounce": "^10.0.4",
