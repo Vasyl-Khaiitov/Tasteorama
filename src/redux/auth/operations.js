@@ -71,7 +71,10 @@ export const fetchCurrentUser = createAsyncThunk(
       console.log("API /users response:", res);
       return res.data.data.info;
     } catch (err) {
-      console.error("fetchCurrentUser error:", err);
+      if (err.response?.status === 401) {
+        deleteAuthorizationToken();
+        return thunkAPI.rejectWithValue("Session expired. Please login again.");
+      }
       return thunkAPI.rejectWithValue(err.response?.data || err.message);
     }
   }
