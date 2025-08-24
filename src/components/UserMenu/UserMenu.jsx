@@ -3,13 +3,17 @@ import UserInfo from "../UserInfo/UserInfo";
 import { useDispatch } from "react-redux";
 import { fetchLogoutUser } from "../../redux/auth/operations";
 import Icon from "../../shared/Icon";
-export default function UserMenu() {
+
+export default function UserMenu({ onLogout }) {
   const dispatch = useDispatch();
   const handleLogOut = () => {
     dispatch(fetchLogoutUser());
+    if (onLogout) {
+      onLogout();
+    }
   };
   return (
-    <div className={css.container}>
+    <>
       <UserInfo />
       <div className={css.divider}></div>
       <button
@@ -20,6 +24,6 @@ export default function UserMenu() {
       >
         <Icon name={"logout"} classname={css.logoutIcon} />
       </button>
-    </div>
+    </>
   );
 }

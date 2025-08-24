@@ -6,12 +6,10 @@ import Layout from "../components/layout/Layout";
 
 import { RestrictedRoute } from "./RestrictedRoute";
 
-
 import Header from "./Header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrentUser } from "../redux/auth/operations";
-import { selectUserIsRefresh } from "../redux/auth/selectors";
-
+import { selectIsLoggedIn, selectUserIsRefresh } from "../redux/auth/selectors";
 
 import { ToastContainer } from "react-toastify";
 
@@ -27,10 +25,13 @@ export default function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectUserIsRefresh);
   // const isLoading = useSelector(selectAuthIsLoading);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
-    dispatch(fetchCurrentUser());
-  }, [dispatch]);
+    if (isLoggedIn) {
+      dispatch(fetchCurrentUser());
+    }
+  }, [dispatch, isLoggedIn]);
 
   return isRefreshing ? (
     <strong>Refreshing user...</strong>
