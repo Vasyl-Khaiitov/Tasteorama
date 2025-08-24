@@ -6,10 +6,6 @@ const apiClient = axios.create({
 });
 
 export const setAuthorizationToken = (token) => {
-  if (!token || token === "undefined" || token === "null") {
-    deleteAuthorizationToken();
-    return;
-  }
   lsSetToken(token);
   apiClient.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
