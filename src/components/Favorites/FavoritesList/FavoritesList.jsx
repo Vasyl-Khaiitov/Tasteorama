@@ -8,12 +8,12 @@ import {
   selectFavoritesPage,
   selectFavoritesPerPage,
   selectFavoritesHasMore,
-} from "../../redux/recipes/selectors";
+} from "../../../redux/recipes/selectors";
 
-import { RecipeCard } from "../RecipeCard/RecipeCard";
-import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn.";
+import { RecipeCard } from "../../RecipeCard/RecipeCard";
+import LoadMoreBtn from "../../LoadMoreBtn/LoadMoreBtn.";
 import { useEffect } from "react";
-import { fetchFavoriteRecipes } from "../../redux/favorites/operation";
+import { fetchFavoriteRecipes } from "../../../redux/favorites/operation";
 
 export default function FavoritesList() {
   const dispatch = useDispatch();
