@@ -8,7 +8,7 @@ import {
   selectFavoritesPage,
   selectFavoritesPerPage,
   selectFavoritesHasMore,
-} from "../../../redux/recipes/selectors";
+} from "../../../redux/favorites/selectors";
 
 import { RecipeCard } from "../../RecipeCard/RecipeCard";
 import LoadMoreBtn from "../../LoadMoreBtn/LoadMoreBtn.";
