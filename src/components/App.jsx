@@ -10,7 +10,7 @@ import Header from "./Header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrentUser } from "../redux/auth/operations";
 
-import { selectIsLoggedIn, selectUserIsRefresh } from "../redux/auth/selectors";
+import { selectUserIsRefresh } from "../redux/auth/selectors";
 
 import { ToastContainer } from "react-toastify";
 import Loader from "./Loader/Loader";
@@ -26,14 +26,10 @@ const AuthPage = lazy(() => import("../pages/AuthPage/AuthPage"));
 export default function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectUserIsRefresh);
-  // const isLoading = useSelector(selectAuthIsLoading);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
-    if (isLoggedIn) {
-      dispatch(fetchCurrentUser());
-    }
-  }, [dispatch, isLoggedIn]);
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
 
   return isRefreshing ? (
     <strong>Refreshing user...</strong>
