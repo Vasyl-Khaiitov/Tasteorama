@@ -10,6 +10,7 @@ import {
   handleLogoutState,
   handlePending,
 } from "../../utils/reduxUtils";
+import { deleteAuthorizationToken } from "../../api/api";
 const tokenFromLS = localStorage.getItem("token");
 const authSlice = createSlice({
   name: "auth",
@@ -72,13 +73,15 @@ const authSlice = createSlice({
         state.isRefreshing = false;
         state.error = null;
       })
-      .addCase(fetchCurrentUser.rejected, (state) => {
+      .addCase(fetchCurrentUser.rejected, (state, action) => {
         state.user = null;
         state.token = null;
         state.isLoggedIn = false;
         state.isLoading = false;
         state.isRefreshing = false;
-        state.error = null;
+        state.error = action.payload || action.error.message;
+
+        deleteAuthorizationToken();
       });
   },
 });
