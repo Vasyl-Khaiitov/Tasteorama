@@ -13,9 +13,9 @@ import {
 const tokenFromLS = localStorage.getItem("token");
 const authSlice = createSlice({
   name: "auth",
-  
+
   initialState: {
-    user: { name: '', email: '' },
+    user: { name: "", email: "" },
     token: tokenFromLS,
     isLoggedIn: false,
     isLoading: false,

@@ -12,8 +12,8 @@ import { fetchCurrentUser } from "../redux/auth/operations";
 
 import { selectIsLoggedIn, selectUserIsRefresh } from "../redux/auth/selectors";
 
-
 import { ToastContainer } from "react-toastify";
+import Logo from "./logo/Logo";
 
 const MainPage = lazy(() => import("../pages/MainPage/MainPage"));
 const AddRecipePage = lazy(() =>
@@ -30,7 +30,7 @@ export default function App() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (!isLoggedIn) {
       dispatch(fetchCurrentUser());
     }
   }, [dispatch, isLoggedIn]);
@@ -41,7 +41,7 @@ export default function App() {
     <>
       <Header />
       <Layout>
-        <Suspense fallback={null}>
+        <Suspense fallback={<Logo />}>
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/auth/:authType" element={<AuthPage />} />

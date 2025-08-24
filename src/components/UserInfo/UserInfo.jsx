@@ -1,15 +1,9 @@
-
-import { useSelector} from "react-redux";
-
-import { selectUser} from "../../redux/auth/selectors";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/auth/selectors";
 import css from "../../components/UserInfo/UserInfo.module.css";
-
 
 const UserInfo = () => {
   const user = useSelector(selectUser);
-
-
-
 
   const firstLetter = user?.name?.charAt(0).toUpperCase() || "";
 
