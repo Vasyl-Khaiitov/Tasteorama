@@ -14,6 +14,8 @@ import { selectUserIsRefresh } from "../redux/auth/selectors";
 
 import { ToastContainer } from "react-toastify";
 import Loader from "./Loader/Loader";
+import { setAuthorizationToken } from "../api/api";
+import { lsGetToken } from "../utils/localStorage";
 
 const MainPage = lazy(() => import("../pages/MainPage/MainPage"));
 const AddRecipePage = lazy(() =>
@@ -28,7 +30,11 @@ export default function App() {
   const isRefreshing = useSelector(selectUserIsRefresh);
 
   useEffect(() => {
-    dispatch(fetchCurrentUser());
+    const token = lsGetToken();
+    if (token) {
+      setAuthorizationToken(token);
+      dispatch(fetchCurrentUser());
+    }
   }, [dispatch]);
 
   return isRefreshing ? (
