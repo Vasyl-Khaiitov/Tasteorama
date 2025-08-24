@@ -5,12 +5,13 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 
 import { RestrictedRoute } from "./RestrictedRoute";
+
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 
 import Header from "./Header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrentUser } from "../redux/auth/operations";
-
+import Footer from "./Footer/Footer";
 import { selectUserIsRefresh } from "../redux/auth/selectors";
 
 import { ToastContainer } from "react-toastify";
@@ -59,6 +60,7 @@ export default function App() {
           </Routes>
         </Suspense>
       </Layout>
+      <Footer />
       <ToastContainer position="top-right" autoClose={2000} />
     </>
   );
