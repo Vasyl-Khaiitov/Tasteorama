@@ -72,14 +72,15 @@ export const fetchCurrentUser = createAsyncThunk(
 
     console.log("Current token:", token);
 
-    if (!token) return thunkAPI.rejectWithValue("No token found");
+    if (!token || token === "undefined" || token === "null"){ 
+      deleteAuthorizationToken()
+      return thunkAPI.rejectWithValue("No token found");
+    }
 
     setAuthorizationToken(token);
 
     try {
-      const res = await apiClient.get("/users", {
-        headers: { "Cache-Control": "no-cache" },
-      });
+      const res = await apiClient.get("/users");
       console.log("API /users response:", res);
       return res.data.data.info;
     } catch (err) {

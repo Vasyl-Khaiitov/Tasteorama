@@ -1,22 +1,17 @@
-// import { useEffect } from "react";
-import { useSelector } from "react-redux";
-// import { fetchCurrentUser } from "../../redux/auth/operations";
-import { selectUser } from "../../redux/auth/selectors";
+
+import { useSelector} from "react-redux";
+
+import { selectUser} from "../../redux/auth/selectors";
 import css from "../../components/UserInfo/UserInfo.module.css";
 
-const UserInfo = () => {
-  // const dispatch = useDispatch();
-  const user = useSelector(selectUser);
-  console.log(user?.name);
-  // const isLoading = useSelector(selectAuthIsLoading);
 
-  // useEffect(() => {
-  //   if (!user) dispatch(fetchCurrentUser());
-  // }, [dispatch, user]);
+const UserInfo = () => {
+  const user = useSelector(selectUser);
+
+
+
 
   const firstLetter = user?.name?.charAt(0).toUpperCase() || "";
-
-  // if (isLoading) return <div>Loading...</div>;
 
   return (
     <div className={css.user_div}>

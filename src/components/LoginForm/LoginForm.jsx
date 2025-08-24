@@ -52,22 +52,24 @@ export default function LoginForm() {
       >
         {({ isValid, dirty, isSubmitting }) => (
           <Form className={css.form}>
-            <Input
-              name="email"
-              type="email"
-              placeholder="email@gmail.com"
-              labelText="Enter your email address"
-            />
+            <div className={css.inputContainer}>
+              <Input
+                name="email"
+                type="email"
+                placeholder="email@gmail.com"
+                labelText="Enter your email address"
+              />
 
-            <Input
-              name="password"
-              type="password"
-              placeholder="********"
-              labelText="Create a strong password"
-              showToggle={true}
-              show={showPassword}
-              onToggle={() => setShowPassword(!showPassword)}
-            />
+              <Input
+                name="password"
+                type="password"
+                placeholder="********"
+                labelText="Create a strong password"
+                showToggle={true}
+                show={showPassword}
+                onToggle={() => setShowPassword(!showPassword)}
+              />
+            </div>
 
             <Button
               type="submit"
