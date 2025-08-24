@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 
 import { RestrictedRoute } from "./RestrictedRoute";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 import Header from "./Header/Header";
 import { useDispatch, useSelector } from "react-redux";
@@ -54,6 +55,7 @@ export default function App() {
             <Route path="/recipes/:id" element={<RecipePage />} />
             <Route path="/add-recipe" element={<AddRecipePage />} />
             <Route path="/profile/:recipeType" element={<ProfilePage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
       </Layout>
