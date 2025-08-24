@@ -13,7 +13,7 @@ import { fetchCurrentUser } from "../redux/auth/operations";
 import { selectIsLoggedIn, selectUserIsRefresh } from "../redux/auth/selectors";
 
 import { ToastContainer } from "react-toastify";
-import Logo from "./logo/Logo";
+import Loader from "./Loader/Loader";
 
 const MainPage = lazy(() => import("../pages/MainPage/MainPage"));
 const AddRecipePage = lazy(() =>
@@ -41,7 +41,7 @@ export default function App() {
     <>
       <Header />
       <Layout>
-        <Suspense fallback={<Logo />}>
+        <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/auth/:authType" element={<AuthPage />} />
