@@ -1,11 +1,11 @@
-import { isRejected, isFulfilled } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import { isRejected, isFulfilled } from "@reduxjs/toolkit";
 
 const successMessagesMap = new Map([
   ["fetchRegisterUser", "Registration successful!"],
   [
     "fetchLoginUser",
-    (action) => `Welcome, ${action.payload?.info?.name || "user"}!`,
+    (action) => `Welcome, ${action.payload?.user?.name || "user"}!`,
   ],
   ["fetchLogoutUser", "See you soon!"],
 ]);
@@ -28,6 +28,7 @@ const errorHandlersMap = new Map([
 export const toastMiddleware = () => (next) => (action) => {
   if (isRejected(action)) {
     let errorMessage;
+
     for (const [key, handler] of errorHandlersMap.entries()) {
       if (action.type.includes(key)) {
         errorMessage =

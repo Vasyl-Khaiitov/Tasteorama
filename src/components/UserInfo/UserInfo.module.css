@@ -22,10 +22,13 @@
 .userName {
   font-weight: 600;
   font-size: 12px;
-  color: black;
+  color: white;
 }
 
 .user_div {
   display: flex;
   align-items: center;
+
+gap: 8px;
 }
+

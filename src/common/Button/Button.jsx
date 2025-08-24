@@ -8,6 +8,7 @@ export default function Button({
   paddingsY = 8,
   paddingsX = 0,
   disabled = false,
+  maxWidth,
 }) {
   return (
     <button
@@ -16,6 +17,7 @@ export default function Button({
       disabled={disabled}
       style={{
         padding: `${paddingsY}px ${paddingsX}px`,
+        maxWidth: maxWidth,
       }}
     >
       {name}

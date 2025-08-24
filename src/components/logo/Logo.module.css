@@ -1,0 +1,21 @@
+.linkBtn {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  padding: 8px 12px;
+}
+.text {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-btn);
+  letter-spacing: -0.03em;
+  color: var(--color-primary);
+}
+.logoIcon {
+  background: none;
+  width: 32px;
+  height: 30px;
+}
