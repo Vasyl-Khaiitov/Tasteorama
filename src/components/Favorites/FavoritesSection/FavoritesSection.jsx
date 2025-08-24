@@ -4,7 +4,7 @@ import { FavoritesList } from "../FavoritesList/FavoritesSection";
 import { useSelector } from "react-redux";
 import { SelectRecipesIsLoading } from "../../../redux/recipes/selectors";
 
-export default function Favorites() {
+export default function FavoritesSection() {
   const isLoading = useSelector(SelectRecipesIsLoading);
 
   return (
