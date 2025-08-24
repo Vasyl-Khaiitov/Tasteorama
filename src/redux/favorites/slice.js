@@ -1,25 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchFavoritesRecipes } from "./operation.js";
+import { fetchFavoriteRecipes } from "./operation.js";
 import { handleError, handlePending } from "../../utils/reduxUtils";
 
 const favoritesSlice = createSlice({
   name: "favorites",
   initialState: {
     items: [],
-    // isLoggedIn: false,
+    page: 1,
+    perPage: 12,
     isLoading: false,
+    hasMore: true,
     error: null,
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchFavoritesRecipes.pending, handlePending)
-      .addCase(fetchFavoritesRecipes.fulfilled, (state, { payload }) => {
-        state.error = null;
-        console.log(payload);
-        state.items = payload.favorites;
+      .addCase(fetchFavoriteRecipes.pending, handlePending)
+      .addCase(fetchFavoriteRecipes.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.error = null;
+        state.items = action.payload;
+        state.hasMore = action.payload.data.hasNextPage;
       })
-      .addCase(fetchFavoritesRecipes.rejected, handleError);
+      .addCase(fetchFavoriteRecipes.rejected, handleError);
   },
 });
 
