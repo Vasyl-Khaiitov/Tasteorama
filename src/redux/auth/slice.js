@@ -10,12 +10,13 @@ import {
   handleLogoutState,
   handlePending,
 } from "../../utils/reduxUtils";
-
+const tokenFromLS = localStorage.getItem("token");
 const authSlice = createSlice({
   name: "auth",
+  
   initialState: {
-    user: null,
-    token: null,
+    user: { name: '', email: '' },
+    token: tokenFromLS,
     isLoggedIn: false,
     isLoading: false,
     error: null,
