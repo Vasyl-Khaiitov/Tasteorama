@@ -9,7 +9,9 @@ import { RestrictedRoute } from "./RestrictedRoute";
 import Header from "./Header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrentUser } from "../redux/auth/operations";
-import { selectUserIsRefresh, selectIsLoggedIn } from "../redux/auth/selectors";
+
+import { selectIsLoggedIn, selectUserIsRefresh } from "../redux/auth/selectors";
+
 
 import { ToastContainer } from "react-toastify";
 
@@ -26,9 +28,9 @@ export default function App() {
   const isRefreshing = useSelector(selectUserIsRefresh);
   // const isLoading = useSelector(selectAuthIsLoading);
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  const tokenFromLS = localStorage.getItem("token");
+
   useEffect(() => {
-    if (isLoggedIn || tokenFromLS) {
+    if (isLoggedIn) {
       dispatch(fetchCurrentUser());
     }
   }, [dispatch, isLoggedIn]);

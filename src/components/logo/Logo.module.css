@@ -1,15 +1,18 @@
-.container {
+.linkBtn {
   display: flex;
-  flex-direction: row;
+  flex-wrap: nowrap;
   gap: 5px;
   align-items: center;
   justify-content: center;
+  background-color: transparent;
+  border: none;
+  padding: 8px 12px;
 }
 .text {
-  font-weight: 600;
-  font-size: 18px;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-btn);
   letter-spacing: -0.03em;
-  color: #ffffff;
+  color: var(--color-primary);
 }
 .logoIcon {
   background: none;
