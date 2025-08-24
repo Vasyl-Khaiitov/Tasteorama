@@ -1,5 +1,5 @@
 import css from "./Header.module.css";
-import Logo from "../Logo/Logo";
+import Logo from "../logo/Logo";
 import NavItem from "../NavItem/NavItem";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
