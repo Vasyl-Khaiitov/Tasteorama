@@ -6,7 +6,8 @@ import {
     SelectRecipesIsLoading,
     SelectRecipesPage,
     SelectRecipesPerPage,
-    SelectRecipesHasMore
+    SelectRecipesHasMore,
+    SelectTotalRecepies
 } from "../../redux/recipes/selectors"
 import { RecipeCard } from "../RecipeCard/RecipeCard"
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn."
@@ -23,6 +24,7 @@ export function RecipesList() {
     const hasMore = useSelector(SelectRecipesHasMore);
     const page = useSelector(SelectRecipesPage);
     const perPage = useSelector(SelectRecipesPerPage);
+    const totalRecepies = useSelector(SelectTotalRecepies)
 
 
     useEffect(() => {
@@ -40,7 +42,7 @@ export function RecipesList() {
     
     return (
         <>
-            
+            <div>{totalRecepies} recepies</div>
             <ul className={style.list}>
                 {recipes.map((recipe) => 
                     <li className={style.item} key={recipe._id}>
