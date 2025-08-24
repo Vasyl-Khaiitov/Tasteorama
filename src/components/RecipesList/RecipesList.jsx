@@ -1,0 +1,62 @@
+import style from "./RecipesList.module.css"
+
+import { useSelector, useDispatch } from "react-redux"
+import {
+    SelectRecipes,
+    SelectRecipesIsLoading,
+    SelectRecipesPage,
+    SelectRecipesPerPage,
+    SelectRecipesHasMore
+} from "../../redux/recipes/selectors"
+import { RecipeCard } from "../RecipeCard/RecipeCard"
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn."
+import { useEffect } from "react"
+import { fetchRecipes } from "../../redux/recipes/operations"
+
+
+export function RecipesList() {
+
+    const dispatch = useDispatch();
+
+    const recipes = useSelector(SelectRecipes);
+    const isLoading = useSelector(SelectRecipesIsLoading);
+    const hasMore = useSelector(SelectRecipesHasMore);
+    const page = useSelector(SelectRecipesPage);
+    const perPage = useSelector(SelectRecipesPerPage);
+
+
+    useEffect(() => {
+    
+    if (recipes.length === 0) {
+      dispatch(fetchRecipes({ page, perPage }));
+    }
+  }, [dispatch, recipes, page, perPage]);
+
+    const handleLoadMore = () => {
+    if (!isLoading && hasMore) {
+      dispatch(fetchRecipes({ page, perPage }));
+    }
+  };
+    
+    return (
+        <>
+            
+            <ul className={style.list}>
+                {recipes.map((recipe) => 
+                    <li className={style.item} key={recipe._id}>
+                        <RecipeCard
+                            dishPhoto={recipe.thumb}
+                            recipeName={recipe.title}
+                            recipeDescription={recipe.description}
+                            recipeTime={recipe.time}
+                        />
+                    </li>
+                    )}
+            </ul>
+        
+             <div >
+        {hasMore && <LoadMoreBtn onClick={handleLoadMore} disabled={isLoading} />}
+      </div>
+        </>
+    )
+};
