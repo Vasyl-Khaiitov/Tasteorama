@@ -66,19 +66,6 @@ export const fetchLogoutUser = createAsyncThunk(
 export const fetchCurrentUser = createAsyncThunk(
   "auth/fetchCurrentUser",
   async (_, thunkAPI) => {
-    const tokenFromState = thunkAPI.getState().auth.token;
-    const tokenFromLS = localStorage.getItem("token");
-    const token = tokenFromState || tokenFromLS;
-
-    console.log("Current token:", token);
-
-    if (!token || token === "undefined" || token === "null"){ 
-      deleteAuthorizationToken()
-      return thunkAPI.rejectWithValue("No token found");
-    }
-
-    setAuthorizationToken(token);
-
     try {
       const res = await apiClient.get("/users");
       console.log("API /users response:", res);
