@@ -14,7 +14,7 @@ import { selectUserIsRefresh } from "../redux/auth/selectors";
 
 import { ToastContainer } from "react-toastify";
 import Loader from "./Loader/Loader";
-import { setAuthorizationToken } from "../api/api";
+import { deleteAuthorizationToken, setAuthorizationToken } from "../api/api";
 import { lsGetToken } from "../utils/localStorage";
 
 const MainPage = lazy(() => import("../pages/MainPage/MainPage"));
@@ -33,7 +33,11 @@ export default function App() {
     const token = lsGetToken();
     if (token) {
       setAuthorizationToken(token);
-      dispatch(fetchCurrentUser());
+      dispatch(fetchCurrentUser())
+        .unwrap()
+        .catch(() => {
+          deleteAuthorizationToken();
+        });
     }
   }, [dispatch]);
 
