@@ -1,5 +1,5 @@
-import { isRejected, isFulfilled } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import { isRejected, isFulfilled } from "@reduxjs/toolkit";
 
 const successMessagesMap = new Map([
   ["fetchRegisterUser", "Registration successful!"],
@@ -24,8 +24,6 @@ const errorHandlersMap = new Map([
   ["fetchRegisterUser", () => "Registration failed. Try another email."],
   ["fetchLogoutUser", () => "Logout failed."],
 ]);
-
-
 
 export const toastMiddleware = () => (next) => (action) => {
   if (isRejected(action)) {
