@@ -30,10 +30,7 @@ export default function App() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (!isLoggedIn || token) {
-      dispatch(isLoggedIn(true));
+    if (isLoggedIn) {
       dispatch(fetchCurrentUser());
     }
   }, [dispatch, isLoggedIn]);
