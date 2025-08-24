@@ -1,7 +1,7 @@
 import NavigationLinks from "../NavigationLinks/NavigationLinks";
 import Icon from "../../shared/Icon";
 import css from "./MobileMenu.module.css";
-import Logo from "../Logo/Logo";
+import Logo from "../logo/Logo";
 import UserMenu from "../UserMenu/UserMenu";
 import NavItem from "../NavItem/NavItem";
 
