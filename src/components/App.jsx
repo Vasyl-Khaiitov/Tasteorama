@@ -5,7 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 
 import { RestrictedRoute } from "./RestrictedRoute";
-import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 
 import Header from "./Header/Header";
 import { useDispatch, useSelector } from "react-redux";
