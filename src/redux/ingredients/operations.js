@@ -6,7 +6,7 @@ export const fetchIngredients = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await apiClient.get("/ingredients");
-      return response.data.data;
+      return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
