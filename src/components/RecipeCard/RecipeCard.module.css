@@ -5,20 +5,17 @@
   border-radius: 16px;
   padding: 12px;
   width: 100%;
-  max-width: 361px;
-  /* height: 431px; */
+  min-height: 483px;
   background-color: #faf3e0;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-
 .card:hover {
   transform: translateY(-4px);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
-
 
 @media (min-width: 768px) {
   .card {
@@ -32,22 +29,18 @@
   }
 }
 
-
 .img {
   border-radius: 8px;
   width: 100%;
-  height: 230px;
+  max-width: 337px;
   object-fit: cover;
   display: block;
 }
 
-
 @media (min-width: 768px) {
   .img {
-
   }
 }
-
 
 @media screen and (min-width: 1440px) {
   .img {
@@ -56,16 +49,17 @@
   }
 }
 
-
 .header {
   display: flex;
   gap: 8px;
   align-items: flex-start;
+  justify-content: space-between;
+  /* min-width: 264px; */
+  /* height: 58px; */
   margin-top: 16px;
   max-width: 337px;
   height: 58px;
 }
-
 
 @media (min-width: 768px) {
   .header {
@@ -73,11 +67,9 @@
   }
 }
 
-
 @media screen and (min-width: 1440px) {
   .header {
     width: 264px;
-    
   }
 }
 
@@ -95,19 +87,15 @@
   text-overflow: ellipsis;
 }
 
-
 @media (min-width: 768px) {
   .title {
     width: 254px;
-
   }
 }
-
 
 @media screen and (min-width: 1440px) {
   .title {
     width: 203px;
-
   }
 }
 
@@ -160,8 +148,7 @@
 }
 
 .descrContainer {
-  width: 100%;
-  height: 83px;
+  /* min-width: 264px; */
   margin: 16px 0;
   max-width: 337px;
 }
@@ -171,8 +158,7 @@
   border: 1px solid #000;
   border-radius: 8px;
   padding: 8px;
-  width: 289px;
-  height: 40px;
+  width: 100%;
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 16px;
@@ -185,26 +171,19 @@
   align-items: center;
   justify-content: center;
 
-
   text-align: center;
-  
 }
-
 
 @media (min-width: 768px) {
   .btn {
     width: 267px;
-  
   }
 }
-
 
 @media screen and (min-width: 1440px) {
   .btn {
     width: 216px;
-
   }
-
 }
 
 .btn:hover,
@@ -234,7 +213,6 @@
   border: none;
 }
 
-
 .btnContainer {
   display: flex;
   gap: 8px;
@@ -242,3 +220,19 @@
   max-width: 337px;
 }
 
+@media (min-width: 768px) {
+  .img {
+    max-width: 315px;
+    max-height: 230px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .img {
+    max-height: 178px;
+  }
+
+  .card {
+    max-height: 431px;
+  }
+}
