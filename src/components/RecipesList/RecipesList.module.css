@@ -1,6 +1,7 @@
 .list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
   gap: 24px;
   margin: 40px 0;
   padding: 0;
@@ -19,4 +20,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media (min-width: 768px) {
+  .item {
+    flex-basis: calc((100% - 24px) / 2);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .item {
+    flex-basis: calc((100% - 72px) / 4);
+  }
 }
