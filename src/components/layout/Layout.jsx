@@ -1,10 +1,25 @@
-import css from "./Layout.module.css";
+import styles from "./Layout.module.css";
+import { Suspense } from "react";
+import { useSelector } from "react-redux";
+import Loader from "../Loader/Loader";
+import { selectAuthIsLoading } from "../../redux/auth/selectors";
 
-export default function Layout({ children }) {
+const Layout = ({ children }) => {
+  const isUserLoading = useSelector(selectAuthIsLoading);
+
   return (
-    <div className={css.container}>
-      <h2>I'm layout</h2>
-      {children}
-    </div>
+    <>
+      <section className={styles.section}>
+        <div className={styles.container}>
+          {isUserLoading ? (
+            <Loader />
+          ) : (
+            <Suspense fallback={<Loader />}>{children}</Suspense>
+          )}
+        </div>
+      </section>
+    </>
   );
-}
+};
+
+export default Layout;

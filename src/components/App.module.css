@@ -1,6 +1,9 @@
-#root {
-  max-width: 1225px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.appWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainContent {
+  flex: 1;
 }

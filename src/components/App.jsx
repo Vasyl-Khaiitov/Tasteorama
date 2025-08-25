@@ -1,4 +1,5 @@
 import "modern-normalize";
+import styles from "./App.module.css";
 
 import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
@@ -24,7 +25,9 @@ const AddRecipePage = lazy(() =>
   import("../pages/AddRecipePage/AddRecipePage")
 );
 const ProfilePage = lazy(() => import("../pages/ProfilePage/ProfilePage"));
-const RecipePage = lazy(() => import("../pages/RecipeViewPage/RecipeViewPage"));
+const RecipeViewPage = lazy(() =>
+  import("../pages/RecipeViewPage/RecipeViewPage")
+);
 const AuthPage = lazy(() => import("../pages/AuthPage/AuthPage"));
 
 export default function App() {
@@ -46,22 +49,24 @@ export default function App() {
   return isRefreshing ? (
     <strong>Refreshing user...</strong>
   ) : (
-    <>
+    <div className={styles.appWrapper}>
       <Header />
-      <Layout>
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/auth/:authType" element={<AuthPage />} />
-            <Route path="/recipes/:id" element={<RecipePage />} />
-            <Route path="/add-recipe" element={<AddRecipePage />} />
-            <Route path="/profile/:recipeType" element={<ProfilePage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </Suspense>
-      </Layout>
+      <main className={styles.mainContent}>
+        <Layout>
+          <Suspense fallback={<Loader />}>
+            <Routes>
+              <Route path="/" element={<MainPage />} />
+              <Route path="/auth/:authType" element={<AuthPage />} />
+              <Route path="/recipes/:recipeId" element={<RecipeViewPage />} />
+              <Route path="/add-recipe" element={<AddRecipePage />} />
+              <Route path="/profile/:recipeType" element={<ProfilePage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </Suspense>
+        </Layout>
+      </main>
       <Footer />
       <ToastContainer position="top-right" autoClose={2000} />
-    </>
+    </div>
   );
 }
