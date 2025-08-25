@@ -19,7 +19,6 @@ export default function RecipeDetails() {
   //   const isLoggedIn = useSelector(selectIsLoggedIn);
   //   const user = useSelector(selectUser);
   const recipe = useSelector(selectCurrentRecipe);
-  console.log(recipe);
   if (!recipe) return <NotFound />;
   return (
     <>

@@ -27,6 +27,10 @@ const errorHandlersMap = new Map([
 
 export const toastMiddleware = () => (next) => (action) => {
   if (isRejected(action)) {
+    if (action.type.includes("fetchRecipesById")) {
+      return next(action);
+    }
+
     let errorMessage;
 
     for (const [key, handler] of errorHandlersMap.entries()) {
@@ -48,8 +52,6 @@ export const toastMiddleware = () => (next) => (action) => {
   }
 
   if (isFulfilled(action)) {
-    console.log(action);
-
     for (const [key, message] of successMessagesMap.entries()) {
       if (action.type.includes(key)) {
         const text = typeof message === "function" ? message(action) : message;

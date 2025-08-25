@@ -9,6 +9,8 @@ import {
 } from "../../redux/recipes/selectors.js";
 import Loader from "../../components/Loader/Loader.jsx";
 import NotFound from "../../components/NotFound/NotFound.jsx";
+import { fetchIngredients } from "../../redux/ingredients/operations.js";
+import { fetchCategories } from "../../redux/categories/operations.js";
 
 const RecipeDetails = lazy(() =>
   import("../../components/RecipeView/RecipeDetails/RecipeDetails.jsx")
@@ -24,6 +26,8 @@ const RecipeViewPage = () => {
   useEffect(() => {
     if (recipeId) {
       dispatch(fetchRecipesById(recipeId));
+      dispatch(fetchIngredients());
+      dispatch(fetchCategories());
     }
   }, [dispatch, recipeId]);
 

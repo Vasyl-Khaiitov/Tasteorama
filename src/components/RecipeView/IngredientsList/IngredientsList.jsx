@@ -1,7 +1,10 @@
+import { useSelector } from "react-redux";
 import styles from "./IngredientsList.module.css";
-import ingredientsData from "../../../api/mockData/ingredients.json";
+import { selectIngredients } from "../../../redux/ingredients/selectors";
 
 const IngredientsList = ({ ingredients = [] }) => {
+  const ingredientsData = useSelector(selectIngredients);
+
   return (
     <div className={styles.sectioningredients}>
       <h2>Ingredients:</h2>
