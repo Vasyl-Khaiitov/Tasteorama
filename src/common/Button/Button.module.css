@@ -9,6 +9,11 @@
   color: #ffffff;
   border: none;
   /* margin-top: 10px; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
 
   transition: background-color 300ms ease, box-shadow 300ms ease,
     border 300ms ease, color 300ms ease, border-radius 300ms ease,

@@ -1,14 +1,14 @@
 import { useParams } from "react-router-dom";
 import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
-import Container from "../../components/Container/Container";
 import LoginForm from "../../components/LoginForm/LoginForm";
 
-export default function AuthPage() {
+const AuthPage = () => {
   const { authType } = useParams();
 
-  return (
-    <Container>
-      {authType === "register" ? <RegistrationForm /> : <LoginForm />}
-    </Container>
-  );
-}
+  if (authType === "register") return <RegistrationForm />;
+  if (authType === "login") return <LoginForm />;
+
+  return <Navigate to="/auth/login" replace />;
+};
+
+export default AuthPage;

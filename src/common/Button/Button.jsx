@@ -9,6 +9,8 @@ export default function Button({
   paddingsX = 0,
   disabled = false,
   maxWidth,
+  onClick,
+  children,
 }) {
   return (
     <button
@@ -19,8 +21,9 @@ export default function Button({
         padding: `${paddingsY}px ${paddingsX}px`,
         maxWidth: maxWidth,
       }}
+      onClick={onClick}
     >
-      {name}
+      {name} {children}
     </button>
   );
 }
