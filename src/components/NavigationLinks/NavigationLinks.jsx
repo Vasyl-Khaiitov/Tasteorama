@@ -32,7 +32,7 @@ export default function Navigation({ onLinkClick }) {
       )}
       {isLoggedIn && (
         <NavItem
-          to="/profile/:recipeType"
+          to="/profile"
           className={css.link}
           activeClassName={css.active}
           onClick={onLinkClick}
