@@ -16,9 +16,10 @@ const favoritesSlice = createSlice({
     builder
       .addCase(fetchFavoriteRecipes.pending, handlePending)
       .addCase(fetchFavoriteRecipes.fulfilled, (state, action) => {
+        console.log("FULFILLED PAYLOAD:", action.payload);
         state.isLoading = false;
         state.error = null;
-        state.items = action.payload;
+        state.items = action.payload.data.recipes;
         state.hasMore = action.payload.data.hasNextPage;
       })
       .addCase(fetchFavoriteRecipes.rejected, handleError);

@@ -19,6 +19,8 @@ import { ToastContainer } from "react-toastify";
 import Loader from "./Loader/Loader";
 import { deleteAuthorizationToken, setAuthorizationToken } from "../api/api";
 import { lsGetToken } from "../utils/localStorage";
+import Owner from "./Owner/Owner";
+import FavoritesSection from "./FavoritesSection/FavoritesSection";
 
 const MainPage = lazy(() => import("../pages/MainPage/MainPage"));
 const AddRecipePage = lazy(() =>
@@ -59,7 +61,10 @@ export default function App() {
               <Route path="/auth/:authType" element={<AuthPage />} />
               <Route path="/recipes/:recipeId" element={<RecipeViewPage />} />
               <Route path="/add-recipe" element={<AddRecipePage />} />
-              <Route path="/profile/:recipeType" element={<ProfilePage />} />
+              <Route path="/profile/:recipeType" element={<ProfilePage />}>
+                <Route path="owner" element={<Owner />} />
+                <Route path="favorites" element={<FavoritesSection />} />
+              </Route>
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>

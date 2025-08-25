@@ -12,6 +12,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import { authReducer } from "./auth/slice";
 import recipesReduser from "./recipes/slice.js";
+import favoritesSlice from "./favorites/slice.js";
 import categoriesReducer from "./categories/slice.js";
 import ingredientsReducer from "./ingredients/slice.js";
 import { toastMiddleware } from "../utils/toastMiddleware";
@@ -28,6 +29,7 @@ export const store = configureStore({
     recipes: recipesReduser,
     categories: categoriesReducer,
     ingredients: ingredientsReducer,
+    favorites: favoritesSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

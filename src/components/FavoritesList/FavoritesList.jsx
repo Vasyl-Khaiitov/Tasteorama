@@ -8,12 +8,13 @@ import {
   selectFavoritesPage,
   selectFavoritesPerPage,
   selectFavoritesHasMore,
-} from "../../../redux/favorites/selectors";
+} from "../../redux/favorites/selectors";
 
-import { RecipeCard } from "../../RecipeCard/RecipeCard";
-import LoadMoreBtn from "../../LoadMoreBtn/LoadMoreBtn.";
+import { RecipeCard } from "../RecipeCard/RecipeCard";
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn.";
 import { useEffect } from "react";
-import { fetchFavoriteRecipes } from "../../../redux/favorites/operation";
+import { fetchFavoriteRecipes } from "../../redux/favorites/operation";
+import { selectToken } from "../../redux/auth/selectors";
 
 export default function FavoritesList() {
   const dispatch = useDispatch();
@@ -24,15 +25,24 @@ export default function FavoritesList() {
   const perPage = useSelector(selectFavoritesPerPage);
   const hasMore = useSelector(selectFavoritesHasMore);
 
+  const token = useSelector(selectToken);
+  const userId = useSelector((state) => state.auth.user?.id);
   useEffect(() => {
-    if (favorites.length === 0) {
-      dispatch(fetchFavoriteRecipes({ page, perPage }));
+    if (userId) {
+      dispatch(
+        fetchFavoriteRecipes({
+          userId,
+          token,
+          page,
+          perPage,
+        })
+      );
     }
-  }, [dispatch, favorites, page, perPage]);
+  }, [dispatch, userId, token, page, perPage]);
 
   const handleLoadMore = () => {
-    if (!isLoading && hasMore) {
-      dispatch(fetchFavoriteRecipes({ page, perPage }));
+    if (!isLoading && hasMore && userId) {
+      dispatch(fetchFavoriteRecipes({ userId, page, perPage }));
     }
   };
 

@@ -3,14 +3,19 @@ import apiClient from "../../api/api";
 
 export const fetchFavoriteRecipes = createAsyncThunk(
   "recipes/fetchFavoritesRecipes",
-  async (userId, { page, perPage }, thunkAPI) => {
+  async ({ userId, token, page, perPage }, thunkAPI) => {
     try {
-      const res = apiClient.get(`/recipes/${userId}/favorites`, {
+      const res = await apiClient.get(`/recipes/${userId}/favorites`, {
         params: {
-          page: page,
+          page,
           per_page: perPage,
         },
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       });
+      console.log("FETCH FAVORITES RESPONSE:", res.data);
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
