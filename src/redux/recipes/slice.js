@@ -27,6 +27,8 @@ const recipesSlice = createSlice({
 
         state.items = [...state.items, ...newRecipes];
 
+        console.log([...state.items, ...newRecipes]);
+
         state.hasMore = action.payload.data.hasNextPage;
 
         state.page = action.payload.data.page + 1;

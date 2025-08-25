@@ -120,7 +120,11 @@
   font-size: 16px;
   color: #000;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.3s ease, border 0.3s ease,
+    padding-color 0.3s ease, font-size 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn:hover,
@@ -142,6 +146,7 @@
   padding: 8px;
   width: 40px;
   height: 40px;
+  transition: background-color 0.3s ease, border 0.3s ease;
 }
 
 .btnIcon:hover {
