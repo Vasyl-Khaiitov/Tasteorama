@@ -12,7 +12,7 @@ import {
 } from "../../../redux/ownRecipes/selectors.js";
 
 import RecipeCard from "../../RecipeCard/RecipeCard.jsx";
-import LoadMoreBtn from "../../LoadMoreBtn/LoadMoreBtn.jsx";
+import LoadMoreBtn from "../../LoadMoreBtn/LoadMoreBtn..jsx";
 import { useEffect } from "react";
 import { fetchOwnRecipes } from "../../../redux/ownRecipes/operations.js";
 
