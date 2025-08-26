@@ -14,6 +14,16 @@ const recipesSlice = createSlice({
     currentRecipe: null,
     isLoadingCurrentRecipe: false,
   },
+  reducers: {
+    // 🔸 тут новий reducer
+    resetRecipes(state) {
+      state.items = [];
+      state.page = 1;
+      state.hasMore = true;
+      state.error = null;
+      state.currentRecipe = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchRecipes.pending, handlePending)
@@ -50,4 +60,5 @@ const recipesSlice = createSlice({
   },
 });
 
+export const { resetRecipes } = recipesSlice.actions;
 export default recipesSlice.reducer;

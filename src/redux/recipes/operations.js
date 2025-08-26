@@ -3,12 +3,13 @@ import apiClient from "../../api/api";
 
 export const fetchRecipes = createAsyncThunk(
   "recipes/fetchAllRecipes",
-  async ({ page, perPage }, thunkAPI) => {
+  async ({ page, perPage, title }, thunkAPI) => {
     try {
       const response = await apiClient.get("/recipes", {
         params: {
-          page: page,
-          per_page: perPage,
+          page,
+          perPage, // тут краще однаковий кейс з бекендом
+          title: title || "", // якщо нема, не додається у запит
         },
       });
       return response.data;
