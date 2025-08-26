@@ -7,20 +7,16 @@ import Layout from "../components/layout/Layout";
 
 import PrivateRoute from "./PrivateRoute";
 
-import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 
 import Header from "./Header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrentUser } from "../redux/auth/operations";
 import Footer from "./Footer/Footer";
 import { selectUserIsRefresh } from "../redux/auth/selectors";
-
 import { ToastContainer } from "react-toastify";
 import Loader from "./Loader/Loader";
 import { deleteAuthorizationToken, setAuthorizationToken } from "../api/api";
 import { lsGetToken } from "../utils/localStorage";
-import Owner from "./Owner/Owner";
-import FavoritesSection from "./FavoritesSection/FavoritesSection";
 import { RestrictedRoute } from "./RestrictedRoute";
 
 const MainPage = lazy(() => import("../pages/MainPage/MainPage"));
@@ -32,6 +28,8 @@ const RecipeViewPage = lazy(() =>
   import("../pages/RecipeViewPage/RecipeViewPage")
 );
 const AuthPage = lazy(() => import("../pages/AuthPage/AuthPage"));
+
+import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 
 export default function App() {
   const dispatch = useDispatch();
