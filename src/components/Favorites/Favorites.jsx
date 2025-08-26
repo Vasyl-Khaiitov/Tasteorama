@@ -1,4 +1,5 @@
-import FavoritesSection from "../../components/Favorites/FavoritesSection/FavoritesSection";
+// import style from "./Favorites.module.css";
+import FavoritesSection from "../FavoritesSection/FavoritesSection";
 
 export default function Favorites() {
   return (
