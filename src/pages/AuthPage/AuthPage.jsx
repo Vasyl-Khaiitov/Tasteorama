@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
 import LoginForm from "../../components/LoginForm/LoginForm";
 
