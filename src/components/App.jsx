@@ -7,7 +7,6 @@ import Layout from "../components/layout/Layout";
 
 import PrivateRoute from "./PrivateRoute";
 
-
 import Header from "./Header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrentUser } from "../redux/auth/operations";
@@ -30,6 +29,8 @@ const RecipeViewPage = lazy(() =>
 const AuthPage = lazy(() => import("../pages/AuthPage/AuthPage"));
 
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
+import Owner from "./Owner/Owner";
+import FavoritesSection from "./FavoritesSection/FavoritesSection";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -75,14 +76,17 @@ export default function App() {
                 }
               />
               <Route
-                path="/profile/:recipeType"
+                path="/profile"
                 element={
                   <PrivateRoute
                     component={<ProfilePage />}
                     redirectTo="/auth/login"
                   />
                 }
-              />
+              >
+                <Route path="owner" element={<Owner />} />
+                <Route path="favorites" element={<FavoritesSection />} />
+              </Route>
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>
