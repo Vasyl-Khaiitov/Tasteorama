@@ -5,6 +5,7 @@ import css from "./ProfilePage.module.css";
 import { useState } from "react";
 
 export default function ProfilePage() {
+
   const [isRecipe, setIsRecipes] = useState(false);
 
   return (
@@ -26,6 +27,7 @@ export default function ProfilePage() {
         Favorites
       </NavItem>
       {!isRecipe ? <Owner /> : <Favorites />}
+
     </>
   );
 }

@@ -5,7 +5,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 
-import { RestrictedRoute } from "./RestrictedRoute";
+import PrivateRoute from "./PrivateRoute";
 
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 
@@ -21,6 +21,7 @@ import { deleteAuthorizationToken, setAuthorizationToken } from "../api/api";
 import { lsGetToken } from "../utils/localStorage";
 import Owner from "./Owner/Owner";
 import FavoritesSection from "./FavoritesSection/FavoritesSection";
+import { RestrictedRoute } from "./RestrictedRoute";
 
 const MainPage = lazy(() => import("../pages/MainPage/MainPage"));
 const AddRecipePage = lazy(() =>
@@ -58,13 +59,32 @@ export default function App() {
           <Suspense fallback={<Loader />}>
             <Routes>
               <Route path="/" element={<MainPage />} />
-              <Route path="/auth/:authType" element={<AuthPage />} />
+              <Route
+                path="/auth/:authType"
+                element={
+                  <RestrictedRoute component={<AuthPage />} redirectTo="/" />
+                }
+              />
               <Route path="/recipes/:recipeId" element={<RecipeViewPage />} />
-              <Route path="/add-recipe" element={<AddRecipePage />} />
-              <Route path="/profile/:recipeType" element={<ProfilePage />}>
-                <Route path="owner" element={<Owner />} />
-                <Route path="favorites" element={<FavoritesSection />} />
-              </Route>
+
+              <Route
+                path="/add-recipe"
+                element={
+                  <PrivateRoute
+                    component={<AddRecipePage />}
+                    redirectTo="/auth/login"
+                  />
+                }
+              />
+              <Route
+                path="/profile/:recipeType"
+                element={
+                  <PrivateRoute
+                    component={<ProfilePage />}
+                    redirectTo="/auth/login"
+                  />
+                }
+              />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>
