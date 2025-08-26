@@ -9,6 +9,7 @@ export default function ProfilePage() {
 
   return (
     <>
+      <h2>My profile</h2>
       <NavItem
         to="/profile/owner"
         className={css.link}

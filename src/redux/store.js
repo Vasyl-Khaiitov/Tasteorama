@@ -15,6 +15,7 @@ import recipesReduser from "./recipes/slice.js";
 import favoritesSlice from "./favorites/slice.js";
 import categoriesReducer from "./categories/slice.js";
 import ingredientsReducer from "./ingredients/slice.js";
+import ownRecipesReducer from "./ownRecipes/slice";
 import { toastMiddleware } from "../utils/toastMiddleware";
 
 const authPersistConfig = {
@@ -30,6 +31,7 @@ export const store = configureStore({
     categories: categoriesReducer,
     ingredients: ingredientsReducer,
     favorites: favoritesSlice,
+    ownRecipes: ownRecipesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

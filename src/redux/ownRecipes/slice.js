@@ -10,6 +10,7 @@ const ownRecipesSlice = createSlice({
     perPage: 12,
     isLoading: false,
     hasMore: true,
+    totalItems: 0,
     error: null,
   },
   extraReducers: (builder) => {
@@ -21,6 +22,7 @@ const ownRecipesSlice = createSlice({
         state.items = [...state.items, ...action.payload];
         state.page += 1;
         state.hasMore = action.payload.length === state.perPage;
+        state.totalItems = action.payload.totalItems;
       })
       .addCase(fetchOwnRecipes.rejected, handleError);
   },
