@@ -8,18 +8,19 @@ export default function Button({
   paddingsY = 8,
   paddingsX = 0,
   disabled = false,
-  maxWidth,
+  // maxWidth,
   onClick,
   children,
+  className,
 }) {
   return (
     <button
-      className={clsx(css.button, styleType && css[styleType])}
+      className={clsx(css.button, styleType && css[styleType], className)}
       type={type}
       disabled={disabled}
       style={{
         padding: `${paddingsY}px ${paddingsX}px`,
-        maxWidth: maxWidth,
+        // maxWidth: maxWidth,
       }}
       onClick={onClick}
     >
