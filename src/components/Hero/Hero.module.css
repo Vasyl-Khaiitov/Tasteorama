@@ -5,7 +5,7 @@
   right: 50%;
   margin: -48px -50vw 48px -50vw;
   background-size: 100%;
-  background-position: center;
+  background-position: center 25%;
   background-repeat: no-repeat;
   overflow: hidden;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25), 0 4px 4px 0 rgba(0, 0, 0, 0.25);
@@ -15,8 +15,6 @@
       rgba(0, 0, 0, 0.3) 100%
     ),
     image-set(url("/assets/Banner/1x/Banner1x\(Mobile\).jpg") 1x);
-  background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
 }
 @media (min-resolution: 2dppx) {
@@ -105,3 +103,40 @@
     }
   }
 }
+
+=======
+
+.input {
+  border: 1px solid var(--light-gray);
+  border-radius: 8px;
+  padding: 8px;
+  height: 46px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 155%;
+  color: var(--black);
+  width: 100%;
+  outline: none;
+}
+.input::placeholder {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 155%;
+  color: #9f9f9f;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.input:focus {
+  box-shadow: 0 0 0 4px rgba(78, 70, 180, 0.2);
+  background: var(--white);
+  border: 1.5px solid var(--light-brown);
+}
+
+.inputError:hover,
+.inputError:focus {
+  border: 1.5px solid #c80000;
+}
+

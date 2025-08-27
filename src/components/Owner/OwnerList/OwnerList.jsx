@@ -40,21 +40,23 @@ export default function OwnerList() {
 
   return (
       <>
-          <p>{total} recipes</p>
+          <p className={style.total}>{total} recipes</p>
       <ul className={style.list}>
         {ownRecipes.map((recipe) => (
           <li className={style.item} key={recipe._id}>
+            <div className={style.cardWrapper}>
             <RecipeCard
               dishPhoto={recipe.thumb}
               recipeName={recipe.title}
               recipeDescription={recipe.description}
               recipeTime={recipe.time}
-            />
+              />
+              </div>
           </li>
         ))}
       </ul>
 
-      <div>
+      <div className={style.loadMoreWrapper}>
         {hasMore && (
           <LoadMoreBtn onClick={handleLoadMore} disabled={isLoading} />
         )}

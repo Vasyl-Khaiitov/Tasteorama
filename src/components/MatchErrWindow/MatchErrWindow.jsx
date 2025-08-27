@@ -1,3 +1,4 @@
+
 import Button from "../../common/Button/Button";
 import css from "./MatchErrWindow.module.css";
 const MatchErrWindow = ({ onReset }) => {

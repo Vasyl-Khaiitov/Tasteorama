@@ -10,13 +10,14 @@ export default function ProfilePage() {
   return (
     <>
       <h2>My profile</h2>
+      <ul className={css.navList}>
       <NavItem
         to="/profile/owner"
         className={css.link}
         activeClassName={css.active}
         onClick={() => setIsRecipes(false)}
       >
-        Recipes
+        My Recipes
       </NavItem>
       <NavItem
         to="/profile/favorites"
@@ -24,8 +25,9 @@ export default function ProfilePage() {
         activeClassName={css.active}
         onClick={() => setIsRecipes(true)}
       >
-        Favorites
-      </NavItem>
+        Saved Recipes
+        </NavItem>
+        </ul>
       {!isRecipe ? <Owner /> : <Favorites />}
     </>
   );

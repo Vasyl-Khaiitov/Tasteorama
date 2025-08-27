@@ -11,6 +11,7 @@ import {
 } from "../../redux/recipes/selectors";
 import { RecipeCard } from "../RecipeCard/RecipeCard";
 import { useEffect } from "react";
+
 import { fetchRecipes } from "../../redux/recipes/operations";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn.";
 import { selectNameFilter } from "../../redux/filter/selectors";
@@ -27,7 +28,9 @@ export function RecipesList() {
   const page = useSelector(SelectRecipesPage);
   const perPage = useSelector(SelectRecipesPerPage);
   const totalRecepies = useSelector(SelectTotalRecepies);
+
   const search = useSelector(selectNameFilter);
+
 
   useEffect(() => {
     // додала умову по пошуку
@@ -36,11 +39,16 @@ export function RecipesList() {
     }
   }, [dispatch, recipes.length, search, page, perPage]);
 
+  
+
   const handleLoadMore = () => {
     if (!isLoading && hasMore) {
-      dispatch(fetchRecipes({ page, perPage, title: search }));
+      const nextPage = page + 1;
+      dispatch(setPage(nextPage));
+      dispatch(loadMoreRecipes({ page: nextPage, title: filterName }));
     }
   };
+      
 
   return (
     <>
@@ -72,6 +80,8 @@ export function RecipesList() {
           ))}
         </ul>
       )}
+
+      <ButtonUp />
 
       <div className={style.loadMoreWrapper}>
         {hasMore && !isLoading && recipes.length > 0 && (
