@@ -51,6 +51,7 @@ export function RecipesList() {
     <>
       <div>{totalRecepies} recipes</div>
 
+
       {recipes.length === 0 && !isLoading ? (
         search ? (
           /* якщо був пошук і нічого не знайдено */
