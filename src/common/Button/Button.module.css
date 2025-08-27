@@ -64,7 +64,8 @@
 
 .transparent {
   background-color: transparent;
-  color: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
 }
 
 .transparent:not(:disabled):hover,

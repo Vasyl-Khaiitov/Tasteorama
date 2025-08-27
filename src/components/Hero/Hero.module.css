@@ -5,7 +5,7 @@
   right: 50%;
   margin: -48px -50vw 48px -50vw;
   background-size: 100%;
-  background-position: center;
+  background-position: center 25%;
   background-repeat: no-repeat;
   overflow: hidden;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25), 0 4px 4px 0 rgba(0, 0, 0, 0.25);
@@ -15,8 +15,6 @@
       rgba(0, 0, 0, 0.3) 100%
     ),
     image-set(url("/assets/Banner/1x/Banner1x\(Mobile\).jpg") 1x);
-  background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
 }
 @media (min-resolution: 2dppx) {
@@ -37,13 +35,6 @@
   z-index: 1;
 }
 
-.wraper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-}
-
 .title {
   font-family: var(--font-family);
   font-size: var(--font-size-lg-mob-title);
@@ -52,10 +43,7 @@
   margin-bottom: 24px;
   line-height: 110%;
 }
-.searchBtn {
-  padding: 13px 0px;
-  max-width: 100%;
-}
+
 @media (min-width: 768px) {
   .hero {
     background-image: linear-gradient(
@@ -72,19 +60,12 @@
     padding: 128px 65px 128px 32px;
     z-index: 1;
   }
-  .wraper {
-    display: flex;
-    flex-direction: row;
-    gap: 24px;
-  }
+
   .title {
     font-size: var(--font-size-xl-title);
     padding-right: 178px;
   }
-  .searchBtn {
-    padding: 12px 59px;
-    max-width: 176px;
-  }
+
   @media (min-resolution: 2dppx) {
     .hero {
       background-image: linear-gradient(
@@ -110,11 +91,7 @@
     max-width: 1440px;
     padding: 128px 671px 128px 108px;
   }
-  .wraper {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-  }
+
   @media (min-resolution: 2dppx) {
     .hero {
       background-image: linear-gradient(
@@ -126,6 +103,8 @@
     }
   }
 }
+
+=======
 
 .input {
   border: 1px solid var(--light-gray);
@@ -152,7 +131,7 @@
 }
 .input:focus {
   box-shadow: 0 0 0 4px rgba(78, 70, 180, 0.2);
-  background: var(--color-primary);
+  background: var(--white);
   border: 1.5px solid var(--light-brown);
 }
 
@@ -160,3 +139,4 @@
 .inputError:focus {
   border: 1.5px solid #c80000;
 }
+

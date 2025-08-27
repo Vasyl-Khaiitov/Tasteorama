@@ -1,0 +1,12 @@
+.title {
+  margin-bottom: 16px;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-lg-sub-title);
+  color: var(--black);
+  line-height: 122%;
+}
+@media (min-width: 768px) {
+  .title {
+    font-size: var(--font-size-lg-mob-title);
+  }
+}
