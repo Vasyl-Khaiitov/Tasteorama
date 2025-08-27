@@ -48,6 +48,7 @@ export function RecipesList() {
               recipeDescription={recipe.description}
               recipeTime={recipe.time}
               recipeId={recipe._id}
+              
             />
           </li>
         ))}

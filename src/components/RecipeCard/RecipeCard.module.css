@@ -212,6 +212,9 @@
   background-color: #9b6c43;
   border: none;
 }
+.btnIcon.active {
+  background-color: #9b6c43;
+}
 
 .btnContainer {
   display: flex;

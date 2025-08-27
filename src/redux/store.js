@@ -19,11 +19,19 @@ import ownRecipesReducer from "./ownRecipes/slice";
 import { toastMiddleware } from "../utils/toastMiddleware";
 import filterReducer from "./filter/slice.js";
 
+
+
 const authPersistConfig = {
   key: "auth",
   storage,
   whitelist: ["token"],
 };
+const favoritesPersistConfig = {
+  key: "favorites",
+  storage,
+  whitelist: ["items"], 
+};
+
 
 export const store = configureStore({
   reducer: {
@@ -31,7 +39,7 @@ export const store = configureStore({
     recipes: recipesReduser,
     categories: categoriesReducer,
     ingredients: ingredientsReducer,
-    favorites: favoritesSlice,
+    favorites: persistReducer(favoritesPersistConfig, favoritesSlice),
     ownRecipes: ownRecipesReducer,
     filter: filterReducer,
   },
