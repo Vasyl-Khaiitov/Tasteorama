@@ -12,12 +12,13 @@ import {
 import { RecipeCard } from "../RecipeCard/RecipeCard";
 import { useEffect } from "react";
 
-import { fetchRecipes } from "../../redux/recipes/operations";
+import { fetchRecipes, loadMoreRecipes } from "../../redux/recipes/operations";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn.";
 import { selectNameFilter } from "../../redux/filter/selectors";
 import MatchErrWindow from "../MatchErrWindow/MatchErrWindow";
 import { changeRecipeSearch } from "../../redux/filter/slice";
-import { resetRecipes } from "../../redux/recipes/slice";
+import { resetRecipes, setPage } from "../../redux/recipes/slice";
+import ButtonUp from "../../common/ButtonUp/ButtonUp";
 
 export function RecipesList() {
   const dispatch = useDispatch();
@@ -31,7 +32,6 @@ export function RecipesList() {
 
   const search = useSelector(selectNameFilter);
 
-
   useEffect(() => {
     // додала умову по пошуку
     if (recipes.length === 0 && !search) {
@@ -39,16 +39,13 @@ export function RecipesList() {
     }
   }, [dispatch, recipes.length, search, page, perPage]);
 
-  
-
   const handleLoadMore = () => {
     if (!isLoading && hasMore) {
       const nextPage = page + 1;
       dispatch(setPage(nextPage));
-      dispatch(loadMoreRecipes({ page: nextPage, title: filterName }));
+      dispatch(loadMoreRecipes({ page: nextPage, title: search }));
     }
   };
-      
 
   return (
     <>
