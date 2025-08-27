@@ -1,14 +1,21 @@
 import style from "./Owner.module.css";
 import OwnerList from "./OwnerList/OwnerList.jsx";
-// import { useSelector } from "react-redux";
-// import { selectOwnRecipesLoading } from "../../../redux/ownRecipes/selectors";
+import MatchErrWindow from "../MatchErrWindow/MatchErrWindow.jsx";
+import { useSelector } from "react-redux";
+import { selectOwnRecipes } from "../../redux/ownRecipes/selectors.js";
 
 export default function Owner() {
-
+  const ownRecipes = useSelector(selectOwnRecipes);
+  
   return (
-    <section className={style}>
-      <h2>Hellow Owner</h2>
-      <OwnerList />
-    </section>
+    <>
+     {ownRecipes.length > 0 ? (
+  <OwnerList />
+) : (
+  <div className={style.errorWrapper}>
+    <MatchErrWindow message="You haven't added any recipes yet." />
+  </div>
+)}
+    </>
   );
 }
