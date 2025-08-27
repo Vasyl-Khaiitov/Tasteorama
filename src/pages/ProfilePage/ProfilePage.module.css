@@ -1,6 +1,16 @@
+h2 {
+  font-weight: 600;
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+.navList {
+  display: flex;
+  margin-bottom: 16px;
+  gap: 38px;
+}
 .link {
   font-weight: 600;
-  font-size: 12px;
+  font-size: 18px;
   color: #000000;
   border-bottom: 1px solid transparent;
   padding: 0px 0px 4px;
@@ -9,4 +19,9 @@
 }
 .active {
   border-color: #ff0000;
+}
+@media (min-width: 768px) {
+  .link {
+    font-size: 12px;
+  }
 }

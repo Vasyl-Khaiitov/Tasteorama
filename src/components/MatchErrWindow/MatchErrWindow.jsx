@@ -1,8 +1,8 @@
 import css from "../../components/MatchErrWindow/MatchErrWindow.module.css";
-const MatchErrWindow = () => {
+const MatchErrWindow = ({ message }) => {
      return (
 	<div className={css.div_err}>
-	     <h2>We're sorry! We were not able to find a match</h2>
+	     <h2>{message || "We're sorry! We were not able to find a match"}</h2>
 	</div>
      );
 };
