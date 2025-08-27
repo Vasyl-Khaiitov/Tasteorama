@@ -11,8 +11,11 @@ import {
 } from "../../redux/recipes/selectors";
 import { RecipeCard } from "../RecipeCard/RecipeCard";
 import { useEffect } from "react";
-import { fetchRecipes } from "../../redux/recipes/operations";
-import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn.";
+import { fetchRecipes, loadMoreRecipes } from "../../redux/recipes/operations";
+import ButtonUp from "../../common/ButtonUp/ButtonUp.jsx";
+import { setPage } from "../../redux/recipes/slice";
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn..jsx";
+import { selectNameFilter } from "../../redux/filter/selectors.js";
 
 export function RecipesList() {
   const dispatch = useDispatch();
@@ -23,16 +26,19 @@ export function RecipesList() {
   const page = useSelector(SelectRecipesPage);
   const perPage = useSelector(SelectRecipesPerPage);
   const totalRecepies = useSelector(SelectTotalRecepies);
+  const filterName = useSelector(selectNameFilter);
 
   useEffect(() => {
     if (recipes.length === 0) {
       dispatch(fetchRecipes({ page, perPage }));
     }
-  }, []);
+  }, [dispatch, page, perPage, recipes.length]);
 
   const handleLoadMore = () => {
     if (!isLoading && hasMore) {
-      dispatch(fetchRecipes({ page, perPage }));
+      const nextPage = page + 1;
+      dispatch(setPage(nextPage));
+      dispatch(loadMoreRecipes({ page: nextPage, title: filterName }));
     }
   };
 
@@ -52,6 +58,8 @@ export function RecipesList() {
           </li>
         ))}
       </ul>
+
+      <ButtonUp />
 
       <div className={style.loadMoreWrapper}>
         {hasMore && (
