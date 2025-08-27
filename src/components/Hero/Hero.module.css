@@ -37,13 +37,6 @@
   z-index: 1;
 }
 
-.wraper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-}
-
 .title {
   font-family: var(--font-family);
   font-size: var(--font-size-lg-mob-title);
@@ -52,10 +45,7 @@
   margin-bottom: 24px;
   line-height: 110%;
 }
-.searchBtn {
-  padding: 13px 0px;
-  max-width: 100%;
-}
+
 @media (min-width: 768px) {
   .hero {
     background-image: linear-gradient(
@@ -72,19 +62,12 @@
     padding: 128px 65px 128px 32px;
     z-index: 1;
   }
-  .wraper {
-    display: flex;
-    flex-direction: row;
-    gap: 24px;
-  }
+
   .title {
     font-size: var(--font-size-xl-title);
     padding-right: 178px;
   }
-  .searchBtn {
-    padding: 12px 59px;
-    max-width: 176px;
-  }
+
   @media (min-resolution: 2dppx) {
     .hero {
       background-image: linear-gradient(
@@ -110,11 +93,7 @@
     max-width: 1440px;
     padding: 128px 671px 128px 108px;
   }
-  .wraper {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-  }
+
   @media (min-resolution: 2dppx) {
     .hero {
       background-image: linear-gradient(
@@ -125,38 +104,4 @@
         image-set(url("/assets/Banner/2x/Banner2x\(Desktop\).jpg") 2x);
     }
   }
-}
-
-.input {
-  border: 1px solid var(--light-gray);
-  border-radius: 8px;
-  padding: 8px;
-  height: 46px;
-  font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 155%;
-  color: var(--black);
-  width: 100%;
-  outline: none;
-}
-.input::placeholder {
-  font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 155%;
-  color: #9f9f9f;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.input:focus {
-  box-shadow: 0 0 0 4px rgba(78, 70, 180, 0.2);
-  background: var(--color-primary);
-  border: 1.5px solid var(--light-brown);
-}
-
-.inputError:hover,
-.inputError:focus {
-  border: 1.5px solid #c80000;
 }
