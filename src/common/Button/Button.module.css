@@ -45,6 +45,12 @@
   border: 1px solid #d9d9d9;
 }
 
+.read {
+  background-color: #c80000;
+  color: #ffffff;
+  border: none;
+}
+
 .white:not(:disabled):hover,
 .white:not(:disabled):focus {
   color: #000000;
