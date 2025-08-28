@@ -15,7 +15,7 @@ export default function Footer() {
     if (!isLoggedIn) {
       setShowModal(true);
     } else {
-      navigate("/profile/${recipeType}");
+      navigate("/profile");
     }
   };
 
