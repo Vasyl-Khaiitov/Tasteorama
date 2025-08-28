@@ -3,6 +3,7 @@ import { lsRemoveToken, lsSetToken } from "../utils/localStorage";
 
 const apiClient = axios.create({
   baseURL: "https://cook-api-dtdl.onrender.com/api",
+  withCredentials: true,
 });
 
 export const setAuthorizationToken = (token) => {
