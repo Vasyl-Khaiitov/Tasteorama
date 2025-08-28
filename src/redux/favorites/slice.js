@@ -9,6 +9,7 @@ const favoritesSlice = createSlice({
     isLoading: false,
     error: null,
     hasMore: true,
+    page: 1,
   },
   reducers: {
     resetFavorites: (state) => {
