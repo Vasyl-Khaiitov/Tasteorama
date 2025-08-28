@@ -1,5 +1,4 @@
 import style from "./FavoritesList.module.css";
-import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RecipeCard } from "../RecipeCard/RecipeCard";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn.";
@@ -9,8 +8,6 @@ import {
   selectFavoritesPerPage,
   selectFavoritesHasMore,
 } from "../../redux/favorites/selectors";
-import { RecipeCard } from "../RecipeCard/RecipeCard";
-import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn.";
 import { useEffect, useState } from "react";
 import { fetchFavoriteRecipes } from "../../redux/favorites/operation";
 import { selectToken } from "../../redux/auth/selectors";
