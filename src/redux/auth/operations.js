@@ -55,7 +55,7 @@ export const fetchLogoutUser = createAsyncThunk(
   "auth/fetchLogoutUser",
   async (_, thunkAPI) => {
     try {
-      await apiClient.post("/api/auth/logout");
+      await apiClient.post("/auth/logout");
       deleteAuthorizationToken();
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
