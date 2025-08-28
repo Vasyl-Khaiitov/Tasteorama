@@ -35,9 +35,9 @@ export function RecipesList() {
   useEffect(() => {
     // додала умову по пошуку
     if (recipes.length === 0 && !search) {
-      dispatch(fetchRecipes({ page, perPage }));
+      dispatch(fetchRecipes({ page: 1, perPage }));
     }
-  }, [dispatch, recipes.length, search, page, perPage]);
+  }, [dispatch, recipes.length, search, perPage]);
 
   const handleLoadMore = () => {
     if (!isLoading && hasMore) {

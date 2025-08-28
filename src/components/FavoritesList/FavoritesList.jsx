@@ -1,5 +1,8 @@
 import style from "./FavoritesList.module.css";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { RecipeCard } from "../RecipeCard/RecipeCard";
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn.";
 import {
   selectFavoritesRecipes,
   selectFavoritesLoading,
@@ -17,11 +20,10 @@ export default function FavoritesList() {
   const dispatch = useDispatch();
   const [localPage, setLocalPage] = useState(1);
 
-  const favorites = useSelector(selectFavoritesRecipes);
+  const favorites = useSelector(selectFavoritesRecipes); // массив объектов
   const isLoading = useSelector(selectFavoritesLoading);
   const perPage = useSelector(selectFavoritesPerPage);
   const hasMore = useSelector(selectFavoritesHasMore);
-
   const token = useSelector(selectToken);
   const userId = useSelector((state) => state.auth.user?.id);
 
@@ -42,17 +44,20 @@ export default function FavoritesList() {
           perPage,
         })
       );
+
     }
   }, [dispatch, userId, token, localPage, perPage]);
 
   const handleLoadMore = () => {
     if (!isLoading && hasMore && userId) {
       setLocalPage((prev) => prev + 1);
+
     }
   };
 
   return (
     <>
+      <h2>Favorites</h2>
       <ul className={style.list}>
         {Array.isArray(favorites) &&
           favorites.map((favorite, index) => (
@@ -68,6 +73,13 @@ export default function FavoritesList() {
       </ul>
 
       {hasMore && <LoadMoreBtn onClick={handleLoadMore} disabled={isLoading} />}
+      
+
+      {/* {hasMore && (
+        <div className={style.loadMoreWrapper}>
+          <LoadMoreBtn onClick={handleLoadMore} disabled={isLoading} />
+        </div>
+      )} */}
     </>
   );
 }
