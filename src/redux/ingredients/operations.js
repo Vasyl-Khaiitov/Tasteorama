@@ -1,12 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-import publicApiClient from "../../api/publicApi";
+import apiClient from "../../api/api";
 
 export const fetchIngredients = createAsyncThunk(
   "ingredients/fetchAllIngredients",
   async (_, thunkAPI) => {
     try {
-      const response = await publicApiClient.get("/ingredients");
+      const response = await apiClient.get("/ingredients");
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
