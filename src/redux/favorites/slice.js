@@ -9,6 +9,16 @@ const favoritesSlice = createSlice({
     isLoading: false,
     error: null,
     hasMore: true,
+    page: 1,
+  },
+  reducers: {
+    resetFavorites: (state) => {
+      state.items = [];
+      state.page = 1;
+      state.hasMore = true;
+      state.error = null;
+      state.isLoading = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -17,8 +27,24 @@ const favoritesSlice = createSlice({
       .addCase(fetchFavoriteRecipes.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = action.payload.data;
-        state.hasMore = action.payload.hasNextPage ?? false;
+
+        const recipes = action.payload.data || [];
+        const hasNextPage = action.payload.hasNextPage;
+
+        if (state.page === 1) {
+          // перша сторінка → замінюємо масив
+          state.items = recipes;
+        } else {
+          // наступні сторінки → додаємо до існуючих
+          state.items = [...state.items, ...recipes].filter(
+            (recipe, index, self) =>
+              index === self.findIndex((r) => r._id === recipe._id)
+          );
+        }
+
+        state.page += 1; // локальна сторінка
+        state.hasMore = hasNextPage;
+        
       })
       .addCase(fetchFavoriteRecipes.rejected, handleError)
 
@@ -40,4 +66,5 @@ const favoritesSlice = createSlice({
   },
 });
 
+export const { resetFavorites } = favoritesSlice.actions;
 export default favoritesSlice.reducer;
