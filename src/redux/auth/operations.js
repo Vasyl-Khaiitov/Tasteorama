@@ -31,7 +31,7 @@ export const fetchLoginUser = createAsyncThunk(
   async (credentials, thunkAPI) => {
     console.log("THUNK STARTED", credentials);
     try {
-      const res = await apiClient.post("/auth/login", credentials);
+      const res = await apiClient.post("/api/auth/login", credentials);
       console.log("LOGIN RESPONSE:", res);
 
       const { accessToken } = res.data.data;
