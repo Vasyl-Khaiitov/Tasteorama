@@ -19,7 +19,7 @@ export default function LogoutModal({ onConfirm, onCancel }) {
         <Button
           type="button"
           styleType="transparent"
-          name="cancel"
+          name="Cancel"
           paddingsY="12"
           paddingsX="54"
           aria-label="Cancel"

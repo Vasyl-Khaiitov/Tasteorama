@@ -3,6 +3,7 @@ import apiClient, {
   deleteAuthorizationToken,
   setAuthorizationToken,
 } from "../../api/api";
+import { fetchFavoriteRecipes } from "../favorites/operation";
 
 export const fetchRegisterUser = createAsyncThunk(
   "auth/fetchRegisterUser",
@@ -38,6 +39,14 @@ export const fetchLoginUser = createAsyncThunk(
       setAuthorizationToken(accessToken);
 
       const dataUser = await apiClient.get("/currentUser");
+      thunkAPI.dispatch(
+        fetchFavoriteRecipes({
+          userId: dataUser.data.data.info.id,
+          token: accessToken,
+          page: 1,
+          perPage: 12,
+        })
+      );
       return {
         user: dataUser.data.data.info, // тут точно лежить { name, email, id, ... }
         token: accessToken,

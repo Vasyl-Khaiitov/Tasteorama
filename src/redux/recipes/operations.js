@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import publicApiClient from "../../api/publicApi";
+import apiClient from "../../api/api";
 
 export const fetchRecipes = createAsyncThunk(
   "recipes/fetchAllRecipes",
   async ({ page, perPage, title }, thunkAPI) => {
     try {
-      const res = await publicApiClient.get("/recipes", {
+      const res = await apiClient.get("/recipes", {
         params: { page, perPage, title: title || "" },
       });
 
@@ -28,7 +28,7 @@ export const loadMoreRecipes = createAsyncThunk(
   "recipes/loadMoreRecipes",
   async ({ page, perPage, title }, thunkAPI) => {
     try {
-      const res = await publicApiClient.get("/recipes", {
+      const res = await apiClient.get("/recipes", {
         params: { page, perPage, title: title || "" },
       });
 
@@ -51,7 +51,7 @@ export const fetchRecipesById = createAsyncThunk(
   "recipes/fetchRecipesById",
   async (recipeId, thunkAPI) => {
     try {
-      const { data } = await publicApiClient.get(`/recipes/${recipeId}`);
+      const { data } = await apiClient.get(`/recipes/${recipeId}`);
       return data.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
