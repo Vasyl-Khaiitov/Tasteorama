@@ -7,6 +7,7 @@ import {
   SelectRecipesPage,
   SelectRecipesPerPage,
   SelectRecipesHasMore,
+   SelectTotalRecepies
 } from "../../redux/recipes/selectors";
 import { RecipeCard } from "../RecipeCard/RecipeCard";
 import { useEffect } from "react";
@@ -27,7 +28,6 @@ export function RecipesList() {
   const hasMore = useSelector(SelectRecipesHasMore);
   const page = useSelector(SelectRecipesPage);
   const perPage = useSelector(SelectRecipesPerPage);
-
   const search = useSelector(selectNameFilter);
   const categoryFilter = useSelector(selectCategoryFilter);
   const ingredientFilter = useSelector(selectIngredientFilter);
@@ -50,7 +50,7 @@ export function RecipesList() {
 
   return (
  <>
-  <div>{totalRecepies} recipes</div>
+  
 
   {recipes.length === 0 && !isLoading && search && (
     <MatchErrWindow
