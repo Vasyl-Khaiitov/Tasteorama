@@ -5,6 +5,7 @@ import { fetchLogoutUser } from "../../redux/auth/operations";
 import Icon from "../../shared/Icon";
 import { useState } from "react";
 import LogoutModal from "../LogoutModal/LogoutModal";
+import { resetRecipes, setPage } from "../../redux/recipes/slice";
 
 export default function UserMenu() {
   const dispatch = useDispatch();
@@ -15,6 +16,8 @@ export default function UserMenu() {
 
   const handleConfirmLogout = () => {
     dispatch(fetchLogoutUser());
+    dispatch(resetRecipes());
+    dispatch(setPage(1));
     handleCloseModal();
   };
 
