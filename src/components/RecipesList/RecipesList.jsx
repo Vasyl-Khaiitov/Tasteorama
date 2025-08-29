@@ -77,7 +77,6 @@ export function RecipesList() {
           ))}
         </ul>
       )}
-
       <ButtonUp />
 
       <div className={style.loadMoreWrapper}>
