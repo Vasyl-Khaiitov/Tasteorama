@@ -97,15 +97,9 @@ img {
   border-style: none; /* IE10 fix */
 }
 
-button {
+.button:focus:not(:focus-visible) {
   outline: none;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 100%;
-  line-height: 1.15;
-  margin: 0;
-  overflow: visible;
-  text-transform: none;
+  box-shadow: none;
 }
 
 a {

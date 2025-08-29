@@ -20,13 +20,17 @@
     border-bottom 300ms ease, opacity 300ms ease;
 }
 
+/* ---------- brown ---------- */
 .brown {
   background-color: #9b6c43;
 }
 
-.brown:not(:disabled):hover,
-.brown:not(:disabled):focus {
+.brown:not(:disabled):hover {
   background-color: #6d554b;
+}
+
+.brown:focus-visible {
+  outline: 2px solid #ffffff;
 }
 
 .brown:not(:disabled):active {
@@ -38,21 +42,20 @@
   box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #ffffff;
   opacity: 0.3;
 }
-
-.white {
-  background-color: transparent;
-  color: #ffffff;
-  border: 1px solid #d9d9d9;
-}
+/* ---------- read ---------- */
 
 .read {
   background-color: #c80000;
   color: #ffffff;
   border: none;
 }
-.read:not(:disabled):hover,
-.read:not(:disabled):focus {
+
+.read:not(:disabled):hover {
   background-color: #b81f1f;
+}
+
+.read:focus-visible {
+  outline: 2px solid #ffffff;
 }
 
 .read:not(:disabled):active {
@@ -60,10 +63,24 @@
   border: 3px solid #ffffff;
 }
 
-.white:not(:disabled):hover,
-.white:not(:disabled):focus {
+.read:disabled {
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #ffffff;
+  opacity: 0.3;
+}
+
+.white {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #d9d9d9;
+}
+
+.white:not(:disabled):hover {
   color: #000000;
   background-color: #d9d9d9;
+}
+
+.white:focus-visible {
+  outline: 2px solid #ffffff;
 }
 
 .white:not(:disabled):active {
@@ -73,19 +90,22 @@
 
 .white:disabled {
   box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #ffffff;
-
   opacity: 0.3;
 }
 
+/* ---------- transparent ---------- */
 .transparent {
   background-color: transparent;
   color: #000000;
   border: 1px solid #000000;
 }
 
-.transparent:not(:disabled):hover,
-.transparent:not(:disabled):focus {
+.transparent:not(:disabled):hover {
   opacity: 0.5;
+}
+
+.transparent:focus-visible {
+  outline: 2px solid #000000;
 }
 
 .transparent:not(:disabled):active {
