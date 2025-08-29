@@ -9,16 +9,22 @@
   transition: background-color 300ms ease, box-shadow 300ms ease,
     border 300ms ease, color 300ms ease;
 }
+
 .linkAsBtn:hover,
-.linkAsBtn:focus {
+.linkAsBtn:focus-visible {
   background-color: #6d554b;
 }
 
-.activeAsBtn {
+.linkAsBtn:active {
+  background-color: #9b6c43; /* натиснута кнопка */
+}
+
+/* .activeAsBtn {
   box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #ffffff;
   border: 2px solid var(--color-primary);
   background-color: #9b6c43;
-}
+} */
+
 .fullWidth {
   width: 100%;
   display: block;

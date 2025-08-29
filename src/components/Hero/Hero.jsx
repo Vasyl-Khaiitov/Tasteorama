@@ -41,18 +41,14 @@ export default function Hero() {
     debouncedSearch(trimmed);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const trimmed = search.trim();
+  const handleSubmit = (searchValue) => {
+    const trimmed = searchValue.trim();
 
-    if (!trimmed) {
-      toast.error("Please enter a recipe title to search!");
-      return;
-    }
     if (/^\d{3,}$/.test(trimmed)) {
       toast.warn("The search field is for text only!");
       return;
     }
+
     // викликає пошук миттєво при сабміті
     debouncedSearch.flush();
     dispatch(changeRecipeSearch(trimmed));

@@ -1,30 +1,8 @@
 .loadMoreBtn {
-  background-color: #9b6c43;
-  border-radius: 8px;
-  padding: 16px 0px;
-  min-width: 289px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 600;
-  font-size: 18px;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: background 0.3s;
-  /* margin: 0 468px; */
-  margin: 0 auto;
+  max-width: 100%;
 }
-
-.loadMoreBtn:hover,
-.loadMoreBtn:focus {
-  background-color: #6d554b;
-}
-
-.loadMoreBtn:active {
-  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
-}
-
-.loadMoreBtn:disabled {
-  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #fff;
-  opacity: 0.3;
-  cursor: not-allowed;
+@media (min-width: 768px) {
+  .loadMoreBtn {
+    max-width: 338px;
+  }
 }

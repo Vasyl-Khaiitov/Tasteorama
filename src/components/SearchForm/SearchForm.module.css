@@ -55,7 +55,19 @@
   border: 1.5px solid #9b6c43;
 }
 
-.inputError:hover,
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+.inputError {
+  border: 1.5px solid #c80000;
+  background: #fff; /* залишаємо світлий фон */
+}
+
 .inputError:focus {
+  box-shadow: 0 0 0 4px rgba(200, 0, 0, 0.2);
   border: 1.5px solid #c80000;
 }
