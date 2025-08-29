@@ -66,7 +66,6 @@ export default function Filters() {
 
   return (
     <>
-      {}
     <div>{totalRecepies} recipes</div>
       <button className={style.resetBtn} onClick={handleReset}>
         Reset filters
