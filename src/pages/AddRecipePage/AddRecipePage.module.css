@@ -1,0 +1,53 @@
+.title {
+  margin-bottom: 32px;
+  font-weight: 600;
+  font-size: 48px;
+  color: var(--black);
+  line-height: 122%;
+}
+
+.subTitle {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.subTitlePhoto {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.subTitleAdd {
+  padding-top: 30px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+  .title {
+    margin-bottom: 28px;
+  }
+
+  .subTitle {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 40px;
+    margin-bottom: 14px;
+  }
+
+  .subTitle {
+    font-size: 24px;
+    margin-bottom: 14px;
+  }
+
+  .subTitlePhoto {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+}
