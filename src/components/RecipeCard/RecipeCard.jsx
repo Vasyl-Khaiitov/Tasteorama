@@ -11,6 +11,7 @@ import {
   deleteFromFavorites,
 } from "../../redux/favorites/operation";
 
+
 export function RecipeCard({
   dishPhoto,
   recipeName,
