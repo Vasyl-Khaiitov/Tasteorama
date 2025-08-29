@@ -7,8 +7,8 @@ import Select from "../../common/Select/Select";
 import css from "./AddRecipeForm.module.css";
 import cssPage from "../../pages/AddRecipePage/AddRecipePage.module.css";
 import * as Yup from "yup";
-import publicApiClient from "../../api/publicApi";
 import Loader from "../../components/Loader/Loader.jsx";
+import apiClient from "../../api/api.js";
 
 const AddRecipeForm = () => {
   const [categoriesList, setCategoriesList] = useState([]);
@@ -56,8 +56,8 @@ const AddRecipeForm = () => {
     const fetchData = async () => {
       try {
         const [categoriesRes, ingredientsRes] = await Promise.all([
-          publicApiClient.get("categories"),
-          publicApiClient.get("ingredients"),
+          apiClient.get("categories"),
+          apiClient.get("ingredients"),
         ]);
 
         setCategoriesList(categoriesRes.data.data);
