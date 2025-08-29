@@ -10,7 +10,6 @@ export default function LinkAsBtn({ onLinkClick, fullWidth = false }) {
     <NavItem
       to={isLoggedIn ? "/add-recipe" : "/auth/register"}
       className={btnClass}
-      activeClassName={css.activeAsBtn}
       onClick={onLinkClick}
     >
       {" "}

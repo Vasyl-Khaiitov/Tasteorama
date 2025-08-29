@@ -104,8 +104,6 @@
   }
 }
 
-=======
-
 .input {
   border: 1px solid var(--light-gray);
   border-radius: 8px;
@@ -139,4 +137,3 @@
 .inputError:focus {
   border: 1.5px solid #c80000;
 }
-
