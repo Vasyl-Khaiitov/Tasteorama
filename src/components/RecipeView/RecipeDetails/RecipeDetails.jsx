@@ -12,33 +12,33 @@ import { useSelector } from "react-redux";
 import Icon from "../../../shared/Icon";
 import About from "../About/About";
 import Button from "../../../common/Button/Button";
-import {useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { selectIsLoggedIn } from "../../../redux/auth/selectors";
-import { addToFavorites,deleteFromFavorites} from "../../../redux/favorites/operation";
+import {
+  addToFavorites,
+  deleteFromFavorites,
+} from "../../../redux/favorites/operation";
 
 export default function RecipeDetails() {
   //   const navigate = useNavigate();
   const dispatch = useDispatch();
-    const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   //   const user = useSelector(selectUser);
-   const { recipeId } = useParams();
+  const { recipeId } = useParams();
   const recipe = useSelector(selectCurrentRecipe);
   if (!recipe) return <NotFound />;
-  const isFavorite = useSelector(state =>
-  recipeId ? state.favorites.items.some(r => r._id === recipeId) : false
-);
- const handleFavoriteClick = (e) => {
+  const isFavorite = useSelector((state) =>
+    recipeId ? state.favorites.items.some((r) => r._id === recipeId) : false
+  );
+  const handleFavoriteClick = (e) => {
     e.stopPropagation();
 
- 
-
     if (!isFavorite) {
-  dispatch(addToFavorites(recipeId));
-}
-else{
-  dispatch(deleteFromFavorites(recipeId));
-}
+      dispatch(addToFavorites(recipeId));
+    } else {
+      dispatch(deleteFromFavorites(recipeId));
+    }
   };
 
   return (
@@ -60,12 +60,22 @@ else{
             time={recipe.time}
             calories={recipe.cals ?? "N/N"}
           />
-          <button type="button" className={`${styles.saveButton} ${isFavorite ? styles.active : ""}`} onClick={handleFavoriteClick}>
-             {isFavorite ? "Unsave" : "Save"}
-            <Icon
-              name="bookmarkicon"
-              classname={clsx(styles.icon, styles.iconSaveFavorite)}
-            />
+          <button
+            type="button"
+            className={`${styles.saveButton} ${
+              isFavorite ? styles.active : ""
+            }`}
+            onClick={handleFavoriteClick}
+          >
+            {isFavorite ? "Unsave" : "Save"}{" "}
+            {isFavorite ? (
+              <Icon
+                name="flag"
+                classname={clsx(styles.icon, styles.iconSavedFavorite)}
+              />
+            ) : (
+              <Icon name="flag" classname={clsx(styles.icon)} />
+            )}
           </button>
         </div>
         <div className={styles.leftContent}>
