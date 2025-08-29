@@ -14,6 +14,7 @@ const recipesSlice = createSlice({
     currentRecipe: null,
     isLoadingCurrentRecipe: false,
     isLoadingMoreRecipes: false,
+    total:0,
   },
   reducers: {
     resetRecipes(state) {
@@ -37,6 +38,7 @@ const recipesSlice = createSlice({
         state.items = payload.items; // overwrite
         state.page = payload.page;
         state.hasMore = payload.hasNextPage;
+        state.total = payload.total;
       })
       .addCase(fetchRecipes.rejected, handleError)
 
@@ -70,6 +72,7 @@ const recipesSlice = createSlice({
         state.page = payload.page;
         state.hasMore = payload.hasNextPage;
         state.isLoadingMoreRecipes = false;
+        state.total = payload.total;
       })
       .addCase(loadMoreRecipes.rejected, (state, action) => {
         state.isLoadingMoreRecipes = false;
