@@ -77,7 +77,6 @@ export function RecipesList() {
             </li>
           ))}
         </ul>
-      )}
 
       <ButtonUp />
 
