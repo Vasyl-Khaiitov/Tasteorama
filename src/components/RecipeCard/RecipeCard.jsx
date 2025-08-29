@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import { useState } from "react";
 import AuthModal from "../AuthModal/AuthModal";
-import { selectIsFavorite } from "../../redux/favorites/selectors";
+
 import { addToFavorites,deleteFromFavorites} from "../../redux/favorites/operation";
 
 

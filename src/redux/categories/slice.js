@@ -14,8 +14,9 @@ const categoriesSlice = createSlice({
       .addCase(fetchCategories.pending, handlePending)
       .addCase(fetchCategories.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.items = action.payload;
+        state.items = action.payload.data;
         console.log(action.payload);
+
 
         state.error = null;
       })

@@ -1,0 +1,109 @@
+.selectContainer {
+    display: none;
+}
+
+
+
+@media screen and (min-width: 1440px) {
+    .selectContainer {
+        display: flex;
+        gap: 24px;
+    
+        }
+}
+
+.selectGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #000;
+}
+
+.select {
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    padding: 4px 8px;
+    width: 179px;
+    height: 33px;
+    stroke-width: 1px;
+    stroke: #000;
+}
+
+.option:checked {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 155%;
+    color: #000;
+    background-color: #d3d3d3;
+}
+
+/* Коли вибрано порожнє значення (через required + defaultValue="") */
+.select:required:invalid {
+    color: #9ca3af;
+}
+
+/* Колір варіантів у випадаючому списку */
+.select option {
+    color: #111;
+}
+
+.resetBtn {
+    display: none; /* приховуємо на мобілці/планшеті */
+}
+
+@media (min-width: 1440px) {
+    .resetBtn {
+        display: block; /* показуємо на десктопі */
+        margin-left: auto;
+
+        border: none;
+        background-color: transparent;
+        border-bottom: 1px solid #000;
+        padding: 0px 0px 4px;
+        width: 74px;
+        height: 19px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+        font-size: 12px;
+        color: #000;
+        margin-right: 24px;
+    }
+}
+
+.filterBtn {
+    display: flex; /* спочатку є */
+    gap: 4px;
+    flex-wrap: wrap;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    margin-left: auto;
+    padding: 0px 0px 4px;
+    /* width: 67px;
+    height: 28px; */
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    color: #000;
+}
+
+
+@media screen and (min-width: 1440px) {
+    .filterBtn {
+            display: none;
+            
+        }
+}
+
+
+.icon {
+    width: 16px;
+    height: 16px;
+    stroke: black;
+    fill: none; /* щоб був прозорий фон */
+    flex-shrink: 0;
+}

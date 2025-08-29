@@ -8,12 +8,14 @@ import SearchForm from "../SearchForm/SearchForm.jsx";
 
 import { fetchRecipes } from "../../redux/recipes/operations.js";
 import { resetRecipes } from "../../redux/recipes/slice.js";
-import { selectNameFilter } from "../../redux/filter/selectors.js";
+import { selectCategoryFilter, selectIngredientFilter, selectNameFilter } from "../../redux/filter/selectors.js";
 import { changeRecipeSearch } from "../../redux/filter/slice";
 
 export default function Hero() {
   const dispatch = useDispatch();
   const textSearch = useSelector(selectNameFilter);
+  const selectedCategory = useSelector(selectCategoryFilter);
+  const selectedIngredient = useSelector(selectIngredientFilter);
 
   const [search, setSearch] = useState(textSearch);
 
@@ -25,7 +27,8 @@ export default function Hero() {
   const debouncedSearch = useDebouncedCallback((value) => {
     dispatch(changeRecipeSearch(value));
     dispatch(resetRecipes());
-    dispatch(fetchRecipes({ page: 1, perPage: 12, title: value }));
+    dispatch(fetchRecipes({ page: 1, perPage: 12, title: value, category: selectedCategory || undefined,
+       ingredient: selectedIngredient || undefined }));
   }, 500);
 
   const handleChange = (value) => {
@@ -54,7 +57,8 @@ export default function Hero() {
     debouncedSearch.flush();
     dispatch(changeRecipeSearch(trimmed));
     dispatch(resetRecipes());
-    dispatch(fetchRecipes({ page: 1, perPage: 12, title: trimmed }));
+    dispatch(fetchRecipes({ page: 1, perPage: 12, title: trimmed, category: selectedCategory || undefined,
+    ingredient: selectedIngredient || undefined, }));
   };
 
   return (

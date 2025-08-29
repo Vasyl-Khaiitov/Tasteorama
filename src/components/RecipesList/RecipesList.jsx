@@ -7,16 +7,15 @@ import {
   SelectRecipesPage,
   SelectRecipesPerPage,
   SelectRecipesHasMore,
-  SelectTotalRecepies,
 } from "../../redux/recipes/selectors";
 import { RecipeCard } from "../RecipeCard/RecipeCard";
 import { useEffect } from "react";
 
 import { fetchRecipes, loadMoreRecipes } from "../../redux/recipes/operations";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn.";
-import { selectNameFilter } from "../../redux/filter/selectors";
+import { selectCategoryFilter, selectIngredientFilter, selectNameFilter } from "../../redux/filter/selectors";
 import MatchErrWindow from "../MatchErrWindow/MatchErrWindow";
-import { changeRecipeSearch } from "../../redux/filter/slice";
+import { resetFilters } from "../../redux/filter/slice";
 import { resetRecipes, setPage } from "../../redux/recipes/slice";
 import ButtonUp from "../../common/ButtonUp/ButtonUp";
 
@@ -28,9 +27,11 @@ export function RecipesList() {
   const hasMore = useSelector(SelectRecipesHasMore);
   const page = useSelector(SelectRecipesPage);
   const perPage = useSelector(SelectRecipesPerPage);
-  const totalRecepies = useSelector(SelectTotalRecepies);
 
   const search = useSelector(selectNameFilter);
+  const categoryFilter = useSelector(selectCategoryFilter);
+  const ingredientFilter = useSelector(selectIngredientFilter);
+
 
   useEffect(() => {
     // додала умову по пошуку
@@ -43,26 +44,22 @@ export function RecipesList() {
     if (!isLoading && hasMore) {
       const nextPage = page + 1;
       dispatch(setPage(nextPage));
-      dispatch(loadMoreRecipes({ page: nextPage, title: search }));
+      dispatch(loadMoreRecipes({ page: nextPage, title: search, category: categoryFilter, ingredient: ingredientFilter }));
     }
   };
 
   return (
     <>
-      <div>{totalRecepies} recipes</div>
 
-
-      {recipes.length === 0 && !isLoading ? (
-        search ? (
+      {recipes.length === 0 && !isLoading ? ( 
           /* якщо був пошук і нічого не знайдено */
           <MatchErrWindow
             onReset={() => {
-              dispatch(changeRecipeSearch("")); // очищаємо фільтр
+              dispatch(resetFilters()); // очищаємо фільтр
               dispatch(resetRecipes()); // чистимо список
               dispatch(fetchRecipes({ page: 1, perPage })); // знову беремо всі
             }}
           />
-        ) : null
       ) : (
         <ul className={style.list}>
           {recipes.map((recipe) => (

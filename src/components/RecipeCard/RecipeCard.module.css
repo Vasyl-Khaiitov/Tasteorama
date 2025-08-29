@@ -101,6 +101,7 @@
 
 .time {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 4px;
   font-family: "Montserrat", sans-serif;
@@ -115,8 +116,8 @@
 }
 
 .icon {
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
   stroke: black;
   fill: none; /* щоб був прозорий фон */
   flex-shrink: 0;
@@ -199,6 +200,9 @@
 }
 
 .btnIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: transparent;
   border: 1px solid #000;
   border-radius: 8px;
@@ -208,12 +212,17 @@
   transition: background-color 0.3s ease, border 0.3s ease;
 }
 
-.btnIcon:hover {
+
+.btnIcon:hover,
+.btnIcon.active {
   background-color: #9b6c43;
   border: none;
 }
-.btnIcon.active {
-  background-color: #9b6c43;
+
+
+.btnIcon:hover .icon,
+.btnIcon.active .icon {
+  stroke: #fff;
 }
 
 .btnContainer {
