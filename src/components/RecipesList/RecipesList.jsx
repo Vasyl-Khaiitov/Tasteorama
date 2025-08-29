@@ -35,10 +35,10 @@ export function RecipesList() {
 
   useEffect(() => {
     // додала умову по пошуку
-    if (recipes.length === 0 && !search) {
+    if (recipes.length === 0 && !search && !ingredientFilter && !categoryFilter) {
       dispatch(fetchRecipes({ page: 1, perPage }));
     }
-  }, [dispatch, recipes.length, search, perPage]);
+  }, [dispatch, recipes.length, search, ingredientFilter, categoryFilter, perPage]);
 
   const handleLoadMore = () => {
     if (!isLoading && hasMore) {
@@ -49,10 +49,9 @@ export function RecipesList() {
   };
 
   return (
- <>
-  
+    <>
 
-  {recipes.length === 0 && !isLoading && search && (
+  {recipes.length === 0 && !isLoading && ( search || categoryFilter || ingredientFilter ) && (
     <MatchErrWindow
       onReset={() => {
         dispatch(resetFilters());
