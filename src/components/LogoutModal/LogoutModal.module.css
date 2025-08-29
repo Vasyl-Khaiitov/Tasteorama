@@ -1,0 +1,7 @@
+.btnWrapper {
+  display: flex;
+  gap: 27px;
+}
+.logoutBtn {
+  white-space: nowrap;
+}

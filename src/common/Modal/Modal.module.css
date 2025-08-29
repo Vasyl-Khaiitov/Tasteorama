@@ -1,0 +1,50 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.modal {
+  text-align: center;
+  position: relative;
+  border-radius: 32px;
+  padding: 56px 24px 32px;
+  background-color: #faf3e0;
+}
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeIcon {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: #000000;
+}
+.title {
+  font-weight: 600;
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+.message {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+  margin-bottom: 20px;
+}

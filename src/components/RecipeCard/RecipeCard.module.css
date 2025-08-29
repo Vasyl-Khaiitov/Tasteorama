@@ -248,3 +248,9 @@
     max-height: 431px;
   }
 }
+
+.fullWidthBtn {
+  width: 100%;
+  display: block;
+  text-align: center;
+}
