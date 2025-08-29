@@ -41,14 +41,12 @@ export default function FavoritesList() {
           perPage,
         })
       );
-
     }
   }, [dispatch, userId, token, localPage, perPage]);
 
   const handleLoadMore = () => {
     if (!isLoading && hasMore && userId) {
       setLocalPage((prev) => prev + 1);
-
     }
   };
 
@@ -56,21 +54,20 @@ export default function FavoritesList() {
     <>
       <h2>Favorites</h2>
       <ul className={style.list}>
-        {Array.isArray(favorites) &&
-          favorites.map((favorite, index) => (
-            <li key={`${favorite._id}-${index}`}>
-              <RecipeCard
-                dishPhoto={favorite.recipeImg}
-                recipeName={favorite.title}
-                recipeDescription={favorite.description}
-                recipeTime={favorite.cookiesTime}
-              />
-            </li>
-          ))}
+        {favorites.map((favorite) => (
+          <li className={style.item} key={favorite._id}>
+            <RecipeCard
+              recipeId={favorite._id} // обязательно передаем id
+              recipeName={favorite.title}
+              recipeDescription={favorite.description}
+              dishPhoto={favorite.thumb}
+              recipeTime={favorite.time}
+            />
+          </li>
+        ))}
       </ul>
 
       {hasMore && <LoadMoreBtn onClick={handleLoadMore} disabled={isLoading} />}
-      
 
       {/* {hasMore && (
         <div className={style.loadMoreWrapper}>

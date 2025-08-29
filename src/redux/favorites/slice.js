@@ -49,7 +49,6 @@ const favoritesSlice = createSlice({
 
         state.page += 1; // локальна сторінка
         state.hasMore = hasNextPage;
-        
       })
       .addCase(fetchFavoriteRecipes.rejected, handleError)
 
