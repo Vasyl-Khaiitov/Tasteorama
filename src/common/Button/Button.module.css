@@ -50,6 +50,15 @@
   color: #ffffff;
   border: none;
 }
+.read:not(:disabled):hover,
+.read:not(:disabled):focus {
+  background-color: #b81f1f;
+}
+
+.read:not(:disabled):active {
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #ffffff;
+  border: 3px solid #ffffff;
+}
 
 .white:not(:disabled):hover,
 .white:not(:disabled):focus {

@@ -1,38 +1,52 @@
-import { useEffect } from "react";
+import style from "./FavoritesList.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { RecipeCard } from "../RecipeCard/RecipeCard";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn.";
 import {
   selectFavoritesRecipes,
   selectFavoritesLoading,
-  selectFavoritesPage,
   selectFavoritesPerPage,
   selectFavoritesHasMore,
 } from "../../redux/favorites/selectors";
+import { useEffect, useState } from "react";
 import { fetchFavoriteRecipes } from "../../redux/favorites/operation";
 import { selectToken } from "../../redux/auth/selectors";
-import style from "./FavoritesList.module.css";
+import { resetFavorites } from "../../redux/favorites/slice";
 
 export default function FavoritesList() {
   const dispatch = useDispatch();
+  const [localPage, setLocalPage] = useState(1);
 
   const favorites = useSelector(selectFavoritesRecipes); // массив объектов
   const isLoading = useSelector(selectFavoritesLoading);
-  const page = useSelector(selectFavoritesPage);
   const perPage = useSelector(selectFavoritesPerPage);
   const hasMore = useSelector(selectFavoritesHasMore);
   const token = useSelector(selectToken);
   const userId = useSelector((state) => state.auth.user?.id);
 
+  // Скидаємо при першому завантаженні
+  useEffect(() => {
+    dispatch(resetFavorites());
+    setLocalPage(1);
+  }, [dispatch]);
+
+  // Завантаження сторінки
   useEffect(() => {
     if (userId) {
-      dispatch(fetchFavoriteRecipes({ userId, token, page, perPage }));
+      dispatch(
+        fetchFavoriteRecipes({
+          userId,
+          token,
+          page: localPage,
+          perPage,
+        })
+      );
     }
-  }, [dispatch, userId, token, page, perPage]);
+  }, [dispatch, userId, token, localPage, perPage]);
 
   const handleLoadMore = () => {
     if (!isLoading && hasMore && userId) {
-      dispatch(fetchFavoriteRecipes({ userId, token, page, perPage }));
+      setLocalPage((prev) => prev + 1);
     }
   };
 
@@ -43,7 +57,7 @@ export default function FavoritesList() {
         {favorites.map((favorite) => (
           <li className={style.item} key={favorite._id}>
             <RecipeCard
-              recipeId={favorite._id}       // обязательно передаем id
+              recipeId={favorite._id} // обязательно передаем id
               recipeName={favorite.title}
               recipeDescription={favorite.description}
               dishPhoto={favorite.thumb}
@@ -52,6 +66,8 @@ export default function FavoritesList() {
           </li>
         ))}
       </ul>
+
+      {hasMore && <LoadMoreBtn onClick={handleLoadMore} disabled={isLoading} />}
 
       {/* {hasMore && (
         <div className={style.loadMoreWrapper}>

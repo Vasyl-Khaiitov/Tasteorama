@@ -17,6 +17,8 @@ export function RecipeCard({
   recipeDescription,
   recipeTime,
   recipeId,
+  hideFavoriteButton = false,
+  fullWidthBtn = false,
 }) {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
@@ -73,7 +75,10 @@ export function RecipeCard({
       </div>
 
       <div className={style.btnContainer}>
-        <NavLink to={`/recipes/${recipeId}`} className={style.btn}>
+        <NavLink
+          to={`/recipes/${recipeId}`}
+          className={`${style.btn} ${fullWidthBtn ? style.fullWidthBtn : ""}`}
+        >
           Learn more
         </NavLink>
 

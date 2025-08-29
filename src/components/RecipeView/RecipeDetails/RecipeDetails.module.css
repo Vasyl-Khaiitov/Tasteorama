@@ -48,8 +48,15 @@
     border 300ms ease, opacity 300ms ease;
 }
 
+
 .saveButton {
   background-color: #9b6c43;
+}
+.saveButton {
+  background-color: #9b6c43;
+}
+.saveButton.active{
+ background-color: #6d554b;
 }
 
 .saveButton:not(:disabled):hover,
