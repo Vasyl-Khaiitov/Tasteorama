@@ -21,10 +21,6 @@
   align-items: center;
 }
 
-.cardWrapper :global(.btnIcon) {
-  display: none;
-}
-
 .loadMoreWrapper {
   display: flex;
   justify-content: center;
