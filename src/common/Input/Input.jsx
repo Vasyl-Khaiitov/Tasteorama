@@ -11,17 +11,38 @@ export default function Input({
   showToggle = false,
   show,
   onToggle,
+  onChange,
+  value,
+  labelClassName,
+  className,
+  errorClaseName,
 }) {
   const fieldId = useId();
 
   const [field, meta] = useField(name);
 
+  const inputNameCase = className ? css[className] : css.inputName;
+  const inputErrorCase = errorClaseName ? css[errorClaseName] : css.inputError;
+
+  // const inputClassName = `${
+  //   meta.touched && meta.error ? css.inputError : css.inputName
+  // }`;
+
   const inputClassName = `${
-    meta.touched && meta.error ? css.inputError : css.inputName
+    meta.touched && meta.error ? inputErrorCase : inputNameCase
   }`;
 
+  const labelName = labelClassName ? css[labelClassName] : css.labelName;
+
+  const handleChange = (e) => {
+    field.onChange(e);
+    if (onChange) {
+      onChange(e);
+    }
+  };
+
   return (
-    <label className={css.labelName} htmlFor={fieldId}>
+    <label className={labelName} htmlFor={fieldId}>
       {labelText}
       <div className={css.inputWrapper}>
         <Field
@@ -31,6 +52,8 @@ export default function Input({
           name={name}
           type={showToggle ? (show ? "text" : "password") : type}
           placeholder={placeholder}
+          onChange={handleChange}
+          value={value}
         />
         {showToggle && (
           <button

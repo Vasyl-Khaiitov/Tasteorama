@@ -5,9 +5,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import { useState } from "react";
 import AuthModal from "../AuthModal/AuthModal";
-
-import { addToFavorites,deleteFromFavorites} from "../../redux/favorites/operation";
-
+import { selectIsFavorite } from "../../redux/favorites/selectors";
+import {
+  addToFavorites,
+  deleteFromFavorites,
+} from "../../redux/favorites/operation";
 
 
 export function RecipeCard({
@@ -21,18 +23,15 @@ export function RecipeCard({
 }) {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
+  //  const isFavorite = useSelector(state =>
+  //     recipeId ? state.favorites.items.includes(recipeId.toString()) : false
+  //   );
+  const isFavorite = useSelector((state) =>
+    recipeId ? state.favorites.items.some((r) => r._id === recipeId) : false
+  );
 
-
-
-//  const isFavorite = useSelector(state =>
-//     recipeId ? state.favorites.items.includes(recipeId.toString()) : false
-//   );
-const isFavorite = useSelector(state =>
-  recipeId ? state.favorites.items.some(r => r._id === recipeId) : false
-);
-
-// const favoriteIds = useSelector(state => state.favorites.items);
-//   console.log("Current favorite IDs:", favoriteIds);
+  // const favoriteIds = useSelector(state => state.favorites.items);
+  //   console.log("Current favorite IDs:", favoriteIds);
 
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
@@ -47,11 +46,10 @@ const isFavorite = useSelector(state =>
     }
 
     if (!isFavorite) {
-  dispatch(addToFavorites(recipeId));
-}
-else{
-  dispatch(deleteFromFavorites(recipeId));
-}
+      dispatch(addToFavorites(recipeId));
+    } else {
+      dispatch(deleteFromFavorites(recipeId));
+    }
   };
 
   const handleNavigate = (path) => {
@@ -78,22 +76,27 @@ else{
       </div>
 
       <div className={style.btnContainer}>
-        <NavLink to={`/recipes/${recipeId}`} className={`${style.btn} ${fullWidthBtn ? style.fullWidthBtn : ""}`} >
+        <NavLink
+          to={`/recipes/${recipeId}`}
+          className={`${style.btn} ${fullWidthBtn ? style.fullWidthBtn : ""}`}
+        >
           Learn more
         </NavLink>
-        {!hideFavoriteButton && (
-          <button
-            type="button"
-            className={`${style.btnIcon} ${isFavorite ? style.active : ""}`}
-            onClick={handleFavoriteClick}
-          >
-            <Icon name="flag" classname={style.icon} />
-          </button>
-        )}
+
+        <button
+          type="button"
+          className={`${style.btnIcon} ${isFavorite ? style.active : ""}`}
+          onClick={handleFavoriteClick}
+        >
+          <Icon name="flag" classname={style.icon} />
+        </button>
       </div>
 
       {showModal && (
-        <AuthModal onClose={() => setShowModal(false)} onNavigate={handleNavigate} />
+        <AuthModal
+          onClose={() => setShowModal(false)}
+          onNavigate={handleNavigate}
+        />
       )}
     </div>
   );
