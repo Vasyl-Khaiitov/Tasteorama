@@ -49,43 +49,42 @@ export function RecipesList() {
   };
 
   return (
-    <>
+ <>
+  <div>{totalRecepies} recipes</div>
 
-      <div>{totalRecepies} recipes</div>
+  {recipes.length === 0 && !isLoading && search && (
+    <MatchErrWindow
+      onReset={() => {
+        dispatch(resetFilters());
+        dispatch(resetRecipes());
+        dispatch(fetchRecipes({ page: 1, perPage }));
+      }}
+    />
+  )}
 
-      {recipes.length === 0 && !isLoading ? (
-        search ? (
-          /* якщо був пошук і нічого не знайдено */
-          <MatchErrWindow
-            onReset={() => {
-              dispatch(resetFilters()); // очищаємо фільтр
-              dispatch(resetRecipes()); // чистимо список
-              dispatch(fetchRecipes({ page: 1, perPage })); // знову беремо всі
-            }}
+  {recipes.length > 0 && (
+    <ul className={style.list}>
+      {recipes.map((recipe) => (
+        <li className={style.item} key={recipe._id}>
+          <RecipeCard
+            dishPhoto={recipe.thumb}
+            recipeName={recipe.title}
+            recipeDescription={recipe.description}
+            recipeTime={recipe.time}
+            recipeId={recipe._id}
           />
-      ) : (
-        <ul className={style.list}>
-          {recipes.map((recipe) => (
-            <li className={style.item} key={recipe._id}>
-              <RecipeCard
-                dishPhoto={recipe.thumb}
-                recipeName={recipe.title}
-                recipeDescription={recipe.description}
-                recipeTime={recipe.time}
-                recipeId={recipe._id}
-              />
-            </li>
-          ))}
-        </ul>
+        </li>
+      ))}
+    </ul>
+  )}
 
-      )}
-      <ButtonUp />
+  <ButtonUp />
 
-      <div className={style.loadMoreWrapper}>
-        {hasMore && !isLoading && recipes.length > 0 && (
-          <LoadMoreBtn onClick={handleLoadMore} disabled={isLoading} />
-        )}
-      </div>
-    </>
+  <div className={style.loadMoreWrapper}>
+    {hasMore && !isLoading && recipes.length > 0 && (
+      <LoadMoreBtn onClick={handleLoadMore} disabled={isLoading} />
+    )}
+  </div>
+</>
   );
 }
