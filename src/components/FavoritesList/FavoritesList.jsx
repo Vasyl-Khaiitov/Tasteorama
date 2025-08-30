@@ -56,7 +56,6 @@ export default function FavoritesList() {
 
   return (
     <>
-      <h2>Favorites</h2>
       <ul className={style.list}>
         {favorites.map((favorite) => (
           <li className={style.item} key={favorite._id}>
@@ -73,14 +72,7 @@ export default function FavoritesList() {
           </li>
         ))}
       </ul>
-
       {hasMore && <LoadMoreBtn onClick={handleLoadMore} disabled={isLoading} />}
-
-      {/* {hasMore && (
-        <div className={style.loadMoreWrapper}>
-          <LoadMoreBtn onClick={handleLoadMore} disabled={isLoading} />
-        </div>
-      )} */}
     </>
   );
 }
