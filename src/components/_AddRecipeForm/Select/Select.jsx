@@ -1,6 +1,6 @@
 import { useId } from "react";
 import css from "./Select.module.css";
-import { ErrorMessage, Field, useField } from "formik";
+import { Field, useField } from "formik";
 
 export default function Select({
   name,
@@ -39,7 +39,12 @@ export default function Select({
           value={value}
           placeholder={placeholder}
         >
-          {placeholder && <option value="">{placeholder}</option>}
+          {placeholder && (
+            <option value="" disabled hidden>
+              {placeholder}
+            </option>
+          )}
+
           {Array.isArray(options) &&
             options.map((item) => (
               <option key={item._id} value={item._id}>
