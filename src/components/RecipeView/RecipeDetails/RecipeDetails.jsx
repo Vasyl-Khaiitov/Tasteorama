@@ -12,16 +12,19 @@ import { useSelector } from "react-redux";
 import Icon from "../../../shared/Icon";
 import About from "../About/About";
 import Button from "../../../common/Button/Button";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { selectIsLoggedIn } from "../../../redux/auth/selectors";
+import { useState } from "react";
+import AuthModal from "../../AuthModal/AuthModal";
 import {
   addToFavorites,
   deleteFromFavorites,
 } from "../../../redux/favorites/operation";
 
 export default function RecipeDetails() {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   //   const user = useSelector(selectUser);
@@ -31,16 +34,23 @@ export default function RecipeDetails() {
   const isFavorite = useSelector((state) =>
     recipeId ? state.favorites.items.some((r) => r._id === recipeId) : false
   );
+  const [showModal, setShowModal] = useState(false);
   const handleFavoriteClick = (e) => {
     e.stopPropagation();
-
+     if (!isLoggedIn) {
+      setShowModal(true);
+      return;
+    }
     if (!isFavorite) {
       dispatch(addToFavorites(recipeId));
     } else {
       dispatch(deleteFromFavorites(recipeId));
     }
   };
-
+  const handleNavigate = (path) => {
+    navigate(path);
+    setShowModal(false);
+  };
   return (
     <>
       <div className={styles.wrapperImgh}>
@@ -84,6 +94,13 @@ export default function RecipeDetails() {
           <Steps instructions={recipe.instructions} />
         </div>
       </div>
+
+      {showModal && (
+        <AuthModal
+          onClose={() => setShowModal(false)}
+          onNavigate={handleNavigate}
+        />
+      )}
     </>
   );
 }
