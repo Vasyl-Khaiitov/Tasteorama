@@ -12,6 +12,7 @@ import {
 } from "../../redux/favorites/operation";
 
 
+
 export function RecipeCard({
   dishPhoto,
   recipeName,
@@ -20,6 +21,7 @@ export function RecipeCard({
   recipeId,
   hideFavoriteButton = false,
   fullWidthBtn = false,
+  customButton,
 }) {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
@@ -82,14 +84,18 @@ export function RecipeCard({
         >
           Learn more
         </NavLink>
-
-        <button
-          type="button"
-          className={`${style.btnIcon} ${isFavorite ? style.active : ""}`}
-          onClick={handleFavoriteClick}
-        >
-          <Icon name="flag" classname={style.icon} />
-        </button>
+             
+        {customButton ? (
+          customButton
+        ) : (
+          <button
+            type="button"
+            className={`${style.btnIcon} ${isFavorite ? style.active : ""}`}
+            onClick={handleFavoriteClick}
+          >
+            <Icon name="flag" classame={style.icon} />
+          </button>
+        )}
       </div>
 
       {showModal && (

@@ -9,9 +9,10 @@ import {
   selectFavoritesHasMore,
 } from "../../redux/favorites/selectors";
 import { useEffect, useState } from "react";
-import { fetchFavoriteRecipes } from "../../redux/favorites/operation";
+import { fetchFavoriteRecipes, deleteFromFavorites } from "../../redux/favorites/operation";
 import { selectToken } from "../../redux/auth/selectors";
 import { resetFavorites } from "../../redux/favorites/slice";
+import RemoveFavoriteButton from "../RemoveFavoriteButton/RemoveFavoriteButton";
 
 export default function FavoritesList() {
   const dispatch = useDispatch();
@@ -49,6 +50,9 @@ export default function FavoritesList() {
       setLocalPage((prev) => prev + 1);
     }
   };
+  const handleRemove = () => {
+  dispatch(deleteFromFavorites(recipeId));
+};
 
   return (
     <>
@@ -62,6 +66,9 @@ export default function FavoritesList() {
               recipeDescription={favorite.description}
               dishPhoto={favorite.thumb}
               recipeTime={favorite.time}
+              customButton={
+                <RemoveFavoriteButton recipeId={favorite._id} />
+              }
             />
           </li>
         ))}
