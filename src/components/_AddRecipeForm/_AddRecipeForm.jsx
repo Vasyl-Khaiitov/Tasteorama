@@ -59,7 +59,13 @@ export default function AddRecipeForm() {
             <GeneralInfoSection categoriesList={categories} />
             <IngredientsSection setFieldValue={setFieldValue} />
             <InstructionsSection />
-            <Button type="submit">Publish Recipe</Button>
+            <Button
+              type="submit"
+              styleType="brown"
+              name="Publish Recipe"
+              paddingsY="12"
+              aria-label="Publish Recipe"
+            ></Button>
           </Form>
         )}
       </Formik>

@@ -4,6 +4,7 @@ import { useIngredientManager } from "../useIngredientManager";
 import { ErrorMessage } from "formik";
 import Icon from "../../../shared/Icon";
 import css from "./ingredientsSection.module.css";
+import Button from "../../../common/Button/Button";
 
 export default function IngredientsSection({ setFieldValue }) {
   const {
@@ -35,9 +36,14 @@ export default function IngredientsSection({ setFieldValue }) {
         onChange={handleInputChange}
       />
 
-      <button type="button" onClick={handleAddIngredient}>
-        Add Ingredient
-      </button>
+      <Button
+        type="button"
+        styleType="brown"
+        name="Add Ingredient"
+        paddingsY="4"
+        aria-label="Add Ingredient button"
+        onClick={handleAddIngredient}
+      />
 
       <ul>
         {ingredients.map((ing) => (
