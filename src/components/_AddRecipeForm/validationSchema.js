@@ -6,11 +6,13 @@ export const initialValues = {
   time: "",
   calories: "",
   category: "",
-  ingredient: "",
-  measure: "",
-  ingredients: [],
-  instructions: "",
   thumb: null,
+  instructions: "",
+  ingredients: [],
+  ingredientInput: {
+    ingredient: { _id: "", name: "" },
+    measure: "",
+  },
 };
 
 const MAX_IMAGE_SIZE = 2 * 1024 * 1024;

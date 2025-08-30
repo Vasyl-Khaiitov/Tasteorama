@@ -1,7 +1,8 @@
+import { useEffect } from "react";
 import { useImageDrop } from "../useImageDrop";
 import css from "./ImageUploadSection.module.css";
 
-export default function ImageUploadSection({ setFieldValue }) {
+export default function ImageUploadSection({ setFieldValue, resetTrigger }) {
   const {
     imagePreview,
     isDragging,
@@ -9,10 +10,18 @@ export default function ImageUploadSection({ setFieldValue }) {
     handleDrop,
     handleDragOver,
     handleDragLeave,
+    clearImage,
   } = useImageDrop(setFieldValue);
+
+  useEffect(() => {
+    if (resetTrigger) {
+      clearImage(); // 🔥 очищення після сабміту
+    }
+  }, [resetTrigger]);
 
   return (
     <>
+      <h2>Upload Photo</h2>
       <input
         type="file"
         id="fileInput"

@@ -4,6 +4,7 @@ import { fetchPostRecipes } from "../../redux/addRecipes/operations";
 import {
   selectIsLoading,
   selectCreatedRecipe,
+  selectError,
 } from "../../redux/addRecipes/selectors";
 import { recipeValidationSchema, initialValues } from "./validationSchema";
 import GeneralInfoSection from "./GeneralInfoSection/GeneralInfoSection";
@@ -13,12 +14,16 @@ import ImageUploadSection from "./ImageUploadSection/ImageUploadSection";
 import Loader from "../Loader/Loader";
 import Button from "../../common/Button/Button";
 import { useCategoryManager } from "./useCategoryManager";
+import { toast } from "react-toastify";
+import { useRef, useEffect } from "react";
 
 export default function AddRecipeForm() {
+  const formikRef = useRef(null);
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const createdRecipe = useSelector(selectCreatedRecipe);
   const { categories } = useCategoryManager();
+  const error = useSelector(selectError);
 
   const handleSubmit = (values) => {
     const formData = new FormData();
@@ -43,12 +48,21 @@ export default function AddRecipeForm() {
     dispatch(fetchPostRecipes({ formData }));
   };
 
+  useEffect(() => {
+    if (createdRecipe) {
+      toast.success("Recipe successfully added!");
+      formikRef.current?.resetForm();
+    }
+    if (error) {
+      toast.error(`Failed to add recipe: ${error}`);
+    }
+  }, [createdRecipe, error]);
+
   return (
     <>
       {isLoading && <Loader />}
-      {createdRecipe && <p className="success">Recipe added!</p>}
-
       <Formik
+        innerRef={formikRef}
         initialValues={initialValues}
         validationSchema={recipeValidationSchema}
         onSubmit={handleSubmit}
@@ -57,7 +71,10 @@ export default function AddRecipeForm() {
           <Form>
             <ImageUploadSection setFieldValue={setFieldValue} />
             <GeneralInfoSection categoriesList={categories} />
-            <IngredientsSection setFieldValue={setFieldValue} />
+            <IngredientsSection
+              setFieldValue={setFieldValue}
+              resetTrigger={Boolean(createdRecipe)}
+            />
             <InstructionsSection />
             <Button
               type="submit"

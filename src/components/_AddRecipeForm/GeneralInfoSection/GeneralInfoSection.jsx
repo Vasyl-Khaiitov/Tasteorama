@@ -5,11 +5,12 @@ import Select from "../Select/Select";
 export default function GeneralInfoSection({ categoriesList }) {
   return (
     <>
+      <h2>General Information</h2>
       <Input name="title" labelText="Recipe Title" placeholder="Enter title" />
       <TextArea
         name="description"
-        labelText="Description"
-        placeholder="Short description"
+        labelText="Recipe Description"
+        placeholder="Enter a brief description of your recipe"
       />
       <Input
         name="time"

@@ -35,6 +35,11 @@ export const useImageDrop = (setFieldValue) => {
     setIsDragging(false);
   };
 
+  const clearImage = () => {
+    setImagePreview(null);
+    setFieldValue("thumb", null);
+  };
+
   return {
     isDragging,
     imagePreview,
@@ -42,5 +47,6 @@ export const useImageDrop = (setFieldValue) => {
     handleDrop,
     handleDragOver,
     handleDragLeave,
+    clearImage,
   };
 };

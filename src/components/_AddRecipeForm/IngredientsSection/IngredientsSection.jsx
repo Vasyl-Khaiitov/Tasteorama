@@ -1,12 +1,14 @@
 import Select from "../Select/Select";
 import Input from "../../../common/Input/Input";
 import { useIngredientManager } from "../useIngredientManager";
-import { ErrorMessage } from "formik";
+import { ErrorMessage, useFormikContext } from "formik";
 import Icon from "../../../shared/Icon";
 import css from "./ingredientsSection.module.css";
 import Button from "../../../common/Button/Button";
 
 export default function IngredientsSection({ setFieldValue }) {
+  const { values } = useFormikContext();
+
   const {
     ingredients,
     ingredientInput,
@@ -15,19 +17,19 @@ export default function IngredientsSection({ setFieldValue }) {
     handleInputChange,
     handleAddIngredient,
     handleDelete,
-  } = useIngredientManager(setFieldValue);
+  } = useIngredientManager(values, setFieldValue);
 
   return (
     <>
+      <h2>Ingredients</h2>
       <Select
         name="ingredient"
-        labelText="Ingredient"
         options={ingredientList}
         value={ingredientInput.ingredient?._id || ""}
         onChange={handleSelectChange}
       />
-      <ErrorMessage name="ingredient">
-        one of ingredient collection
+      <ErrorMessage name="ingredientInput.ingredient._id">
+        {(msg) => <div className={css.error}>{msg}</div>}
       </ErrorMessage>
       <Input
         name="measure"
@@ -35,6 +37,9 @@ export default function IngredientsSection({ setFieldValue }) {
         value={ingredientInput.measure}
         onChange={handleInputChange}
       />
+      <ErrorMessage name="ingredientInput.measure">
+        {(msg) => <div className={css.error}>{msg}</div>}
+      </ErrorMessage>
 
       <Button
         type="button"
@@ -45,20 +50,39 @@ export default function IngredientsSection({ setFieldValue }) {
         onClick={handleAddIngredient}
       />
 
-      <ul>
+      <div className={css.ingredientsGrid}>
+        <div className={css.ingredientsGridRow}>
+          <div
+            className={`${css.ingredientsGridCell} ${css.ingredientsGridHead}`}
+          >
+            Name:
+          </div>
+          <div
+            className={`${css.ingredientsGridCell} ${css.ingredientsGridHead}`}
+          >
+            Amount:
+          </div>
+          <div
+            className={`${css.ingredientsGridCell} ${css.ingredientsGridHead}`}
+          ></div>
+        </div>
+
         {ingredients.map((ing) => (
-          <li key={ing.id}>
-            {ing.name} — {ing.measure}
-            <button
-              className={css.deleteBtn}
-              type="button"
-              onClick={() => handleDelete(ing.id)}
-            >
-              <Icon name={"delete"} classname={css.deleteBtnIcon} />
-            </button>
-          </li>
+          <div key={ing.id} className={css.ingredientsGridRow}>
+            <div className={css.ingredientsGridCell}>{ing.name}</div>
+            <div className={css.ingredientsGridCell}>{ing.measure}</div>
+            <div className={css.ingredientsGridCell}>
+              <button
+                className={css.deleteBtn}
+                type="button"
+                onClick={() => handleDelete(ing.id)}
+              >
+                <Icon name="delete" classname={css.deleteBtnIcon} />
+              </button>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </>
   );
 }

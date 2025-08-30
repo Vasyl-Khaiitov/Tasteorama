@@ -15,3 +15,35 @@
   fill: transparent;
   width: 14px;
 }
+.ingredientsGrid {
+  display: table;
+  /*border-collapse: separate; /* щоб був gap */
+  /*border-spacing: 16px 8px; /* відстань між "клітинками": горизонтальна і вертикальна */
+  width: auto; /* не розтягувати на 100% */
+}
+
+.ingredientsGridRow {
+  display: table-row;
+}
+
+.ingredientsGridCell {
+  display: table-cell;
+  vertical-align: top;
+  padding: 10px 0;
+  border-bottom: 1px solid #c5c5c5;
+}
+
+.ingredientsGridCell:nth-child(1),
+.ingredientsGridCell:nth-child(2) {
+  min-width: 150px;
+}
+
+.ingredientsGridHead {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.ingredientsGridRowDel {
+  height: 24px;
+  width: 24px;
+}

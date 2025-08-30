@@ -15,14 +15,14 @@ export default function Input({
   value,
   labelClassName,
   className,
-  errorClaseName,
+  errorClassName,
 }) {
   const fieldId = useId();
 
   const [field, meta] = useField(name);
 
   const inputNameCase = className ? css[className] : css.inputName;
-  const inputErrorCase = errorClaseName ? css[errorClaseName] : css.inputError;
+  const inputErrorCase = errorClassName ? css[errorClassName] : css.inputError;
 
   // const inputClassName = `${
   //   meta.touched && meta.error ? css.inputError : css.inputName
