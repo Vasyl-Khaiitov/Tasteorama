@@ -1,0 +1,17 @@
+.deleteBtn {
+  cursor: pointer;
+  display: flex;
+  background: transparent;
+  align-items: center;
+  padding: 5px;
+  border: none;
+  height: 24px;
+  width: 24px;
+}
+.deleteBtnIcon {
+  border: none;
+  background-color: transparent;
+  stroke: black;
+  fill: transparent;
+  width: 14px;
+}

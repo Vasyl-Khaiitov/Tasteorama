@@ -2,6 +2,8 @@ import Select from "../Select/Select";
 import Input from "../../../common/Input/Input";
 import { useIngredientManager } from "../useIngredientManager";
 import { ErrorMessage } from "formik";
+import Icon from "../../../shared/Icon";
+import css from "./ingredientsSection.module.css";
 
 export default function IngredientsSection({ setFieldValue }) {
   const {
@@ -41,8 +43,12 @@ export default function IngredientsSection({ setFieldValue }) {
         {ingredients.map((ing) => (
           <li key={ing.id}>
             {ing.name} — {ing.measure}
-            <button type="button" onClick={() => handleDelete(ing.id)}>
-              ✖
+            <button
+              className={css.deleteBtn}
+              type="button"
+              onClick={() => handleDelete(ing.id)}
+            >
+              <Icon name={"delete"} classname={css.deleteBtnIcon} />
             </button>
           </li>
         ))}
