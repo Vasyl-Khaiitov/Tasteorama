@@ -16,7 +16,7 @@ export const fetchOwnRecipes = createAsyncThunk(
           per_page: perPage,
         },
       });
-      return res.data.data;
+      return { recipes: res.data.data, totalItems: res.data.total };
     } catch (err) {
       console.error(
         "fetchOwnRecipes error:",

@@ -19,10 +19,13 @@ const ownRecipesSlice = createSlice({
       .addCase(fetchOwnRecipes.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = [...state.items, ...action.payload];
+
+        const { recipes, totalItems } = action.payload;
+
+        state.items = [...state.items, ...recipes];
         state.page += 1;
         state.hasMore = action.payload.length === state.perPage;
-        state.totalItems = action.payload.totalItems;
+        state.totalItems = totalItems;
       })
       .addCase(fetchOwnRecipes.rejected, handleError);
   },
