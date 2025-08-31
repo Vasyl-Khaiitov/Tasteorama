@@ -40,7 +40,7 @@ export const store = configureStore({
     favorites: persistReducer(favoritesPersistConfig, favoritesSlice),
     ownRecipes: ownRecipesReducer,
     filter: filterReducer,
-    addRecipes: addRecipesReducer,
+     addRecipes: addRecipesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

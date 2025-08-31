@@ -4,6 +4,7 @@ import { fetchPostRecipes } from "./operations";
 const addRecipesSlice = createSlice({
   name: "addRecipes",
   initialState: {
+    items: [], 
     isLoading: false,
     error: null,
     createdRecipe: null,
@@ -22,6 +23,9 @@ const addRecipesSlice = createSlice({
       })
       .addCase(fetchPostRecipes.fulfilled, (state, { payload }) => {
         state.isLoading = false;
+          if (!state.items.some((r) => r._id === payload._id)) {
+    state.items.push(payload);
+  }
         state.createdRecipe = payload;
       })
       .addCase(fetchPostRecipes.rejected, (state, action) => {

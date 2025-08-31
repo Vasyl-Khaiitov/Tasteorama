@@ -10,7 +10,7 @@ import {
   selectOwnRecipesHasMore,
   selectOwnRecipesTotal,
 } from "../../../redux/ownRecipes/selectors.js";
-
+import { selectCreatedRecipesList } from "../../../redux/addRecipes/selectors.js";
 import { RecipeCard } from "../../RecipeCard/RecipeCard.jsx";
 import LoadMoreBtn from "../../LoadMoreBtn/LoadMoreBtn..jsx";
 import { useEffect } from "react";
@@ -21,10 +21,16 @@ export default function OwnerList() {
 
   const total = useSelector(selectOwnRecipesTotal);
   const ownRecipes = useSelector(selectOwnRecipes);
+  const createdRecipes = useSelector(selectCreatedRecipesList); // <- сюда
   const isLoading = useSelector(selectOwnRecipesLoading);
   const page = useSelector(selectOwnRecipesPage);
   const perPage = useSelector(selectOwnRecipesPerPage);
   const hasMore = useSelector(selectOwnRecipesHasMore);
+
+  // объединяем без дублей по _id
+  const allRecipes = [...createdRecipes, ...ownRecipes].filter(
+    (recipe, index, self) => index === self.findIndex(r => r._id === recipe._id)
+  );
 
   useEffect(() => {
     if (ownRecipes.length === 0) {
@@ -40,9 +46,9 @@ export default function OwnerList() {
 
   return (
     <>
-      <p className={style.total}>{total} recipes</p>
+      <p className={style.total}>{allRecipes.length} recipes</p>
       <ul className={style.list}>
-        {ownRecipes.map((recipe) => (
+        {allRecipes.map((recipe) => (
           <li className={style.item} key={recipe._id}>
             <div className={style.cardWrapper}>
               <RecipeCard
@@ -60,7 +66,7 @@ export default function OwnerList() {
       </ul>
 
       <div className={style.loadMoreWrapper}>
-        {total !== 0 && (
+        {allRecipes.length !== 0 && (
           <LoadMoreBtn onClick={handleLoadMore} disabled={isLoading} />
         )}
       </div>
