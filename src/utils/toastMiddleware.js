@@ -25,44 +25,33 @@ const errorHandlersMap = new Map([
   ],
   ["fetchRegisterUser", () => "Registration failed. Try another email."],
   ["fetchLogoutUser", () => "Logout failed."],
-  // Заглушка для fetchCurrentUser (не показуємо помилку)
-  ["fetchCurrentUser", () => null],
 ]);
 
+const silentErrors = ["fetchCurrentUser"];
+
 export const toastMiddleware = () => (next) => (action) => {
+  // ✅ Обробка помилок
   if (isRejected(action)) {
-    if (action.type.includes("fetchRecipesById")) {
-      return next(action);
-    }
-
-    let errorMessage;
-
     for (const [key, handler] of errorHandlersMap.entries()) {
       if (action.type.includes(key)) {
-        errorMessage =
+        const errorMessage =
           typeof handler === "function" ? handler(action) : handler;
+
+        const isSilent = silentErrors.some((s) => action.type.includes(s));
+        if (!isSilent && errorMessage) {
+          toast.error(errorMessage);
+        }
         break;
       }
     }
-
-    if (!errorMessage) {
-      errorMessage =
-        action.payload?.message ||
-        action.error?.message ||
-        "Something went wrong.";
-    }
-
-    if (errorMessage) toast.error(errorMessage);
   }
 
+  // ✅ Обробка успіху
   if (isFulfilled(action)) {
     for (const [key, message] of successMessagesMap.entries()) {
       if (action.type.includes(key)) {
-        if (message) {
-          const text =
-            typeof message === "function" ? message(action) : message;
-          toast.success(text);
-        }
+        const text = typeof message === "function" ? message(action) : message;
+        if (text) toast.success(text);
         break;
       }
     }
