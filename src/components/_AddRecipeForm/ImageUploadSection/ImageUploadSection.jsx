@@ -1,4 +1,4 @@
-import { useFormikContext } from "formik";
+import { useFormikContext, ErrorMessage } from "formik";
 import { useImageDrop } from "../useImageDrop";
 import css from "./ImageUploadSection.module.css";
 import Icon from "../../../shared/Icon";
@@ -19,13 +19,13 @@ export default function ImageUploadSection({ setFieldValue }) {
   return (
     <div className={css.photoSection}>
       <input
+        name="thumb"
         type="file"
         id="fileInput"
         accept="image/*"
         style={{ display: "none" }}
         onChange={handleFileChange}
       />
-
       <label
         htmlFor="fileInput"
         className={`${css.uploadBox} ${isDragging ? css.dragging : ""}`}
@@ -39,6 +39,9 @@ export default function ImageUploadSection({ setFieldValue }) {
           <Icon name="photo" classname={css.photoIcon} />
         )}
       </label>
+      <ErrorMessage name="thumb">
+        {(msg) => <div className={css.error}>{msg}</div>}
+      </ErrorMessage>
     </div>
   );
 }

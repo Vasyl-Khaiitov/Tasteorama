@@ -17,6 +17,7 @@ import css from "./_AddRecipeForm.module.css";
 import { useCategoryManager } from "./useCategoryManager";
 import { toast } from "react-toastify";
 import { useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function AddRecipeForm() {
   const formikRef = useRef(null);
@@ -25,6 +26,7 @@ export default function AddRecipeForm() {
   const createdRecipe = useSelector(selectCreatedRecipe);
   const { categories } = useCategoryManager();
   const error = useSelector(selectError);
+  const navigate = useNavigate();
 
   const handleSubmit = (values) => {
     const formData = new FormData();
@@ -52,9 +54,7 @@ export default function AddRecipeForm() {
   useEffect(() => {
     if (createdRecipe && !error) {
       toast.success("Recipe successfully added!");
-      formikRef.current?.resetForm();
-      formikRef.current?.setFieldValue("title", "");
-      formikRef.current?.setFieldValue("calories", "");
+      navigate("/profile/owner", { replace: true });
     } else if (error) {
       toast.error(`Failed to add recipe: ${error}`);
     }
@@ -68,6 +68,8 @@ export default function AddRecipeForm() {
         initialValues={initialValues}
         validationSchema={recipeValidationSchema}
         onSubmit={handleSubmit}
+        validateOnChange={true}
+        validateOnBlur={true}
       >
         {({ setFieldValue }) => (
           <Form>
@@ -78,10 +80,7 @@ export default function AddRecipeForm() {
               </div>
               <div className={css.col1}>
                 <h2 className={css.subTitle}>General information</h2>
-                <GeneralInfoSection
-                  categoriesList={categories}
-                  setFieldValue={setFieldValue}
-                />
+                <GeneralInfoSection categoriesList={categories} />
                 <h2 className={css.subTitle}>Ingredients</h2>
                 <IngredientsSection setFieldValue={setFieldValue} />
                 <h2 className={css.subTitle}>Instructions</h2>

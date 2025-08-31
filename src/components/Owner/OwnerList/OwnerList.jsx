@@ -7,8 +7,8 @@ import {
   selectOwnRecipesLoading,
   selectOwnRecipesPage,
   selectOwnRecipesPerPage,
-    selectOwnRecipesHasMore,
-    selectOwnRecipesTotal,
+  selectOwnRecipesHasMore,
+  selectOwnRecipesTotal,
 } from "../../../redux/ownRecipes/selectors.js";
 
 import { RecipeCard } from "../../RecipeCard/RecipeCard.jsx";
@@ -39,28 +39,28 @@ export default function OwnerList() {
   };
 
   return (
-      <>
-          <p className={style.total}>{total} recipes</p>
+    <>
+      <p className={style.total}>{total} recipes</p>
       <ul className={style.list}>
         {ownRecipes.map((recipe) => (
           <li className={style.item} key={recipe._id}>
             <div className={style.cardWrapper}>
               <RecipeCard
-              recipeId={recipe._id} 
-              dishPhoto={recipe.thumb}
-              recipeName={recipe.title}
-              recipeDescription={recipe.description}
+                recipeId={recipe._id}
+                dishPhoto={recipe.thumb}
+                recipeName={recipe.title}
+                recipeDescription={recipe.description}
                 recipeTime={recipe.time}
                 hideFavoriteButton
                 fullWidthBtn
               />
-              </div>
+            </div>
           </li>
         ))}
       </ul>
 
       <div className={style.loadMoreWrapper}>
-        {hasMore && (
+        {total !== 0 && (
           <LoadMoreBtn onClick={handleLoadMore} disabled={isLoading} />
         )}
       </div>

@@ -1,6 +1,7 @@
 import Select from "../Select/Select";
-import Input from "../../../common/Input/Input";
+// import Input from "../../../common/Input/Input";
 import clsx from "clsx";
+import * as Yup from "yup";
 
 import { useIngredientManager } from "../useIngredientManager";
 import { ErrorMessage, useFormikContext } from "formik";
@@ -8,8 +9,8 @@ import Icon from "../../../shared/Icon";
 import css from "./ingredientsSection.module.css";
 import Button from "../../../common/Button/Button";
 
-export default function IngredientsSection({ setFieldValue }) {
-  const { errors, touched, values } = useFormikContext();
+export default function IngredientsSection() {
+  const { errors, touched } = useFormikContext();
 
   const hasError =
     touched.ingredientInput?.measure && errors.ingredientInput?.measure;
@@ -22,13 +23,13 @@ export default function IngredientsSection({ setFieldValue }) {
     handleInputChange,
     handleAddIngredient,
     handleDelete,
-  } = useIngredientManager(values, setFieldValue);
+  } = useIngredientManager();
 
   return (
     <div className={css.ingredientSection}>
       <div className={css.ingredientsRow}>
         <Select
-          name="ingredient"
+          name="ingredientInput.ingredient._id"
           labelText="Name"
           options={ingredientList}
           value={ingredientInput.ingredient?._id || ""}
@@ -41,7 +42,7 @@ export default function IngredientsSection({ setFieldValue }) {
         <label htmlFor="measure">Amount</label>
         <input
           id="measure"
-          name="measure"
+          name="ingredientInput.measure"
           value={ingredientInput.measure}
           placeholder="100g"
           onChange={handleInputChange}
@@ -79,21 +80,22 @@ export default function IngredientsSection({ setFieldValue }) {
             className={`${css.ingredientsGridCell} ${css.ingredientsGridHead}`}
           ></div>
         </div>
-        {ingredients.map((ing) => (
-          <div className={css.ingredientsGridRow} key={ing.id}>
-            <div className={css.ingredientsGridCell}>{ing.name}</div>
-            <div className={css.ingredientsGridCell}>{ing.measure}</div>
-            <div className={css.ingredientsGridCell}>
-              <button
-                className={css.deleteBtn}
-                type="button"
-                onClick={() => handleDelete(ing.id)}
-              >
-                <Icon name={"delete"} classname={css.deleteBtnIcon} />
-              </button>
+        {Array.isArray(ingredients) &&
+          ingredients.map((ing) => (
+            <div className={css.ingredientsGridRow} key={ing.id}>
+              <div className={css.ingredientsGridCell}>{ing.name}</div>
+              <div className={css.ingredientsGridCell}>{ing.measure}</div>
+              <div className={css.ingredientsGridCell}>
+                <button
+                  className={css.deleteBtn}
+                  type="button"
+                  onClick={() => handleDelete(ing.id)}
+                >
+                  <Icon name={"delete"} classname={css.deleteBtnIcon} />
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );

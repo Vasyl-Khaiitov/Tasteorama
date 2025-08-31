@@ -43,7 +43,7 @@ export default function GeneralInfoSection({ categoriesList }) {
           options={categoriesList}
           className={css.inputTwoColl}
           labelClassName="labelNameRForm"
-          placeholder="soup"
+          placeholder="Category"
         />
       </div>
     </div>
