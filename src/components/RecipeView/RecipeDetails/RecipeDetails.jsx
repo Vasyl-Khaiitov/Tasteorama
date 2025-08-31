@@ -18,6 +18,7 @@ import { useParams } from "react-router-dom";
 import { selectIsLoggedIn } from "../../../redux/auth/selectors";
 import { useState } from "react";
 import AuthModal from "../../AuthModal/AuthModal";
+import { useCategoryManager } from "../../_AddRecipeForm/useCategoryManager"
 import {
   addToFavorites,
   deleteFromFavorites,
@@ -30,6 +31,12 @@ export default function RecipeDetails() {
   //   const user = useSelector(selectUser);
   const { recipeId } = useParams();
   const recipe = useSelector(selectCurrentRecipe);
+    const { categories } = useCategoryManager();
+    const categoryName =
+  categories.length > 0
+    ? categories.find((c) => c._id === recipe.category)?.name || recipe.category|| "Unknown"
+    : "Loading...";
+
   if (!recipe) return <NotFound />;
   const isFavorite = useSelector((state) =>
     recipeId ? state.favorites.items.some((r) => r._id === recipeId) : false
@@ -66,7 +73,7 @@ export default function RecipeDetails() {
       <div className={styles.recipeLayout}>
         <div className={styles.generalInfobutton}>
           <GeneralInfo
-            category={recipe.category ?? "N/N"}
+            category={categoryName ?? recipe.category ?? "N/N"}
             time={recipe.time}
             calories={recipe.cals ?? "N/N"}
           />
