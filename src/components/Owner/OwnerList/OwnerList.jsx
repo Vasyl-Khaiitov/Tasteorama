@@ -9,6 +9,7 @@ import {
   selectOwnRecipesPerPage,
   selectOwnRecipesHasMore,
   selectOwnRecipesTotal,
+  selectOwnRecipesIsInitialized,
 } from "../../../redux/ownRecipes/selectors.js";
 
 import { RecipeCard } from "../../RecipeCard/RecipeCard.jsx";
@@ -25,12 +26,13 @@ export default function OwnerList() {
   const page = useSelector(selectOwnRecipesPage);
   const perPage = useSelector(selectOwnRecipesPerPage);
   const hasMore = useSelector(selectOwnRecipesHasMore);
+  const isInitialized = useSelector(selectOwnRecipesIsInitialized);
 
   useEffect(() => {
-    if (ownRecipes.length === 0) {
+    if (!isInitialized) {
       dispatch(fetchOwnRecipes({ page, perPage }));
     }
-  }, [dispatch, ownRecipes, page, perPage]);
+  }, [dispatch, isInitialized]);
 
   const handleLoadMore = () => {
     if (!isLoading && hasMore) {
@@ -60,7 +62,7 @@ export default function OwnerList() {
       </ul>
 
       <div className={style.loadMoreWrapper}>
-        {total !== 0 && (
+        {hasMore && (
           <LoadMoreBtn onClick={handleLoadMore} disabled={isLoading} />
         )}
       </div>

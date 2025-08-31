@@ -19,6 +19,7 @@ import { toast } from "react-toastify";
 import { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { resetCreatedRecipe } from "../../redux/addRecipes/slice";
+import { resetOwnRecipes } from "../../redux/ownRecipes/slice";
 
 export default function AddRecipeForm() {
   const formikRef = useRef(null);
@@ -59,6 +60,7 @@ export default function AddRecipeForm() {
   useEffect(() => {
     if (createdRecipe && !error) {
       toast.success("Recipe successfully added!");
+      dispatch(resetOwnRecipes());
       navigate("/profile/owner", { replace: true });
       dispatch(resetCreatedRecipe());
     } else if (error) {

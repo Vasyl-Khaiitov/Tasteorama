@@ -13,6 +13,7 @@ const ownRecipesSlice = createSlice({
     hasMore: true,
     totalItems: 0,
     error: null,
+    isInitialized: false,
   },
   reducers: {
     resetOwnRecipes: (state) => {
@@ -21,6 +22,7 @@ const ownRecipesSlice = createSlice({
       state.totalItems = 0;
       state.hasMore = true;
       state.error = null;
+      state.isInitialized = false;
     },
   },
   extraReducers: (builder) => {
@@ -36,6 +38,7 @@ const ownRecipesSlice = createSlice({
         state.page += 1;
         state.hasMore = recipes.length === state.perPage;
         state.totalItems = totalItems;
+        state.isInitialized = true;
       })
       .addCase(fetchOwnRecipes.rejected, handleError)
       // очищення при логауті

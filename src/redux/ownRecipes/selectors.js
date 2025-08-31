@@ -5,3 +5,5 @@ export const selectOwnRecipesHasMore = (state) => state.ownRecipes.hasMore;
 export const selectOwnRecipesPage = (state) => state.ownRecipes.page;
 export const selectOwnRecipesPerPage = (state) => state.ownRecipes.perPage;
 export const selectOwnRecipesTotal = (state) => state.ownRecipes.totalItems;
+export const selectOwnRecipesIsInitialized = (state) =>
+  state.ownRecipes.isInitialized;
