@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchOwnRecipes } from "./operations";
 import { handleError, handlePending } from "../../utils/reduxUtils";
+import { fetchLogoutUser } from "../auth/operations";
 
 const ownRecipesSlice = createSlice({
   name: "ownRecipes",
@@ -13,6 +14,15 @@ const ownRecipesSlice = createSlice({
     totalItems: 0,
     error: null,
   },
+  reducers: {
+    resetOwnRecipes: (state) => {
+      state.items = [];
+      state.page = 1;
+      state.totalItems = 0;
+      state.hasMore = true;
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchOwnRecipes.pending, handlePending)
@@ -24,11 +34,20 @@ const ownRecipesSlice = createSlice({
 
         state.items = [...state.items, ...recipes];
         state.page += 1;
-        state.hasMore = action.payload.length === state.perPage;
+        state.hasMore = recipes.length === state.perPage;
         state.totalItems = totalItems;
       })
-      .addCase(fetchOwnRecipes.rejected, handleError);
+      .addCase(fetchOwnRecipes.rejected, handleError)
+      // очищення при логауті
+      .addCase(fetchLogoutUser.fulfilled, (state) => {
+        state.items = [];
+        state.page = 1;
+        state.totalItems = 0;
+        state.hasMore = true;
+        state.error = null;
+      });
   },
 });
 
+export const { resetOwnRecipes } = ownRecipesSlice.actions;
 export default ownRecipesSlice.reducer;
