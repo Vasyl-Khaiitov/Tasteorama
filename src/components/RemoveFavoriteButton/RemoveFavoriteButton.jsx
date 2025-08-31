@@ -2,8 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteFromFavorites } from "../../redux/favorites/operation";
 import Icon from "../../shared/Icon";
-import toast from "react-hot-toast";
 import style from "./RemoveFavoriteButton.module.css";
+import { toast } from "react-toastify";
 
 export default function RemoveFavoriteButton({ recipeId }) {
   const dispatch = useDispatch();
