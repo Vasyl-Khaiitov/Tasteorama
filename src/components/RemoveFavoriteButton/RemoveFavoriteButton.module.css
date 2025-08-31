@@ -1,0 +1,28 @@
+.btnIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #9b6c43;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.icon {
+    stroke: #fff;
+    fill: none;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.btnIcon:hover {
+    background-color: #7a5232;
+}
+
+.active {
+    background-color: #7a5232;
+}
