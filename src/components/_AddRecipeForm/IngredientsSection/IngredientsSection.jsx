@@ -27,31 +27,38 @@ export default function IngredientsSection({ setFieldValue }) {
   return (
     <div className={css.ingredientSection}>
       <div className={css.ingredientsRow}>
-        <Select
-          name="ingredient"
-          labelText="Name"
-          options={ingredientList}
-          value={ingredientInput.ingredient?._id || ""}
-          onChange={handleSelectChange}
-          placeholder="Ingredient"
-        />
-        <ErrorMessage name="ingredientInput.ingredient._id">
-          {(msg) => <div className={css.error}>{msg}</div>}
-        </ErrorMessage>
-        <label htmlFor="measure">Amount</label>
-        <input
-          id="measure"
-          name="measure"
-          value={ingredientInput.measure}
-          placeholder="100g"
-          onChange={handleInputChange}
-          className={clsx(css.inputName, css.inputBiggerPadding, {
-            [css.inputError]: hasError,
-          })}
-        />
-        <ErrorMessage name="ingredientInput.measure">
-          {(msg) => <div className={css.error}>{msg}</div>}
-        </ErrorMessage>
+        <div className={css.inputGroup}>
+          <Select
+            name="ingredientInput.ingredient._id"
+            labelText="Name"
+            options={ingredientList}
+            value={ingredientInput.ingredient?._id || ""}
+            onChange={handleSelectChange}
+            placeholder="Broccoli"
+          />
+          <ErrorMessage name="ingredientInput.ingredient._id">
+            {(msg) => <div className={css.error}>{msg}</div>}
+          </ErrorMessage>
+        </div>
+
+        <div className={css.inputGroup}>
+          <label htmlFor="measure" className={css.lableName}>
+            Amount
+          </label>
+          <input
+            id="measure"
+            name="measure"
+            value={ingredientInput.measure}
+            placeholder="100g"
+            onChange={handleInputChange}
+            className={clsx(css.inputName, {
+              [css.inputError]: hasError,
+            })}
+          />
+          <ErrorMessage name="ingredientInput.measure">
+            {(msg) => <div className={css.error}>{msg}</div>}
+          </ErrorMessage>
+        </div>
       </div>
       <Button
         type="button"

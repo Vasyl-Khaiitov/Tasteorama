@@ -25,38 +25,38 @@ export default function Select({
   };
 
   return (
-    <label className={css.labelName} htmlFor={fieldId}>
-      {labelText}
-      <div className={css.inputWrapper}>
-        <Field
-          {...field}
-          className={inputClassName}
-          id={fieldId}
-          name={name}
-          as="select"
-          onChange={handleChange}
-          placeholder={placeholder}
-        >
-          {!field.value && (
-            <option value="" disabled>
+    <div className={css.selectWrapper}>
+      <label className={css.labelName} htmlFor={fieldId}>
+        {labelText}
+        <div className={css.inputWrapper}>
+          <Field
+            {...field}
+            id={fieldId}
+            as="select"
+            name={name}
+            className={inputClassName}
+            onChange={handleChange}
+            value={field.value || ""}
+            required
+          >
+            {/* Плейсхолдер */}
+            <option value="" disabled hidden>
               {placeholder}
             </option>
-          )}
 
-          {Array.isArray(options) &&
-            options.map((item) => (
-              <option
-                key={item.value || item._id}
-                value={item.value || item._id}
-              >
-                {item.label || item.name}
+            {/* Варіанти списку */}
+            {options.map((item) => (
+              <option key={item._id} value={item._id}>
+                {item.name}
               </option>
             ))}
-        </Field>
-      </div>
+          </Field>
+        </div>
+      </label>
+      {/* Помилка */}
       <span className={css.error}>
         {meta.touched && meta.error ? meta.error : "\u00A0"}
       </span>
-    </label>
+    </div>
   );
 }

@@ -4,6 +4,7 @@
 
 .inputBiggerPadding {
   padding: 12px;
+  font-size: 18px;
   max-height: 46px;
 }
 
@@ -15,11 +16,22 @@
 .addIngrBtn {
   margin-bottom: 32px;
 }
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 
+  width: 100%;
+}
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
 @media screen and (min-width: 768px) and (max-width: 1439px) {
   .ingredientsRow {
     grid-template-columns: 431px 249px; /* фіксовані ширини */
-    align-items: end;
+    align-items: start;
     column-gap: 24px;
   }
 
@@ -88,12 +100,6 @@
   fill: transparent;
   width: 14px;
 }
-.ingredientsGrid {
-  display: table;
-  /*border-collapse: separate; /* щоб був gap */
-  /*border-spacing: 16px 8px; /* відстань між "клітинками": горизонтальна і вертикальна */
-  width: auto; /* не розтягувати на 100% */
-}
 
 .ingredientsGridRow {
   display: table-row;
@@ -116,15 +122,29 @@
   font-size: 16px;
 }
 
-.ingredientsGridRowDel {
-  height: 24px;
-  width: 24px;
+/* .inputGroup {
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 4px;
+} */
+.lableName {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  color: #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 4px;
+  min-width: 100%;
 }
 
 .inputName {
   border: 1px solid #d9d9d9;
   border-radius: 8px;
-  padding: 8px;
+  padding: 12px;
   width: 100%;
   font-family: var(--font-family);
   font-weight: 400;
@@ -137,14 +157,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  height: 44px;
-  margin-bottom: 32px;
-}
-
-@media screen and (min-width: 768px) {
-  .inputName {
-    margin-bottom: 17px;
-  }
+  height: 46px;
 }
 
 .inputName::placeholder {

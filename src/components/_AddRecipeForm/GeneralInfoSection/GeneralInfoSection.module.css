@@ -10,15 +10,49 @@
   min-width: 100%;
   margin-bottom: 9px;
 }
-.inputBiggerPadding {
-  padding: 12px;
-  max-height: 46px;
+.inputNameRForm {
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 8px;
+  height: 46px;
+  width: 100%;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 155%;
+  color: #000000;
+  outline: none;
+  transition: box-shadow 300ms ease, border 300ms ease;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.inputNameRForm::placeholder {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 155%;
+  color: #9f9f9f;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .inputTwoColl {
   width: 100%; /* тепер інпут займає всю свою грід-колонку */
   padding: 12px;
   max-height: 46px;
   box-sizing: border-box;
+}
+.inputTwoColl::placeholder {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 155%;
+  color: #9f9f9f;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .wrapper {
   display: grid;

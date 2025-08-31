@@ -14,7 +14,7 @@
 .inputName {
   border: 1px solid #d9d9d9;
   border-radius: 8px;
-  padding: 8px;
+  padding: 12px;
   width: 100%;
   font-family: var(--font-family);
   font-weight: 400;
@@ -30,7 +30,7 @@
   height: 46px;
 }
 
-.inputName::placeholder {
+.selectPlaceholder {
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 18px;
@@ -82,34 +82,19 @@
   color: #c80000;
 }
 
-.eyeButton {
-  position: absolute;
-  top: 50%;
-  right: 8px;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-  height: 24px;
-  width: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.eyeIcon {
-  width: 16px;
-  height: 16px;
-  fill: none;
-  stroke: #000000;
-}
-
 .inputWrapper {
   position: relative;
   width: 100%;
 }
-select option[value=""] {
+
+select:invalid {
   color: #9f9f9f;
-  font-style: italic;
+}
+
+option {
+  color: #000;
+}
+
+option[value=""] {
+  color: #9f9f9f;
 }
