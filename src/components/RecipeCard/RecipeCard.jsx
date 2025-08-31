@@ -59,6 +59,7 @@ export function RecipeCard({
     setShowModal(false);
   };
 
+
   return (
     <div className={style.card}>
       <img className={style.img} src={dishPhoto} alt={recipeName} />
