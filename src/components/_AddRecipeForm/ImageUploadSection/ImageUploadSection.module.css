@@ -2,13 +2,18 @@
   width: 100%;
   height: 200px;
   border: 2px dashed #ccc;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  background: #9f9f9f;
   cursor: pointer;
   text-align: center;
 }
-
+.uploadBox:hover {
+  border-color: #9f9f9f;
+}
 .dragging {
   border-color: #007bff;
   background-color: #f0f8ff;
@@ -18,4 +23,20 @@
   max-width: 100%;
   max-height: 100%;
   object-fit: cover;
+}
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+  .uploadBox {
+    height: 383px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .uploadBox {
+    width: 391;
+    height: 374px;
+  }
+}
+.dragging {
+  border-color: #3399ff;
+  background-color: #e0f0ff;
 }

@@ -19,31 +19,32 @@ export default function IngredientsSection({ setFieldValue }) {
   } = useIngredientManager(values, setFieldValue);
 
   return (
-    <>
-      <h2>Ingredients</h2>
-      <Select
-        name="ingredient"
-        labelText="Name"
-        options={ingredientList}
-        // value={ingredientInput.ingredient?._id || ""}
-        onChange={handleSelectChange}
-        placeholder="Broccoli"
-      />
-
-      <ErrorMessage name="ingredientInput.ingredient._id">
-        {(msg) => <div className={css.error}>{msg}</div>}
-      </ErrorMessage>
-      <Input
-        name="measure"
-        labelText="Amount"
-        // value={ingredientInput.measure}
-        onChange={handleInputChange}
-        placeholder="100g"
-      />
-      <ErrorMessage name="ingredientInput.measure">
-        {(msg) => <div className={css.error}>{msg}</div>}
-      </ErrorMessage>
-
+    <div className={css.ingredientSection}>
+      <div className={css.ingredientsRow}>
+        <Select
+          name="ingredient"
+          labelText="Name"
+          options={ingredientList}
+          // value={ingredientInput.ingredient?._id || ""}
+          onChange={handleSelectChange}
+          placeholder="Ingredient"
+        />
+        <ErrorMessage name="ingredientInput.ingredient._id">
+          {(msg) => <div className={css.error}>{msg}</div>}
+        </ErrorMessage>
+        <Input
+          name="measure"
+          labelText="Amount"
+          // value={ingredientInput.measure}
+          onChange={handleInputChange}
+          labelClassName="labelNameRForm"
+          errorClaseName="inputErrorRForm"
+          className={css.inputBiggerPadding}
+        />
+        <ErrorMessage name="ingredientInput.measure">
+          {(msg) => <div className={css.error}>{msg}</div>}
+        </ErrorMessage>
+      </div>
       <Button
         type="button"
         styleType="brown"
@@ -51,6 +52,7 @@ export default function IngredientsSection({ setFieldValue }) {
         paddingsY="4"
         aria-label="Add Ingredient button"
         onClick={handleAddIngredient}
+        className={css.addIngrBtn}
       />
 
       <div className={css.ingredientsGrid}>
@@ -69,9 +71,8 @@ export default function IngredientsSection({ setFieldValue }) {
             className={`${css.ingredientsGridCell} ${css.ingredientsGridHead}`}
           ></div>
         </div>
-
         {ingredients.map((ing) => (
-          <div key={ing.id} className={css.ingredientsGridRow}>
+          <div className={css.ingredientsGridRow} key={ing.id}>
             <div className={css.ingredientsGridCell}>{ing.name}</div>
             <div className={css.ingredientsGridCell}>{ing.measure}</div>
             <div className={css.ingredientsGridCell}>
@@ -80,12 +81,12 @@ export default function IngredientsSection({ setFieldValue }) {
                 type="button"
                 onClick={() => handleDelete(ing.id)}
               >
-                <Icon name="delete" classname={css.deleteBtnIcon} />
+                <Icon name={"delete"} classname={css.deleteBtnIcon} />
               </button>
             </div>
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }

@@ -8,6 +8,9 @@
   list-style: none;
   width: 100%;
 }
+.wrapper {
+  margin: 0 auto;
+}
 
 .item {
   overflow: hidden;

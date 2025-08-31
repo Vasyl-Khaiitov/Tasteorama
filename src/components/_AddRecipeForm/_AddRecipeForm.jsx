@@ -13,6 +13,7 @@ import InstructionsSection from "./InstructionsSection/InstructionsSection";
 import ImageUploadSection from "./ImageUploadSection/ImageUploadSection";
 import Loader from "../Loader/Loader";
 import Button from "../../common/Button/Button";
+import css from "./_AddRecipeForm.module.css";
 import { useCategoryManager } from "./useCategoryManager";
 import { toast } from "react-toastify";
 import { useRef, useEffect } from "react";
@@ -70,17 +71,27 @@ export default function AddRecipeForm() {
       >
         {({ setFieldValue }) => (
           <Form>
-            <ImageUploadSection setFieldValue={setFieldValue} />
-            <GeneralInfoSection categoriesList={categories} />
-            <IngredientsSection setFieldValue={setFieldValue} />
-            <InstructionsSection />
-            <Button
-              type="submit"
-              styleType="brown"
-              name="Publish Recipe"
-              paddingsY="12"
-              aria-label="Publish Recipe"
-            ></Button>
+            <div className={css.formInnerContainer}>
+              <div className={css.col2}>
+                <h2 className={css.subTitle}>Upload Photo</h2>
+                <ImageUploadSection setFieldValue={setFieldValue} />
+              </div>
+              <div className={css.col1}>
+                <h2 className={css.subTitle}>General information</h2>
+                <GeneralInfoSection categoriesList={categories} />
+                <h2 className={css.subTitle}>Ingredients</h2>
+                <IngredientsSection setFieldValue={setFieldValue} />
+                <h2 className={css.subTitle}>Instructions</h2>
+                <InstructionsSection />
+                <Button
+                  type="submit"
+                  styleType="brown"
+                  name="Publish Recipe"
+                  paddingsY="12"
+                  aria-label="Publish Recipe"
+                ></Button>
+              </div>
+            </div>
           </Form>
         )}
       </Formik>
