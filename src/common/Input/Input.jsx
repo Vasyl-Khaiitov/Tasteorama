@@ -12,17 +12,17 @@ export default function Input({
   show,
   onToggle,
   onChange,
-  value,
+  // value,
   labelClassName,
   className,
-  errorClaseName,
+  errorClassName,
 }) {
   const fieldId = useId();
 
   const [field, meta] = useField(name);
 
-  const inputNameCase = className ? css[className] : css.inputName;
-  const inputErrorCase = errorClaseName ? css[errorClaseName] : css.inputError;
+  const inputNameCase = `${css.inputName} ${className || ""}`;
+  const inputErrorCase = errorClassName ? css[errorClassName] : css.inputError;
 
   // const inputClassName = `${
   //   meta.touched && meta.error ? css.inputError : css.inputName
@@ -53,7 +53,7 @@ export default function Input({
           type={showToggle ? (show ? "text" : "password") : type}
           placeholder={placeholder}
           onChange={handleChange}
-          value={value}
+          // value={value}
         />
         {showToggle && (
           <button

@@ -28,8 +28,6 @@ const authSlice = createSlice({
       .addCase(fetchRegisterUser.pending, handlePending)
       .addCase(fetchRegisterUser.fulfilled, (state, { payload }) => {
         state.error = null;
-        // state.user = payload.user || null;
-        // state.token = payload.token || null;
         state.user = payload.user;
         state.token = payload.token;
         state.isLoggedIn = true;
@@ -40,28 +38,15 @@ const authSlice = createSlice({
       .addCase(fetchLoginUser.pending, handlePending)
       .addCase(fetchLoginUser.fulfilled, (state, { payload }) => {
         state.error = null;
-        // Was changed according AI recomendation and analise log API/responce
         state.user = payload.user;
         state.token = payload.token;
         state.isLoggedIn = true;
         state.isLoading = false;
       })
       .addCase(fetchLoginUser.rejected, handleError)
-
       .addCase(fetchLogoutUser.pending, handlePending)
       .addCase(fetchLogoutUser.fulfilled, handleLogoutState)
       .addCase(fetchLogoutUser.rejected, handleError)
-
-      // сюда добавляем fetchCurrentUser
-      // .addCase(fetchCurrentUser.pending, handlePending)
-      // .addCase(fetchCurrentUser.fulfilled, (state, { payload }) => {
-      //   state.user = payload;
-      //   state.isLoggedIn = true;
-      //   state.isLoading = false;
-      //   state.error = null;
-      // })
-      // .addCase(fetchCurrentUser.rejected, handleLogoutState);
-
       .addCase(fetchCurrentUser.pending, (state) => {
         state.isRefreshing = true;
         state.isLoading = true;

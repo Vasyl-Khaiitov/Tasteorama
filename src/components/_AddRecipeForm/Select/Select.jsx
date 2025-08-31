@@ -1,6 +1,6 @@
 import { useId } from "react";
 import css from "./Select.module.css";
-import { ErrorMessage, Field, useField } from "formik";
+import { Field, useField } from "formik";
 
 export default function Select({
   name,
@@ -8,7 +8,6 @@ export default function Select({
   labelText,
   options = [],
   onChange,
-  value,
 }) {
   const fieldId = useId();
 
@@ -36,14 +35,21 @@ export default function Select({
           name={name}
           as="select"
           onChange={handleChange}
-          value={value}
           placeholder={placeholder}
         >
-          {placeholder && <option value="">{placeholder}</option>}
+          {!field.value && (
+            <option value="" disabled>
+              {placeholder}
+            </option>
+          )}
+
           {Array.isArray(options) &&
             options.map((item) => (
-              <option key={item._id} value={item._id}>
-                {item.name}
+              <option
+                key={item.value || item._id}
+                value={item.value || item._id}
+              >
+                {item.label || item.name}
               </option>
             ))}
         </Field>

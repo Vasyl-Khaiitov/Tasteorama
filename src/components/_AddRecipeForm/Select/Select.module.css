@@ -109,3 +109,7 @@
   position: relative;
   width: 100%;
 }
+select option[value=""] {
+  color: #9f9f9f;
+  font-style: italic;
+}

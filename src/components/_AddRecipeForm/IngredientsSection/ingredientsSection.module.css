@@ -1,0 +1,200 @@
+.ingredientSection {
+  margin-bottom: 40px;
+}
+
+.inputBiggerPadding {
+  padding: 12px;
+  max-height: 46px;
+}
+
+.ingredientsRow {
+  display: grid;
+  grid-template-columns: 1fr; /* мобайл - все в колонку */
+  gap: 16px; /* відступи між елементами */
+}
+.addIngrBtn {
+  margin-bottom: 32px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+  .ingredientsRow {
+    grid-template-columns: 431px 249px; /* фіксовані ширини */
+    align-items: end;
+    column-gap: 24px;
+  }
+
+  .addIngrBtn {
+    max-width: 249px;
+    justify-self: flex-end;
+    margin-bottom: 40px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .ingredientsRow {
+    grid-template-columns: 497px 288px; /* фіксовані ширини */
+    align-items: end;
+    column-gap: 24px;
+  }
+
+  .addIngrBtn {
+    max-width: 258px;
+    justify-self: flex-end;
+    margin-bottom: 16px;
+  }
+  .ingredientSection {
+    margin-bottom: 72px;
+  }
+}
+
+.ingredientsGrid {
+  display: table;
+  width: auto; /* не розтягувати на 100% */
+}
+
+.ingredientsGridRow {
+  display: table-row;
+}
+
+.ingredientsGridCell {
+  display: table-cell;
+  vertical-align: top;
+  padding: 10px 0;
+  border-bottom: 1px solid #c5c5c5;
+}
+
+.ingredientsGridCell:nth-child(1),
+.ingredientsGridCell:nth-child(2) {
+  min-width: 150px;
+}
+
+.ingredientsGridHead {
+  font-weight: 600;
+  font-size: 16px;
+}
+.deleteBtn {
+  cursor: pointer;
+  display: flex;
+  background: transparent;
+  align-items: center;
+  padding: 5px;
+  border: none;
+  height: 24px;
+  width: 24px;
+}
+.deleteBtnIcon {
+  border: none;
+  background-color: transparent;
+  stroke: black;
+  fill: transparent;
+  width: 14px;
+}
+.ingredientsGrid {
+  display: table;
+  /*border-collapse: separate; /* щоб був gap */
+  /*border-spacing: 16px 8px; /* відстань між "клітинками": горизонтальна і вертикальна */
+  width: auto; /* не розтягувати на 100% */
+}
+
+.ingredientsGridRow {
+  display: table-row;
+}
+
+.ingredientsGridCell {
+  display: table-cell;
+  vertical-align: top;
+  padding: 10px 0;
+  border-bottom: 1px solid #c5c5c5;
+}
+
+.ingredientsGridCell:nth-child(1),
+.ingredientsGridCell:nth-child(2) {
+  min-width: 150px;
+}
+
+.ingredientsGridHead {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.ingredientsGridRowDel {
+  height: 24px;
+  width: 24px;
+}
+
+.inputName {
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 8px;
+  width: 100%;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 155%;
+  color: #000000;
+  outline: none;
+  transition: box-shadow 300ms ease, border 300ms ease;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 44px;
+  margin-bottom: 32px;
+}
+
+@media screen and (min-width: 768px) {
+  .inputName {
+    margin-bottom: 17px;
+  }
+}
+
+.inputName::placeholder {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 155%;
+  color: #9f9f9f;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inputName:focus,
+.inputName:hover {
+  box-shadow: 0 0 0 4px rgba(78, 70, 180, 0.2);
+  border: 1px solid #9b6c43;
+}
+
+.inputError {
+  border: 1.5px solid #c80000;
+  border-radius: 8px;
+  padding: 8px;
+  width: 100%;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 155%;
+  color: #000000;
+  outline: none;
+  transition: border 300ms ease;
+  height: 46px;
+}
+
+.inputError::placeholder {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 155%;
+  color: #c80000;
+}
+
+.inputError:hover,
+.inputError:focus {
+  border: 1.5px solid #c80000;
+}
+
+.error {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  color: #c80000;
+}
