@@ -11,7 +11,7 @@ export default function GeneralInfoSection({ categoriesList }) {
           name="title"
           labelText="Recipe Title"
           placeholder="Enter the name of your recipe"
-          className={css.inputBiggerPadding}
+          className={css.inputNameRForm} // <-- ось тут передаємо клас для input
           labelClassName="labelNameRForm" //  перебиває на font-size: 18px
         />
       </div>
@@ -25,7 +25,7 @@ export default function GeneralInfoSection({ categoriesList }) {
           name="time"
           labelText="Cooking time in minutes"
           placeholder="Time in minutes"
-          className={css.inputBiggerPadding}
+          className={css.inputNameRForm}
           labelClassName="labelNameRForm"
         />
       </div>

@@ -7,7 +7,7 @@ import { useIngredientManager } from "../useIngredientManager";
 import { ErrorMessage, useFormikContext } from "formik";
 import Icon from "../../../shared/Icon";
 import css from "./ingredientsSection.module.css";
-import Button from "../../../common/Button/Button";
+import AddIngredientButton from "../AddIngredientButton/AddIngredientButton";
 
 export default function IngredientsSection() {
   const { errors, touched } = useFormikContext();
@@ -28,41 +28,45 @@ export default function IngredientsSection() {
   return (
     <div className={css.ingredientSection}>
       <div className={css.ingredientsRow}>
-        <Select
-          name="ingredientInput.ingredient._id"
-          labelText="Name"
-          options={ingredientList}
-          value={ingredientInput.ingredient?._id || ""}
-          onChange={handleSelectChange}
-          placeholder="Ingredient"
-        />
-        <ErrorMessage name="ingredientInput.ingredient._id">
-          {(msg) => <div className={css.error}>{msg}</div>}
-        </ErrorMessage>
-        <label htmlFor="measure">Amount</label>
-        <input
-          id="measure"
-          name="ingredientInput.measure"
-          value={ingredientInput.measure}
-          placeholder="100g"
-          onChange={handleInputChange}
-          className={clsx(css.inputName, css.inputBiggerPadding, {
-            [css.inputError]: hasError,
-          })}
-        />
-        <ErrorMessage name="ingredientInput.measure">
-          {(msg) => <div className={css.error}>{msg}</div>}
-        </ErrorMessage>
+        <div className={css.inputGroup}>
+          <Select
+            name="ingredientInput.ingredient._id"
+            labelText="Name"
+            options={ingredientList}
+            value={ingredientInput.ingredient?._id || ""}
+            onChange={handleSelectChange}
+            placeholder="Ingredient"
+          />
+          <ErrorMessage name="ingredientInput.ingredient._id">
+            {(msg) => <div className={css.error}>{msg}</div>}
+          </ErrorMessage>
+        </div>
+
+        <div className={css.inputGroup}>
+          <label htmlFor="measure" className={css.lableName}>
+            Amount
+          </label>
+          <input
+            id="measure"
+            name="measure"
+            value={ingredientInput.measure}
+            placeholder="100g"
+            onChange={handleInputChange}
+            className={clsx(css.inputName, {
+              [css.inputError]: hasError,
+            })}
+          />
+          <ErrorMessage name="ingredientInput.measure">
+            {(msg) => <div className={css.error}>{msg}</div>}
+          </ErrorMessage>
+        </div>
       </div>
-      <Button
-        type="button"
-        styleType="brown"
-        name="Add Ingredient"
-        paddingsY="4"
-        aria-label="Add Ingredient button"
-        onClick={handleAddIngredient}
-        className={css.addIngrBtn}
-      />
+      <div className={css.addBtnWrapper}>
+        <AddIngredientButton
+          className={css.addIngrBtn}
+          onClick={handleAddIngredient}
+        />
+      </div>
 
       <div className={css.ingredientsGrid}>
         <div className={css.ingredientsGridRow}>
