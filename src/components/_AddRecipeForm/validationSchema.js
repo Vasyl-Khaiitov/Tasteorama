@@ -42,7 +42,7 @@ export const recipeValidationSchema = Yup.object({
   category: Yup.string().required("Category is required"),
 
   ingredients: Yup.array()
-    .min(2, "You must add at least 2 ingredients")
+    .min(1, "You must add at least 2 ingredients")
     .max(16, "You can add up to 16 ingredients")
     .of(
       Yup.object({
