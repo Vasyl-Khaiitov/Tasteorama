@@ -1,0 +1,47 @@
+.addIngredient {
+  border-radius: 8px;
+  width: 100%;
+  padding: 12px;
+  cursor: pointer;
+  outline: none;
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 16px;
+  color: #ffffff;
+  border: none;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #9b6c43;
+
+  transition: background-color 300ms ease, box-shadow 300ms ease,
+    border 300ms ease, color 300ms ease, border-radius 300ms ease,
+    border-bottom 300ms ease;
+}
+.addIngredient:hover {
+  background-color: #6d554b;
+}
+.addIngredient:active {
+  box-shadow: 0 0 0 6px rgba(78, 70, 180, 0.12), 0 0 0 2px #ffffff;
+  border: 3px solid #ffffff;
+}
+.addIngredient:focus-visible {
+  outline: 2px solid #ffffff;
+}
+
+@media (min-width: 768px) {
+  .addIngredient {
+    padding: 8px;
+    width: 249px;
+    margin-top: 0px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .addIngredient {
+    padding: 4px;
+    width: 247px;
+  }
+}

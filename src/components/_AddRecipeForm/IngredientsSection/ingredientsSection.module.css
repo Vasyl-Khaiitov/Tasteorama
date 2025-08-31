@@ -13,15 +13,16 @@
   grid-template-columns: 1fr; /* мобайл - все в колонку */
   gap: 16px; /* відступи між елементами */
 }
-.addIngrBtn {
-  margin-bottom: 32px;
+.addBtnWrapper {
+  display: flex;
+  justify-content: flex-end;
 }
 .inputGroup {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-
+  /* justify-content: flex-start; */
   width: 100%;
+  position: relative;
 }
 .error {
   color: red;
@@ -36,20 +37,19 @@
   }
 
   .addIngrBtn {
-    max-width: 249px;
     justify-self: flex-end;
+    align-self: flex-end;
     margin-bottom: 40px;
   }
 }
 @media screen and (min-width: 1440px) {
   .ingredientsRow {
     grid-template-columns: 497px 288px; /* фіксовані ширини */
-    align-items: end;
+    align-items: start;
     column-gap: 24px;
   }
 
   .addIngrBtn {
-    max-width: 258px;
     justify-self: flex-end;
     margin-bottom: 16px;
   }
@@ -57,7 +57,6 @@
     margin-bottom: 72px;
   }
 }
-
 .ingredientsGrid {
   display: table;
   width: auto; /* не розтягувати на 100% */

@@ -6,7 +6,7 @@ import { useIngredientManager } from "../useIngredientManager";
 import { ErrorMessage, useFormikContext } from "formik";
 import Icon from "../../../shared/Icon";
 import css from "./ingredientsSection.module.css";
-import Button from "../../../common/Button/Button";
+import AddIngredientButton from "../AddIngredientButton/AddIngredientButton";
 
 export default function IngredientsSection({ setFieldValue }) {
   const { errors, touched, values } = useFormikContext();
@@ -60,15 +60,12 @@ export default function IngredientsSection({ setFieldValue }) {
           </ErrorMessage>
         </div>
       </div>
-      <Button
-        type="button"
-        styleType="brown"
-        name="Add Ingredient"
-        paddingsY="4"
-        aria-label="Add Ingredient button"
-        onClick={handleAddIngredient}
-        className={css.addIngrBtn}
-      />
+      <div className={css.addBtnWrapper}>
+        <AddIngredientButton
+          className={css.addIngrBtn}
+          onClick={handleAddIngredient}
+        />
+      </div>
 
       <div className={css.ingredientsGrid}>
         <div className={css.ingredientsGridRow}>
