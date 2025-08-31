@@ -1,7 +1,5 @@
 import Select from "../Select/Select";
-// import Input from "../../../common/Input/Input";
 import clsx from "clsx";
-import * as Yup from "yup";
 
 import { useIngredientManager } from "../useIngredientManager";
 import { ErrorMessage, useFormikContext } from "formik";

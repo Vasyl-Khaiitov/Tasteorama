@@ -28,8 +28,12 @@ export default function AddRecipeForm() {
   const { categories } = useCategoryManager();
   const error = useSelector(selectError);
   const navigate = useNavigate();
+  const isSubmittedRef = useRef(false);
 
   const handleSubmit = (values) => {
+    if (isSubmittedRef.current) return;
+    isSubmittedRef.current = true;
+
     const formData = new FormData();
 
     const cleanedIngredients = values.ingredients.map(({ id, measure }) => ({
@@ -71,8 +75,8 @@ export default function AddRecipeForm() {
         initialValues={initialValues}
         validationSchema={recipeValidationSchema}
         onSubmit={handleSubmit}
-        validateOnChange={true}
-        validateOnBlur={true}
+        validateOnChange={false}
+        validateOnBlur={false}
       >
         {({ setFieldValue }) => (
           <Form>
