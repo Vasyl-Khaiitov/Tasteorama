@@ -1,7 +1,11 @@
+import { useFormikContext } from "formik";
 import { useImageDrop } from "../useImageDrop";
 import css from "./ImageUploadSection.module.css";
 
 export default function ImageUploadSection({ setFieldValue }) {
+  const { values } = useFormikContext();
+  const { thumb } = values;
+
   const {
     imagePreview,
     isDragging,
@@ -9,10 +13,11 @@ export default function ImageUploadSection({ setFieldValue }) {
     handleDrop,
     handleDragOver,
     handleDragLeave,
-  } = useImageDrop(setFieldValue);
+  } = useImageDrop(setFieldValue, thumb);
 
   return (
     <>
+      <h2>Upload Photo</h2>
       <input
         type="file"
         id="fileInput"

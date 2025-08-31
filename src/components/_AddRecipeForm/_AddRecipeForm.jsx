@@ -4,6 +4,7 @@ import { fetchPostRecipes } from "../../redux/addRecipes/operations";
 import {
   selectIsLoading,
   selectCreatedRecipe,
+  selectError,
 } from "../../redux/addRecipes/selectors";
 import { recipeValidationSchema, initialValues } from "./validationSchema";
 import GeneralInfoSection from "./GeneralInfoSection/GeneralInfoSection";
@@ -14,12 +15,18 @@ import Loader from "../Loader/Loader";
 import Button from "../../common/Button/Button";
 import css from "./_AddRecipeForm.module.css";
 import { useCategoryManager } from "./useCategoryManager";
+import { toast } from "react-toastify";
+import { useRef, useEffect } from "react";
+// import { selectIsLoggedIn } from "../../redux/auth/selectors";
 
 export default function AddRecipeForm() {
+  const formikRef = useRef(null);
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const createdRecipe = useSelector(selectCreatedRecipe);
   const { categories } = useCategoryManager();
+  const error = useSelector(selectError);
+  // const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const handleSubmit = (values) => {
     const formData = new FormData();
@@ -44,12 +51,20 @@ export default function AddRecipeForm() {
     dispatch(fetchPostRecipes({ formData }));
   };
 
+  useEffect(() => {
+    if (createdRecipe && !error) {
+      toast.success("Recipe successfully added!");
+      formikRef.current?.resetForm();
+    } else if (error) {
+      toast.error(`Failed to add recipe: ${error}`);
+    }
+  }, [createdRecipe, error]);
+
   return (
     <>
       {isLoading && <Loader />}
-      {createdRecipe && <p className="success">Recipe added!</p>}
-
       <Formik
+        innerRef={formikRef}
         initialValues={initialValues}
         validationSchema={recipeValidationSchema}
         onSubmit={handleSubmit}

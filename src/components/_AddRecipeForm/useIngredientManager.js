@@ -1,18 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIngredients } from "../../redux/ingredients/selectors";
 import { fetchIngredients } from "../../redux/ingredients/operations";
 
-export const useIngredientManager = (setFieldValue) => {
+export const useIngredientManager = (values, setFieldValue) => {
   const dispatch = useDispatch();
-
   const ingredientList = useSelector(selectIngredients);
-
-  const [ingredients, setIngredients] = useState([]);
-  const [ingredientInput, setIngredientInput] = useState({
-    ingredient: { _id: "", name: "" },
-    measure: "",
-  });
 
   useEffect(() => {
     dispatch(fetchIngredients());
@@ -21,45 +14,60 @@ export const useIngredientManager = (setFieldValue) => {
   const handleSelectChange = (e) => {
     const selectedId = e.target.value;
     const selectedItem = ingredientList.find((item) => item._id === selectedId);
+
     if (selectedItem) {
-      setIngredientInput((prev) => ({
-        ...prev,
+      setFieldValue("ingredientInput", {
+        ...values.ingredientInput,
         ingredient: {
           _id: selectedItem._id,
           name: selectedItem.name,
         },
-      }));
+      });
     }
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setIngredientInput((prev) => ({ ...prev, [name]: value }));
+
+    setFieldValue("ingredientInput", {
+      ...values.ingredientInput,
+      [name]: value,
+    });
   };
 
   const handleAddIngredient = () => {
+    const { ingredient, measure } = values.ingredientInput;
+
+    if (!ingredient._id || !measure) return;
+
     const updatedIngredients = [
-      ...ingredients,
+      ...values.ingredients,
       {
-        id: ingredientInput.ingredient._id,
-        name: ingredientInput.ingredient.name,
-        measure: ingredientInput.measure,
+        id: ingredient._id,
+        name: ingredient.name,
+        measure,
       },
     ];
 
-    setIngredients(updatedIngredients);
-    setFieldValue("ingredients", updatedIngredients); // 🔥 Formik
+    setFieldValue("ingredients", updatedIngredients);
+
+    // Очистити тимчасовий ввід
+    setFieldValue("ingredientInput", {
+      ingredient: { _id: "", name: "" },
+      measure: "",
+    });
   };
 
   const handleDelete = (id) => {
-    const updatedIngredients = ingredients.filter((item) => item.id !== id);
-    setIngredients(updatedIngredients);
-    setFieldValue("ingredients", updatedIngredients); // 🔥 Formik
+    const updatedIngredients = values.ingredients.filter(
+      (item) => item.id !== id
+    );
+    setFieldValue("ingredients", updatedIngredients);
   };
 
   return {
-    ingredients,
-    ingredientInput,
+    ingredients: values.ingredients,
+    ingredientInput: values.ingredientInput,
     ingredientList,
     handleSelectChange,
     handleInputChange,

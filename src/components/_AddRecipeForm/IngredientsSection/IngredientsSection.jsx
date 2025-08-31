@@ -1,46 +1,53 @@
 import Select from "../Select/Select";
 import Input from "../../../common/Input/Input";
 import { useIngredientManager } from "../useIngredientManager";
-import { ErrorMessage } from "formik";
+import { ErrorMessage, useFormikContext } from "formik";
 import Icon from "../../../shared/Icon";
 import css from "./ingredientsSection.module.css";
 import Button from "../../../common/Button/Button";
 
 export default function IngredientsSection({ setFieldValue }) {
+  const { values } = useFormikContext();
   const {
     ingredients,
-    ingredientInput,
+    // ingredientInput,
     ingredientList,
     handleSelectChange,
     handleInputChange,
     handleAddIngredient,
     handleDelete,
-  } = useIngredientManager(setFieldValue);
+  } = useIngredientManager(values, setFieldValue);
 
   return (
     <div className={css.ingredientSection}>
       <div className={css.ingredientsRow}>
-        <Select
-          name="ingredient"
-          labelText="Name"
-          options={ingredientList}
-          value={ingredientInput.ingredient?._id || ""}
-          onChange={handleSelectChange}
-          placeholder="Ingredient"
-        />
-        <ErrorMessage name="ingredient">
-          one of ingredient collection
-        </ErrorMessage>
-        <Input
-          name="measure"
-          labelText="Amount"
-          value={ingredientInput.measure}
-          onChange={handleInputChange}
-          labelClassName="labelNameRForm"
+       
+      <Select
+        name="ingredient"
+        labelText="Name"
+        options={ingredientList}
+        // value={ingredientInput.ingredient?._id || ""}
+        onChange={handleSelectChange}
+       placeholder="Ingredient"
+      />
+
+      <ErrorMessage name="ingredientInput.ingredient._id">
+        {(msg) => <div className={css.error}>{msg}</div>}
+      </ErrorMessage>
+      <Input
+        name="measure"
+        labelText="Amount"
+        // value={ingredientInput.measure}
+        onChange={handleInputChange}
+        placeholder="100g"
+        labelClassName="labelNameRForm"
           errorClaseName="inputErrorRForm"
           className={css.inputBiggerPadding}
-        />
-      </div>
+      />
+      <ErrorMessage name="ingredientInput.measure">
+        {(msg) => <div className={css.error}>{msg}</div>}
+      </ErrorMessage>
+
       <Button
         type="button"
         styleType="brown"

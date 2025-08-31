@@ -21,6 +21,7 @@ const addRecipesSlice = createSlice({
       .addCase(fetchPostRecipes.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+        state.createdRecipe = null;
       });
   },
 });
