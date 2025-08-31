@@ -21,7 +21,7 @@ export default function Input({
 
   const [field, meta] = useField(name);
 
-  const inputNameCase = className ? css[className] : css.inputName;
+  const inputNameCase = `${css.inputName} ${className || ""}`;
   const inputErrorCase = errorClaseName ? css[errorClaseName] : css.inputError;
 
   // const inputClassName = `${

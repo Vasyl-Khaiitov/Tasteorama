@@ -1,0 +1,33 @@
+.generalSection {
+  margin-bottom: 32px;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 100%;
+  margin-bottom: 9px;
+}
+.inputBiggerPadding {
+  padding: 12px;
+  max-height: 46px;
+}
+.inputTwoColl {
+  width: 100%; /* тепер інпут займає всю свою грід-колонку */
+  padding: 12px;
+  max-height: 46px;
+  box-sizing: border-box;
+}
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 100%;
+}
+@media screen and (min-width: 1440px) {
+  .generalSection {
+    margin-bottom: 64px;
+  }
+}

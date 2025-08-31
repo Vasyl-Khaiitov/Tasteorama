@@ -1,3 +1,76 @@
+.ingredientSection {
+  margin-bottom: 40px;
+}
+
+.inputBiggerPadding {
+  padding: 12px;
+  max-height: 46px;
+}
+
+.ingredientsRow {
+  display: grid;
+  grid-template-columns: 1fr; /* мобайл - все в колонку */
+  gap: 16px; /* відступи між елементами */
+}
+.addIngrBtn {
+  margin-bottom: 32px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+  .ingredientsRow {
+    grid-template-columns: 431px 249px; /* фіксовані ширини */
+    align-items: end;
+    column-gap: 24px;
+  }
+
+  .addIngrBtn {
+    max-width: 249px;
+    justify-self: flex-end;
+    margin-bottom: 40px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .ingredientsRow {
+    grid-template-columns: 497px 288px; /* фіксовані ширини */
+    align-items: end;
+    column-gap: 24px;
+  }
+
+  .addIngrBtn {
+    max-width: 258px;
+    justify-self: flex-end;
+    margin-bottom: 16px;
+  }
+  .ingredientSection {
+    margin-bottom: 72px;
+  }
+}
+
+.ingredientsGrid {
+  display: table;
+  width: auto; /* не розтягувати на 100% */
+}
+
+.ingredientsGridRow {
+  display: table-row;
+}
+
+.ingredientsGridCell {
+  display: table-cell;
+  vertical-align: top;
+  padding: 10px 0;
+  border-bottom: 1px solid #c5c5c5;
+}
+
+.ingredientsGridCell:nth-child(1),
+.ingredientsGridCell:nth-child(2) {
+  min-width: 150px;
+}
+
+.ingredientsGridHead {
+  font-weight: 600;
+  font-size: 16px;
+}
 .deleteBtn {
   cursor: pointer;
   display: flex;
