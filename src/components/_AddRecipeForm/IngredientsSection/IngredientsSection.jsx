@@ -21,33 +21,30 @@ export default function IngredientsSection({ setFieldValue }) {
   return (
     <div className={css.ingredientSection}>
       <div className={css.ingredientsRow}>
-       
-      <Select
-        name="ingredient"
-        labelText="Name"
-        options={ingredientList}
-        // value={ingredientInput.ingredient?._id || ""}
-        onChange={handleSelectChange}
-       placeholder="Ingredient"
-      />
-
-      <ErrorMessage name="ingredientInput.ingredient._id">
-        {(msg) => <div className={css.error}>{msg}</div>}
-      </ErrorMessage>
-      <Input
-        name="measure"
-        labelText="Amount"
-        // value={ingredientInput.measure}
-        onChange={handleInputChange}
-        placeholder="100g"
-        labelClassName="labelNameRForm"
+        <Select
+          name="ingredient"
+          labelText="Name"
+          options={ingredientList}
+          // value={ingredientInput.ingredient?._id || ""}
+          onChange={handleSelectChange}
+          placeholder="Ingredient"
+        />
+        <ErrorMessage name="ingredientInput.ingredient._id">
+          {(msg) => <div className={css.error}>{msg}</div>}
+        </ErrorMessage>
+        <Input
+          name="measure"
+          labelText="Amount"
+          // value={ingredientInput.measure}
+          onChange={handleInputChange}
+          labelClassName="labelNameRForm"
           errorClaseName="inputErrorRForm"
           className={css.inputBiggerPadding}
-      />
-      <ErrorMessage name="ingredientInput.measure">
-        {(msg) => <div className={css.error}>{msg}</div>}
-      </ErrorMessage>
-
+        />
+        <ErrorMessage name="ingredientInput.measure">
+          {(msg) => <div className={css.error}>{msg}</div>}
+        </ErrorMessage>
+      </div>
       <Button
         type="button"
         styleType="brown"
