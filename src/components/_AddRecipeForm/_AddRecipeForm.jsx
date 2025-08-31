@@ -18,6 +18,7 @@ import { useCategoryManager } from "./useCategoryManager";
 import { toast } from "react-toastify";
 import { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { resetCreatedRecipe } from "../../redux/addRecipes/slice";
 
 export default function AddRecipeForm() {
   const formikRef = useRef(null);
@@ -55,8 +56,10 @@ export default function AddRecipeForm() {
     if (createdRecipe && !error) {
       toast.success("Recipe successfully added!");
       navigate("/profile/owner", { replace: true });
+      dispatch(resetCreatedRecipe());
     } else if (error) {
       toast.error(`Failed to add recipe: ${error}`);
+      dispatch(resetCreatedRecipe());
     }
   }, [createdRecipe, error]);
 

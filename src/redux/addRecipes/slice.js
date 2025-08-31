@@ -8,6 +8,12 @@ const addRecipesSlice = createSlice({
     error: null,
     createdRecipe: null,
   },
+  reducers: {
+    resetCreatedRecipe: (state) => {
+      state.createdRecipe = null;
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPostRecipes.pending, (state) => {
@@ -27,3 +33,4 @@ const addRecipesSlice = createSlice({
 });
 
 export const addRecipesReducer = addRecipesSlice.reducer;
+export const { resetCreatedRecipe } = addRecipesSlice.actions;
