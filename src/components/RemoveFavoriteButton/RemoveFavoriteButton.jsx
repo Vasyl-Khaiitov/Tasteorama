@@ -43,7 +43,7 @@ export default function RemoveFavoriteButton({ recipeId }) {
       disabled={loading}
       aria-label="Remove from favorites"
     >
-      <Icon name="flag" classame={style.icon} />
+      <Icon name="flag" classname={style.icon} />
     </button>
   );
 }

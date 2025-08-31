@@ -93,7 +93,7 @@ export function RecipeCard({
             className={`${style.btnIcon} ${isFavorite ? style.active : ""}`}
             onClick={handleFavoriteClick}
           >
-            <Icon name="flag" classame={style.icon} />
+            <Icon name="flag" classname={style.icon} />
           </button>
         )}
       </div>
