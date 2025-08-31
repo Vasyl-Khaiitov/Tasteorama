@@ -15,7 +15,7 @@ export const fetchRegisterUser = createAsyncThunk(
       const { accessToken } = res.data.data; // <-- виправлено
       setAuthorizationToken(accessToken);
 
-      const dataUser = await apiClient.get("/users");
+      const dataUser = await apiClient.get("/currentUser");
       return {
         user: dataUser.data.data.info, // тут точно лежить { name, email, id, ... }
         token: accessToken,
