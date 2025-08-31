@@ -48,7 +48,7 @@ export default function IngredientsSection() {
           </label>
           <input
             id="measure"
-            name="measure"
+            name="ingredientInput.measure"
             value={ingredientInput.measure}
             placeholder="100g"
             onChange={handleInputChange}
