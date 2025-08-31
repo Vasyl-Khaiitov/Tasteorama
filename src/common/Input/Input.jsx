@@ -12,7 +12,7 @@ export default function Input({
   show,
   onToggle,
   onChange,
-  value,
+  // value,
   labelClassName,
   className,
   errorClassName,
@@ -53,7 +53,7 @@ export default function Input({
           type={showToggle ? (show ? "text" : "password") : type}
           placeholder={placeholder}
           onChange={handleChange}
-          value={value}
+          // value={value}
         />
         {showToggle && (
           <button

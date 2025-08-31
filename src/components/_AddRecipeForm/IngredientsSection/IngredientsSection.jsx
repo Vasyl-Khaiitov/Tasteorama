@@ -1,5 +1,7 @@
 import Select from "../Select/Select";
 import Input from "../../../common/Input/Input";
+import clsx from "clsx";
+
 import { useIngredientManager } from "../useIngredientManager";
 import { ErrorMessage, useFormikContext } from "formik";
 import Icon from "../../../shared/Icon";
@@ -7,10 +9,14 @@ import css from "./ingredientsSection.module.css";
 import Button from "../../../common/Button/Button";
 
 export default function IngredientsSection({ setFieldValue }) {
-  const { values } = useFormikContext();
+  const { errors, touched, values } = useFormikContext();
+
+  const hasError =
+    touched.ingredientInput?.measure && errors.ingredientInput?.measure;
+
   const {
     ingredients,
-    // ingredientInput,
+    ingredientInput,
     ingredientList,
     handleSelectChange,
     handleInputChange,
@@ -25,21 +31,23 @@ export default function IngredientsSection({ setFieldValue }) {
           name="ingredient"
           labelText="Name"
           options={ingredientList}
-          // value={ingredientInput.ingredient?._id || ""}
+          value={ingredientInput.ingredient?._id || ""}
           onChange={handleSelectChange}
           placeholder="Ingredient"
         />
         <ErrorMessage name="ingredientInput.ingredient._id">
           {(msg) => <div className={css.error}>{msg}</div>}
         </ErrorMessage>
-        <Input
+        <label htmlFor="measure">Amount</label>
+        <input
+          id="measure"
           name="measure"
-          labelText="Amount"
-          // value={ingredientInput.measure}
+          value={ingredientInput.measure}
+          placeholder="100g"
           onChange={handleInputChange}
-          labelClassName="labelNameRForm"
-          errorClaseName="inputErrorRForm"
-          className={css.inputBiggerPadding}
+          className={clsx(css.inputName, css.inputBiggerPadding, {
+            [css.inputError]: hasError,
+          })}
         />
         <ErrorMessage name="ingredientInput.measure">
           {(msg) => <div className={css.error}>{msg}</div>}

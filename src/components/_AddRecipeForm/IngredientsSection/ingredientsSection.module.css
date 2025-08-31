@@ -120,9 +120,81 @@
   height: 24px;
   width: 24px;
 }
-.placeholder {
-  color: #888;
-  font-size: 14px;
-  text-align: center;
+
+.inputName {
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
   padding: 8px;
+  width: 100%;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 155%;
+  color: #000000;
+  outline: none;
+  transition: box-shadow 300ms ease, border 300ms ease;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 44px;
+  margin-bottom: 32px;
+}
+
+@media screen and (min-width: 768px) {
+  .inputName {
+    margin-bottom: 17px;
+  }
+}
+
+.inputName::placeholder {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 155%;
+  color: #9f9f9f;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inputName:focus,
+.inputName:hover {
+  box-shadow: 0 0 0 4px rgba(78, 70, 180, 0.2);
+  border: 1px solid #9b6c43;
+}
+
+.inputError {
+  border: 1.5px solid #c80000;
+  border-radius: 8px;
+  padding: 8px;
+  width: 100%;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 155%;
+  color: #000000;
+  outline: none;
+  transition: border 300ms ease;
+  height: 46px;
+}
+
+.inputError::placeholder {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 155%;
+  color: #c80000;
+}
+
+.inputError:hover,
+.inputError:focus {
+  border: 1.5px solid #c80000;
+}
+
+.error {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  color: #c80000;
 }

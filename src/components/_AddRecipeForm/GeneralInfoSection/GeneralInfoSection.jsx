@@ -2,6 +2,7 @@ import Input from "../../../common/Input/Input";
 import TextArea from "../TextArea/TextArea";
 import Select from "../Select/Select";
 import css from "./GeneralInfoSection.module.css";
+
 export default function GeneralInfoSection({ categoriesList }) {
   return (
     <div className={css.generalSection}>
@@ -42,6 +43,7 @@ export default function GeneralInfoSection({ categoriesList }) {
           options={categoriesList}
           className={css.inputTwoColl}
           labelClassName="labelNameRForm"
+          placeholder="soup"
         />
       </div>
     </div>

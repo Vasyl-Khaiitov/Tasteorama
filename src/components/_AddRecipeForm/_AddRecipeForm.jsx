@@ -17,7 +17,6 @@ import css from "./_AddRecipeForm.module.css";
 import { useCategoryManager } from "./useCategoryManager";
 import { toast } from "react-toastify";
 import { useRef, useEffect } from "react";
-// import { selectIsLoggedIn } from "../../redux/auth/selectors";
 
 export default function AddRecipeForm() {
   const formikRef = useRef(null);
@@ -26,7 +25,6 @@ export default function AddRecipeForm() {
   const createdRecipe = useSelector(selectCreatedRecipe);
   const { categories } = useCategoryManager();
   const error = useSelector(selectError);
-  // const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const handleSubmit = (values) => {
     const formData = new FormData();
@@ -55,6 +53,8 @@ export default function AddRecipeForm() {
     if (createdRecipe && !error) {
       toast.success("Recipe successfully added!");
       formikRef.current?.resetForm();
+      formikRef.current?.setFieldValue("title", "");
+      formikRef.current?.setFieldValue("calories", "");
     } else if (error) {
       toast.error(`Failed to add recipe: ${error}`);
     }
@@ -78,7 +78,10 @@ export default function AddRecipeForm() {
               </div>
               <div className={css.col1}>
                 <h2 className={css.subTitle}>General information</h2>
-                <GeneralInfoSection categoriesList={categories} />
+                <GeneralInfoSection
+                  categoriesList={categories}
+                  setFieldValue={setFieldValue}
+                />
                 <h2 className={css.subTitle}>Ingredients</h2>
                 <IngredientsSection setFieldValue={setFieldValue} />
                 <h2 className={css.subTitle}>Instructions</h2>

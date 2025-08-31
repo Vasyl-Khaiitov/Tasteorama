@@ -17,7 +17,6 @@ export default function ImageUploadSection({ setFieldValue }) {
 
   return (
     <>
-      <h2>Upload Photo</h2>
       <input
         type="file"
         id="fileInput"
