@@ -8,10 +8,9 @@ import Button from "../../../common/Button/Button";
 
 export default function IngredientsSection({ setFieldValue }) {
   const { values } = useFormikContext();
-
   const {
     ingredients,
-    ingredientInput,
+    // ingredientInput,
     ingredientList,
     handleSelectChange,
     handleInputChange,
@@ -24,18 +23,22 @@ export default function IngredientsSection({ setFieldValue }) {
       <h2>Ingredients</h2>
       <Select
         name="ingredient"
+        labelText="Name"
         options={ingredientList}
-        value={ingredientInput.ingredient?._id || ""}
+        // value={ingredientInput.ingredient?._id || ""}
         onChange={handleSelectChange}
+        placeholder="Broccoli"
       />
+
       <ErrorMessage name="ingredientInput.ingredient._id">
         {(msg) => <div className={css.error}>{msg}</div>}
       </ErrorMessage>
       <Input
         name="measure"
         labelText="Amount"
-        value={ingredientInput.measure}
+        // value={ingredientInput.measure}
         onChange={handleInputChange}
+        placeholder="100g"
       />
       <ErrorMessage name="ingredientInput.measure">
         {(msg) => <div className={css.error}>{msg}</div>}

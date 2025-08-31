@@ -18,7 +18,12 @@ export default function GeneralInfoSection({ categoriesList }) {
         placeholder="Time in minutes"
       />
       <Input name="calories" labelText="Calories" placeholder="Calories" />
-      <Select name="category" labelText="Category" options={categoriesList} />
+      <Select
+        name="category"
+        labelText="Category"
+        options={categoriesList}
+        placeholder="Soup"
+      />
     </>
   );
 }

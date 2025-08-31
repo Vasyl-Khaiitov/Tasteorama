@@ -16,6 +16,7 @@ import Button from "../../common/Button/Button";
 import { useCategoryManager } from "./useCategoryManager";
 import { toast } from "react-toastify";
 import { useRef, useEffect } from "react";
+// import { selectIsLoggedIn } from "../../redux/auth/selectors";
 
 export default function AddRecipeForm() {
   const formikRef = useRef(null);
@@ -24,6 +25,7 @@ export default function AddRecipeForm() {
   const createdRecipe = useSelector(selectCreatedRecipe);
   const { categories } = useCategoryManager();
   const error = useSelector(selectError);
+  // const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const handleSubmit = (values) => {
     const formData = new FormData();
@@ -49,11 +51,10 @@ export default function AddRecipeForm() {
   };
 
   useEffect(() => {
-    if (createdRecipe) {
+    if (createdRecipe && !error) {
       toast.success("Recipe successfully added!");
       formikRef.current?.resetForm();
-    }
-    if (error) {
+    } else if (error) {
       toast.error(`Failed to add recipe: ${error}`);
     }
   }, [createdRecipe, error]);
@@ -71,10 +72,7 @@ export default function AddRecipeForm() {
           <Form>
             <ImageUploadSection setFieldValue={setFieldValue} />
             <GeneralInfoSection categoriesList={categories} />
-            <IngredientsSection
-              setFieldValue={setFieldValue}
-              resetTrigger={Boolean(createdRecipe)}
-            />
+            <IngredientsSection setFieldValue={setFieldValue} />
             <InstructionsSection />
             <Button
               type="submit"

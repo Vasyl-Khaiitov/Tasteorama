@@ -1,8 +1,11 @@
-import { useEffect } from "react";
+import { useFormikContext } from "formik";
 import { useImageDrop } from "../useImageDrop";
 import css from "./ImageUploadSection.module.css";
 
-export default function ImageUploadSection({ setFieldValue, resetTrigger }) {
+export default function ImageUploadSection({ setFieldValue }) {
+  const { values } = useFormikContext();
+  const { thumb } = values;
+
   const {
     imagePreview,
     isDragging,
@@ -10,14 +13,7 @@ export default function ImageUploadSection({ setFieldValue, resetTrigger }) {
     handleDrop,
     handleDragOver,
     handleDragLeave,
-    clearImage,
-  } = useImageDrop(setFieldValue);
-
-  useEffect(() => {
-    if (resetTrigger) {
-      clearImage(); // 🔥 очищення після сабміту
-    }
-  }, [resetTrigger]);
+  } = useImageDrop(setFieldValue, thumb);
 
   return (
     <>

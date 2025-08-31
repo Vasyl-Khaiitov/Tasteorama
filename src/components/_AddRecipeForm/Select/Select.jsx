@@ -37,8 +37,8 @@ export default function Select({
           onChange={handleChange}
           placeholder={placeholder}
         >
-          {placeholder && (
-            <option value="" disabled hidden>
+          {!field.value && (
+            <option value="" disabled>
               {placeholder}
             </option>
           )}

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export const useImageDrop = (setFieldValue) => {
+export const useImageDrop = (setFieldValue, thumb) => {
   const [isDragging, setIsDragging] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -35,10 +35,11 @@ export const useImageDrop = (setFieldValue) => {
     setIsDragging(false);
   };
 
-  const clearImage = () => {
-    setImagePreview(null);
-    setFieldValue("thumb", null);
-  };
+  useEffect(() => {
+    if (!thumb) {
+      setImagePreview(null);
+    }
+  }, [thumb]);
 
   return {
     isDragging,
@@ -47,6 +48,5 @@ export const useImageDrop = (setFieldValue) => {
     handleDrop,
     handleDragOver,
     handleDragLeave,
-    clearImage,
   };
 };
