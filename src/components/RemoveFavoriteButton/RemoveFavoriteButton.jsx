@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteFromFavorites } from "../../redux/favorites/operation";
 import Icon from "../../shared/Icon";
-import { toast } from "react-hot-toast";
+import toast from "react-hot-toast";
 import style from "./RemoveFavoriteButton.module.css";
 
 export default function RemoveFavoriteButton({ recipeId }) {
@@ -10,7 +10,7 @@ export default function RemoveFavoriteButton({ recipeId }) {
   const [loading, setLoading] = useState(false);
   const isMounted = useRef(true);
 
- const isFavorite = useSelector((state) =>
+  const isFavorite = useSelector((state) =>
     recipeId ? state.favorites.items.some((r) => r._id === recipeId) : false
   );
   useEffect(() => {
