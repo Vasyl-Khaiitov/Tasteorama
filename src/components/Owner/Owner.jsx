@@ -6,16 +6,15 @@ import { selectOwnRecipes } from "../../redux/ownRecipes/selectors.js";
 
 export default function Owner() {
   const ownRecipes = useSelector(selectOwnRecipes);
-  
+
   return (
     <>
-     {ownRecipes.length > 0 ? (
-  <OwnerList />
-) : (
-  <div className={style.errorWrapper}>
-    <EmptyRecipesWindow/>
-  </div>
-)}
+      <OwnerList />
+      {ownRecipes.length === 0 && (
+        <div className={style.errorWrapper}>
+          <EmptyRecipesWindow />
+        </div>
+      )}
     </>
   );
 }

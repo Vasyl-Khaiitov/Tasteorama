@@ -2,10 +2,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIngredients } from "../../redux/ingredients/selectors";
 import { fetchIngredients } from "../../redux/ingredients/operations";
+import { useFormikContext } from "formik";
 
-export const useIngredientManager = (values, setFieldValue) => {
+export const useIngredientManager = () => {
   const dispatch = useDispatch();
   const ingredientList = useSelector(selectIngredients);
+
+  const { values, setFieldValue } = useFormikContext();
 
   useEffect(() => {
     dispatch(fetchIngredients());
@@ -28,11 +31,7 @@ export const useIngredientManager = (values, setFieldValue) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-
-    setFieldValue("ingredientInput", {
-      ...values.ingredientInput,
-      [name]: value,
-    });
+    setFieldValue(name, value);
   };
 
   const handleAddIngredient = () => {
@@ -51,7 +50,6 @@ export const useIngredientManager = (values, setFieldValue) => {
 
     setFieldValue("ingredients", updatedIngredients);
 
-    // Очистити тимчасовий ввід
     setFieldValue("ingredientInput", {
       ingredient: { _id: "", name: "" },
       measure: "",
