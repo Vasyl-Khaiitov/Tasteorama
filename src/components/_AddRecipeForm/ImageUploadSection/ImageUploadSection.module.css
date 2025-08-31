@@ -28,6 +28,9 @@
   .uploadBox {
     height: 383px;
   }
+  .photoSection {
+    margin-bottom: 24px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
@@ -39,4 +42,9 @@
 .dragging {
   border-color: #3399ff;
   background-color: #e0f0ff;
+}
+.photoIcon {
+  width: 52px;
+  height: 52px;
+  stroke: black;
 }
