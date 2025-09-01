@@ -10,6 +10,7 @@
   color: #ffffff;
   border: none;
   margin-top: 16px;
+  margin-bottom: 40px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -36,6 +37,7 @@
     padding: 8px;
     width: 249px;
     margin-top: 0px;
+    margin-bottom: 32px;
   }
 }
 
