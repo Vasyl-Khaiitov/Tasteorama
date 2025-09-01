@@ -39,7 +39,7 @@ export default function Select({
             value={field.value || ""}
           >
             {/* Плейсхолдер */}
-            <option value="" disabled hidden>
+            <option value="" disabled hidden className={css.selectPlaceholder}>
               {placeholder}
             </option>
 
