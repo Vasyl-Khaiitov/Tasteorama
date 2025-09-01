@@ -17,13 +17,14 @@ export const fetchOwnRecipes = createAsyncThunk(
         },
       });
 
-      return { recipes: res.data.data, totalItems: res.data.total };
+      return { recipes: res.data.data || [], totalItems: res.data.total ?? 0 };
     } catch (err) {
-      console.error(
-        "fetchOwnRecipes error:",
-        err.response?.data || err.message
-      );
-
+      if (err.response?.status === 404) {
+        return thunkAPI.fulfillWithValue({
+          recipes: [],
+          totalItems: 0,
+        });
+      }
       return thunkAPI.rejectWithValue(
         err.response?.data?.message || err.message
       );

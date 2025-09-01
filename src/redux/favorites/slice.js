@@ -15,6 +15,7 @@ const favoritesSlice = createSlice({
     error: null,
     hasMore: true,
     page: 1,
+    total: 0,
   },
   reducers: {
     resetFavorites: (state) => {
@@ -32,7 +33,7 @@ const favoritesSlice = createSlice({
       .addCase(fetchFavoriteRecipes.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-
+        state.total = action.payload.totalItems;
         const recipes = action.payload.data || [];
         const hasNextPage = action.payload.hasNextPage;
 

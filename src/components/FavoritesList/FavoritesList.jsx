@@ -7,6 +7,7 @@ import {
   selectFavoritesLoading,
   selectFavoritesPerPage,
   selectFavoritesHasMore,
+  selectFavoritesTotalRecipes,
 } from "../../redux/favorites/selectors";
 import { useEffect, useState } from "react";
 import { fetchFavoriteRecipes } from "../../redux/favorites/operation";
@@ -24,6 +25,7 @@ export default function FavoritesList() {
   const hasMore = useSelector(selectFavoritesHasMore);
   const token = useSelector(selectToken);
   const userId = useSelector((state) => state.auth.user?.id);
+  const total = useSelector(selectFavoritesTotalRecipes);
 
   // Скидаємо при першому завантаженні
   useEffect(() => {
@@ -50,9 +52,11 @@ export default function FavoritesList() {
       setLocalPage((prev) => prev + 1);
     }
   };
+  console.log("🚀 ~ total:", total);
 
   return (
     <>
+      <p className={style.total}>{total} recipes</p>
       <ul className={style.list}>
         {favorites.map((favorite) => (
           <li className={style.item} key={favorite._id}>
