@@ -15,36 +15,46 @@ import Button from "../../../common/Button/Button";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { selectIsLoggedIn } from "../../../redux/auth/selectors";
+import { selectIsLoggedIn, selectUser } from "../../../redux/auth/selectors";
 import { useState } from "react";
 import AuthModal from "../../AuthModal/AuthModal";
-import { useCategoryManager } from "../../_AddRecipeForm/useCategoryManager"
+import { useCategoryManager } from "../../_AddRecipeForm/useCategoryManager";
 import {
   addToFavorites,
   deleteFromFavorites,
 } from "../../../redux/favorites/operation";
 
-export default function RecipeDetails() {
+export default function RecipeDetails({}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  //   const user = useSelector(selectUser);
+  const user = useSelector(selectUser);
   const { recipeId } = useParams();
-  const recipe = useSelector(selectCurrentRecipe);
-    const { categories } = useCategoryManager();
-    const categoryName =
-  categories.length > 0
-    ? categories.find((c) => c._id === recipe.category)?.name || recipe.category|| "Unknown"
-    : "Loading...";
 
-  if (!recipe) return <NotFound />;
+  const recipe = useSelector(selectCurrentRecipe);
+
+  const { categories } = useCategoryManager();
+
+  if (!recipe) return <NotFound />; // ✅ спочатку перевірка
+
+  const categoryName =
+    categories.length > 0
+      ? categories.find((c) => c._id === recipe.category)?.name ||
+        recipe.category ||
+        "Unknown"
+      : "Loading...";
+
+  const isOwner = user?.id === recipe.owner; // ✅ тепер можна
+
   const isFavorite = useSelector((state) =>
     recipeId ? state.favorites.items.some((r) => r._id === recipeId) : false
   );
+
   const [showModal, setShowModal] = useState(false);
+
   const handleFavoriteClick = (e) => {
     e.stopPropagation();
-     if (!isLoggedIn) {
+    if (!isLoggedIn) {
       setShowModal(true);
       return;
     }
@@ -54,10 +64,14 @@ export default function RecipeDetails() {
       dispatch(deleteFromFavorites(recipeId));
     }
   };
+
   const handleNavigate = (path) => {
     navigate(path);
     setShowModal(false);
   };
+
+  console.log(recipe, user);
+
   return (
     <>
       <div className={styles.wrapperImgh}>
@@ -77,23 +91,26 @@ export default function RecipeDetails() {
             time={recipe.time}
             calories={recipe.cals ?? "N/N"}
           />
-          <button
-            type="button"
-            className={`${styles.saveButton} ${
-              isFavorite ? styles.active : ""
-            }`}
-            onClick={handleFavoriteClick}
-          >
-            {isFavorite ? "Unsave" : "Save"}{" "}
-            {isFavorite ? (
-              <Icon
-                name="flag"
-                classname={clsx(styles.icon, styles.iconSavedFavorite)}
-              />
-            ) : (
-              <Icon name="flag" classname={clsx(styles.icon)} />
-            )}
-          </button>
+
+          {!isOwner && (
+            <button
+              type="button"
+              className={`${styles.saveButton} ${
+                isFavorite ? styles.active : ""
+              }`}
+              onClick={handleFavoriteClick}
+            >
+              {isFavorite ? "Unsave" : "Save"}{" "}
+              {isFavorite ? (
+                <Icon
+                  name="flag"
+                  classname={clsx(styles.icon, styles.iconSavedFavorite)}
+                />
+              ) : (
+                <Icon name="flag" classname={clsx(styles.icon)} />
+              )}
+            </button>
+          )}
         </div>
         <div className={styles.leftContent}>
           <About description={recipe.description} />
