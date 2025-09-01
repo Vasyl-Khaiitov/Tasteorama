@@ -13,9 +13,10 @@ export default function Select({
 
   const [field, meta] = useField(name);
 
-  const inputClassName = `${
-    meta.touched && meta.error ? css.inputError : css.inputName
-  }`;
+  const isEmpty = !field.value || field.value === "";
+
+  const baseClass = meta.touched && meta.error ? css.inputError : css.inputName;
+  const inputClassName = `${baseClass} ${isEmpty ? css.empty : ""}`;
 
   const handleChange = (e) => {
     field.onChange(e);
@@ -39,7 +40,7 @@ export default function Select({
             value={field.value || ""}
           >
             {/* Плейсхолдер */}
-            <option value="" disabled hidden className={css.selectPlaceholder}>
+            <option value="" disabled>
               {placeholder}
             </option>
 
