@@ -209,16 +209,15 @@
   padding: 8px;
   width: 40px;
   height: 40px;
+  cursor: pointer;
   transition: background-color 0.3s ease, border 0.3s ease;
 }
-
 
 .btnIcon:hover,
 .btnIcon.active {
   background-color: #9b6c43;
   border: none;
 }
-
 
 .btnIcon:hover .icon,
 .btnIcon.active .icon {
@@ -253,4 +252,5 @@
   width: 100%;
   display: block;
   text-align: center;
+  cursor: pointer;
 }

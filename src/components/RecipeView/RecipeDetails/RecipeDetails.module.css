@@ -44,6 +44,7 @@
   color: #ffffff;
   margin-bottom: 24px;
   border: none;
+  cursor: pointer;
   transition: background-color 300ms ease, box-shadow 300ms ease,
     border 300ms ease, opacity 300ms ease;
 }
