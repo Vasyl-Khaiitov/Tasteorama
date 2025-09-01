@@ -4,7 +4,7 @@ import css from "./ImageUploadSection.module.css";
 import Icon from "../../../shared/Icon";
 
 export default function ImageUploadSection({ setFieldValue }) {
-  const { values } = useFormikContext();
+  const { values, errors, touched } = useFormikContext();
   const { thumb } = values;
 
   const {
@@ -15,6 +15,7 @@ export default function ImageUploadSection({ setFieldValue }) {
     handleDragOver,
     handleDragLeave,
   } = useImageDrop(setFieldValue, thumb);
+  const hasError = errors.thumb && touched.thumb;
 
   return (
     <div className={css.photoSection}>
@@ -28,7 +29,9 @@ export default function ImageUploadSection({ setFieldValue }) {
       />
       <label
         htmlFor="fileInput"
-        className={`${css.uploadBox} ${isDragging ? css.dragging : ""}`}
+        className={`${css.uploadBox} 
+          ${isDragging ? css.dragging : ""} 
+          ${hasError ? css.errorBorder : ""}`}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
