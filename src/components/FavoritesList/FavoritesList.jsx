@@ -50,7 +50,7 @@ export default function FavoritesList() {
       setLocalPage((prev) => prev + 1);
     }
   };
-  
+
   return (
     <>
       <ul className={style.list}>
@@ -62,14 +62,16 @@ export default function FavoritesList() {
               recipeDescription={favorite.description}
               dishPhoto={favorite.thumb}
               recipeTime={favorite.time}
-              customButton={
-                <RemoveFavoriteButton recipeId={favorite._id} />
-              }
+              customButton={<RemoveFavoriteButton recipeId={favorite._id} />}
             />
           </li>
         ))}
       </ul>
-      {hasMore && <LoadMoreBtn onClick={handleLoadMore} disabled={isLoading} />}
+      <div className={style.loadMoreWrapper}>
+        {hasMore && (
+          <LoadMoreBtn onClick={handleLoadMore} disabled={isLoading} />
+        )}
+      </div>
     </>
   );
 }

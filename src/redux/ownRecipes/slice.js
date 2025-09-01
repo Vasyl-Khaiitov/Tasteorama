@@ -10,7 +10,7 @@ const ownRecipesSlice = createSlice({
     page: 1,
     perPage: 12,
     isLoading: false,
-    hasMore: true,
+    hasMore: false,
     totalItems: 0,
     error: null,
     isInitialized: false,
@@ -20,7 +20,7 @@ const ownRecipesSlice = createSlice({
       state.items = [];
       state.page = 1;
       state.totalItems = 0;
-      state.hasMore = true;
+      state.hasMore = false;
       state.error = null;
       state.isInitialized = false;
     },
@@ -36,7 +36,13 @@ const ownRecipesSlice = createSlice({
 
         state.items = [...state.items, ...recipes];
         state.page += 1;
-        state.hasMore = recipes.length === state.perPage;
+        if (typeof totalItems === "number") {
+          // якщо бекенд дає totalItems
+          state.hasMore = state.items.length < totalItems;
+        } else {
+          // fallback — якщо totalItems немає
+          state.hasMore = recipes.length === state.perPage;
+        }
         state.totalItems = totalItems;
         state.isInitialized = true;
       })
