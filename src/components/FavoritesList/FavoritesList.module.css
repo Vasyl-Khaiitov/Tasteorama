@@ -1,3 +1,7 @@
+.total {
+  font-weight: 600;
+  font-size: 18px;
+}
 .list {
   display: flex;
   flex-wrap: wrap;

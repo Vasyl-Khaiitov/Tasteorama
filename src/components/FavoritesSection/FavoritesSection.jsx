@@ -14,12 +14,12 @@ export default function FavoritesSection() {
   return (
     <section className={style}>
       {isLoading && <Loader />}
-      <FavoritesList />
       {favoriteRecipes.length === 0 && (
         <div className={style.errorWrapper}>
           <EmptyRecipesWindow />
         </div>
       )}
+      <FavoritesList />
     </section>
   );
 }
