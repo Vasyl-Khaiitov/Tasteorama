@@ -5,13 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import { useState } from "react";
 import AuthModal from "../AuthModal/AuthModal";
-import { selectIsFavorite } from "../../redux/favorites/selectors";
-import {
-  addToFavorites,
-  deleteFromFavorites,
-} from "../../redux/favorites/operation";
-
-
+import { addToFavorites, deleteFromFavorites } from "../../redux/favorites/operation";
 
 export function RecipeCard({
   dishPhoto,
@@ -24,16 +18,9 @@ export function RecipeCard({
   customButton,
 }) {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-
-  //  const isFavorite = useSelector(state =>
-  //     recipeId ? state.favorites.items.includes(recipeId.toString()) : false
-  //   );
   const isFavorite = useSelector((state) =>
     recipeId ? state.favorites.items.some((r) => r._id === recipeId) : false
   );
-
-  // const favoriteIds = useSelector(state => state.favorites.items);
-  //   console.log("Current favorite IDs:", favoriteIds);
 
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
@@ -58,7 +45,6 @@ export function RecipeCard({
     navigate(path);
     setShowModal(false);
   };
-
 
   return (
     <div className={style.card}>
@@ -85,17 +71,19 @@ export function RecipeCard({
         >
           Learn more
         </NavLink>
-             
-        {customButton ? (
-          customButton
-        ) : (
-          <button
-            type="button"
-            className={`${style.btnIcon} ${isFavorite ? style.active : ""}`}
-            onClick={handleFavoriteClick}
-          >
-            <Icon name="flag" classname={style.icon} />
-          </button>
+
+        {!hideFavoriteButton && (
+          customButton ? (
+            customButton
+          ) : (
+            <button
+              type="button"
+              className={`${style.btnIcon} ${isFavorite ? style.active : ""}`}
+              onClick={handleFavoriteClick}
+            >
+              <Icon name="flag" classname={style.icon} />
+            </button>
+          )
         )}
       </div>
 
