@@ -10,7 +10,7 @@ const ownRecipesSlice = createSlice({
     page: 1,
     perPage: 12,
     isLoading: false,
-    hasMore: false,
+    hasMore: true,
     totalItems: 0,
     error: null,
     isInitialized: false,
