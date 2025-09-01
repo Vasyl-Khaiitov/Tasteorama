@@ -82,6 +82,9 @@ export default function IngredientsSection() {
             className={`${css.ingredientsGridCell} ${css.ingredientsGridHead}`}
           ></div>
         </div>
+        <ErrorMessage name="ingredients">
+          {(msg) => <div className={css.error}>{msg}</div>}
+        </ErrorMessage>
         {Array.isArray(ingredients) &&
           ingredients.map((ing) => (
             <div className={css.ingredientsGridRow} key={ing.id}>

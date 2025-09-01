@@ -37,7 +37,6 @@ export default function Select({
             className={inputClassName}
             onChange={handleChange}
             value={field.value || ""}
-            required
           >
             {/* Плейсхолдер */}
             <option value="" disabled hidden>

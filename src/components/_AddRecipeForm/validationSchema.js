@@ -36,12 +36,13 @@ export const recipeValidationSchema = Yup.object({
     .typeError("Calories must be a number")
     .min(1, "Calories must be at least 1")
     .max(10000, "Calories must be at most 10000")
-    .nullable(),
+    .nullable()
+    .required(),
 
   category: Yup.string().required("Category is required"),
 
   ingredients: Yup.array()
-    .min(1, "You must add at least 2 ingredients")
+    .min(1, "You must add at least 1 ingredients")
     .max(16, "You can add up to 16 ingredients")
     .of(
       Yup.object({
