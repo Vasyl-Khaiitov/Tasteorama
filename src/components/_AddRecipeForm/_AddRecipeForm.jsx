@@ -75,8 +75,8 @@ export default function AddRecipeForm() {
         initialValues={initialValues}
         validationSchema={recipeValidationSchema}
         onSubmit={handleSubmit}
-        validateOnChange={false}
-        validateOnBlur={false}
+        validateOnChange={true}
+        validateOnBlur={true}
       >
         {({ setFieldValue }) => (
           <Form>
