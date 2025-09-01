@@ -78,31 +78,47 @@ export default function AddRecipeForm() {
         validateOnChange={true}
         validateOnBlur={true}
       >
-        {({ setFieldValue }) => (
-          <Form>
-            <div className={css.formInnerContainer}>
-              <div className={css.col2}>
-                <h2 className={css.subTitle}>Upload Photo</h2>
-                <ImageUploadSection setFieldValue={setFieldValue} />
+        {({ setFieldValue, values }) => {
+          const isLargeScreen = window.innerWidth >= 1440; // можна ще хук useMediaQuery
+          const isImageUploaded = Boolean(values.thumb);
+
+          return (
+            <Form>
+              <div className={css.formInnerContainer}>
+                <div className={css.col2}>
+                  <h2 className={css.subTitle}>Upload Photo</h2>
+                  <ImageUploadSection setFieldValue={setFieldValue} />
+                  {isLargeScreen && isImageUploaded && (
+                    <Button
+                      type="submit"
+                      styleType="brown"
+                      name="Publish Recipe"
+                      paddingsY="12"
+                      aria-label="Publish Recipe"
+                    />
+                  )}
+                </div>
+                <div className={css.col1}>
+                  <h2 className={css.subTitle}>General information</h2>
+                  <GeneralInfoSection categoriesList={categories} />
+                  <h2 className={css.subTitle}>Ingredients</h2>
+                  <IngredientsSection setFieldValue={setFieldValue} />
+                  <h2 className={css.subTitle}>Instructions</h2>
+                  <InstructionsSection />
+                  {(!isLargeScreen || !isImageUploaded) && (
+                    <Button
+                      type="submit"
+                      styleType="brown"
+                      name="Publish Recipe"
+                      paddingsY="12"
+                      aria-label="Publish Recipe"
+                    />
+                  )}
+                </div>
               </div>
-              <div className={css.col1}>
-                <h2 className={css.subTitle}>General information</h2>
-                <GeneralInfoSection categoriesList={categories} />
-                <h2 className={css.subTitle}>Ingredients</h2>
-                <IngredientsSection setFieldValue={setFieldValue} />
-                <h2 className={css.subTitle}>Instructions</h2>
-                <InstructionsSection />
-                <Button
-                  type="submit"
-                  styleType="brown"
-                  name="Publish Recipe"
-                  paddingsY="12"
-                  aria-label="Publish Recipe"
-                ></Button>
-              </div>
-            </div>
-          </Form>
-        )}
+            </Form>
+          );
+        }}
       </Formik>
     </>
   );

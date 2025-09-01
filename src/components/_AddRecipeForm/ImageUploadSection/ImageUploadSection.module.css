@@ -38,6 +38,9 @@
     width: 391;
     height: 374px;
   }
+  .photoSection {
+    margin-bottom: 32px;
+  }
 }
 .dragging {
   border-color: #3399ff;
@@ -47,4 +50,14 @@
   width: 52px;
   height: 52px;
   stroke: black;
+}
+.error {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  color: #c80000;
+}
+
+.errorBorder {
+  border: 2px solid red !important;
 }
