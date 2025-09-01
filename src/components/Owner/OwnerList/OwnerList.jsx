@@ -9,7 +9,6 @@ import {
   selectOwnRecipesPerPage,
   selectOwnRecipesHasMore,
   selectOwnRecipesTotal,
-  selectOwnRecipesIsInitialized,
 } from "../../../redux/ownRecipes/selectors.js";
 
 import { RecipeCard } from "../../RecipeCard/RecipeCard.jsx";
@@ -26,13 +25,11 @@ export default function OwnerList() {
   const page = useSelector(selectOwnRecipesPage);
   const perPage = useSelector(selectOwnRecipesPerPage);
   const hasMore = useSelector(selectOwnRecipesHasMore);
-  const isInitialized = useSelector(selectOwnRecipesIsInitialized);
-
   useEffect(() => {
-    if (!isInitialized) {
+    if (!total) {
       dispatch(fetchOwnRecipes({ page, perPage }));
     }
-  }, [dispatch, isInitialized]);
+  }, [dispatch]);
 
   const handleLoadMore = () => {
     if (!isLoading && hasMore) {
