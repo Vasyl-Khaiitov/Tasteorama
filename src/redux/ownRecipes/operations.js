@@ -19,11 +19,6 @@ export const fetchOwnRecipes = createAsyncThunk(
 
       return { recipes: res.data.data, totalItems: res.data.total };
     } catch (err) {
-      console.error(
-        "fetchOwnRecipes error:",
-        err.response?.data || err.message
-      );
-
       return thunkAPI.rejectWithValue(
         err.response?.data?.message || err.message
       );
