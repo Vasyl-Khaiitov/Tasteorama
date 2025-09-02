@@ -57,8 +57,7 @@
   background-color: #6d554b;
 }
 
-.saveButton:not(:disabled):hover,
-.saveButton:not(:disabled):focus {
+.saveButton:not(:disabled):hover {
   background-color: #6d554b;
 }
 
