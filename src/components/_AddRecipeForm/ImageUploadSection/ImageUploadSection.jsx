@@ -4,7 +4,7 @@ import css from "./ImageUploadSection.module.css";
 import Icon from "../../../shared/Icon";
 
 export default function ImageUploadSection({ setFieldValue }) {
-  const { values, errors, touched } = useFormikContext();
+  const { values, errors, touched, setFieldTouched } = useFormikContext();
   const { thumb } = values;
 
   const {
@@ -14,7 +14,7 @@ export default function ImageUploadSection({ setFieldValue }) {
     handleDrop,
     handleDragOver,
     handleDragLeave,
-  } = useImageDrop(setFieldValue, thumb);
+  } = useImageDrop(setFieldValue, thumb, setFieldTouched);
   const hasError = errors.thumb && touched.thumb;
 
   return (

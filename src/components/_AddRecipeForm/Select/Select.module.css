@@ -30,7 +30,7 @@
   height: 46px;
 }
 
-.selectPlaceholder {
+.empty {
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 18px;

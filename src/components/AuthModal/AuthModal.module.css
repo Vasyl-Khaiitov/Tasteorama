@@ -36,6 +36,7 @@
 }
 
 .closeIcon {
+  cursor: pointer;
   width: 16px;
   height: 16px;
   fill: none;
@@ -70,7 +71,7 @@
   width: 100%;
   padding: 16px;
   background-color: transparent;
-
+  cursor: pointer;
   font-weight: 600;
   font-size: 16px;
   color: #000;
@@ -92,7 +93,7 @@
   width: 100%;
   padding: 16px;
   background-color: #9b6c43;
-
+  cursor: pointer;
   font-weight: 600;
   font-size: 16px;
   color: #fff;
