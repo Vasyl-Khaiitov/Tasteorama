@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIngredients } from "../../redux/ingredients/selectors";
 import { fetchIngredients } from "../../redux/ingredients/operations";
 import { useFormikContext } from "formik";
+import { toast } from "react-toastify";
 
 export const useIngredientManager = () => {
   const dispatch = useDispatch();
   const ingredientList = useSelector(selectIngredients);
 
-  const { values, setFieldValue } = useFormikContext();
+  const { values, setFieldValue, setFieldTouched, validateField } =
+    useFormikContext();
 
   useEffect(() => {
     dispatch(fetchIngredients());
@@ -34,10 +36,21 @@ export const useIngredientManager = () => {
     setFieldValue(name, value);
   };
 
-  const handleAddIngredient = () => {
+  const handleAddIngredient = async () => {
     const { ingredient, measure } = values.ingredientInput;
 
-    if (!ingredient._id || !measure) return;
+    const isDuplicate = values.ingredients.some(
+      (item) => item.id === ingredient._id
+    );
+
+    if (isDuplicate) {
+      toast.warning(`"${ingredient.name}" is already in the list.`);
+      return;
+    }
+
+    if (!ingredient._id || !measure) {
+      return;
+    }
 
     const updatedIngredients = [
       ...values.ingredients,
@@ -49,6 +62,8 @@ export const useIngredientManager = () => {
     ];
 
     setFieldValue("ingredients", updatedIngredients);
+    setFieldTouched("ingredients", true);
+    await validateField("ingredients");
 
     setFieldValue("ingredientInput", {
       ingredient: { _id: "", name: "" },
@@ -61,6 +76,8 @@ export const useIngredientManager = () => {
       (item) => item.id !== id
     );
     setFieldValue("ingredients", updatedIngredients);
+    setFieldTouched("ingredients", true);
+    validateField("ingredients");
   };
 
   return {
