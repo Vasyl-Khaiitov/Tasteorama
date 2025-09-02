@@ -19,6 +19,8 @@
   border-radius: 32px;
   padding: 56px 24px 32px;
   background-color: #faf3e0;
+  width: 90%;
+  max-width: 420px;
 }
 
 .closeBtn {

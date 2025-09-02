@@ -11,7 +11,7 @@ import Steps from "../Steps/Steps";
 import { useSelector } from "react-redux";
 import Icon from "../../../shared/Icon";
 import About from "../About/About";
-import Button from "../../../common/Button/Button";
+
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -24,7 +24,7 @@ import {
   deleteFromFavorites,
 } from "../../../redux/favorites/operation";
 
-export default function RecipeDetails({}) {
+export default function RecipeDetails() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -34,6 +34,10 @@ export default function RecipeDetails({}) {
   const recipe = useSelector(selectCurrentRecipe);
 
   const { categories } = useCategoryManager();
+  const [showModal, setShowModal] = useState(false);
+  const isFavorite = useSelector((state) =>
+    recipeId ? state.favorites.items.some((r) => r._id === recipeId) : false
+  );
 
   if (!recipe) return <NotFound />; // ✅ спочатку перевірка
 
@@ -45,12 +49,6 @@ export default function RecipeDetails({}) {
       : "Loading...";
 
   const isOwner = user?.id === recipe.owner; // ✅ тепер можна
-
-  const isFavorite = useSelector((state) =>
-    recipeId ? state.favorites.items.some((r) => r._id === recipeId) : false
-  );
-
-  const [showModal, setShowModal] = useState(false);
 
   const handleFavoriteClick = (e) => {
     e.stopPropagation();

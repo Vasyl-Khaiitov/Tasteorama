@@ -15,7 +15,7 @@ export default function AuthorModal({ onClose, onLogin, onRegister }) {
           styleType="transparent"
           name="Log in"
           paddingsY={8}
-          paddingsX="54"
+          paddingsX="56"
           aria-label="Log in"
           className={css.loginBtn}
           onClick={onLogin}
@@ -25,7 +25,7 @@ export default function AuthorModal({ onClose, onLogin, onRegister }) {
           styleType="brown"
           name="Register"
           paddingsY={8}
-          paddingsX="54"
+          paddingsX="48"
           aria-label="Register"
           className={css.authBtn}
           onClick={onRegister}
