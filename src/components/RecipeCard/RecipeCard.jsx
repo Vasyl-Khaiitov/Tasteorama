@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import { useState } from "react";
 import AuthModal from "../AuthModal/AuthModal";
-import { selectIsFavorite } from "../../redux/favorites/selectors";
 import {
   addToFavorites,
   deleteFromFavorites,
@@ -83,17 +82,18 @@ export function RecipeCard({
           Learn more
         </NavLink>
 
-        {customButton ? (
-          customButton
-        ) : (
-          <button
-            type="button"
-            className={`${style.btnIcon} ${isFavorite ? style.active : ""}`}
-            onClick={handleFavoriteClick}
-          >
-            <Icon name="flag" classname={style.icon} />
-          </button>
-        )}
+        {!hideFavoriteButton &&
+          (customButton ? (
+            customButton
+          ) : (
+            <button
+              type="button"
+              className={`${style.btnIcon} ${isFavorite ? style.active : ""}`}
+              onClick={handleFavoriteClick}
+            >
+              <Icon name="flag" classname={style.icon} />
+            </button>
+          ))}
       </div>
 
       {showModal && (
