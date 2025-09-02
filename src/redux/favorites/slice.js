@@ -66,6 +66,9 @@ const favoritesSlice = createSlice({
       .addCase(deleteFromFavorites.fulfilled, (state, action) => {
         const id = action.payload;
         state.items = state.items.filter((r) => r._id !== id);
+        if (state.total > 0) {
+          state.total -= 1;
+        }
       })
       .addCase(deleteFromFavorites.rejected, handleError)
       .addCase(fetchLogoutUser.fulfilled, (state) => {

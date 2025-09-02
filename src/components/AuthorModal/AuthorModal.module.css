@@ -1,7 +1,14 @@
 .btnWrapper {
   display: flex;
-  gap: 27px;
+  flex-direction: column;
+  gap: 16px;
 }
 .loginBtn {
   white-space: nowrap;
+}
+@media only screen and (min-width: 768px) {
+  .btnWrapper {
+    flex-direction: row;
+    gap: 27px;
+  }
 }

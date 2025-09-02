@@ -12,13 +12,19 @@ export default function Modal({ title, message, onClose, children }) {
     };
 
     document.addEventListener("keydown", handleKeyDown);
-
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [onClose]);
+
+  const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
-    <div className={css.backdrop}>
+    <div className={css.backdrop} onClick={handleBackdropClick}>
       <div className={css.modal}>
         <button
           className={css.closeBtn}

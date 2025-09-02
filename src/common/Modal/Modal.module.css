@@ -16,6 +16,15 @@
   border-radius: 32px;
   padding: 56px 24px 32px;
   background-color: #faf3e0;
+  width: 90%;
+  max-width: 420px;
+  box-sizing: border-box;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 .closeBtn {
   position: absolute;
@@ -47,6 +56,14 @@
   font-size: 16px;
   line-height: 1.55;
   margin-bottom: 20px;
+}
+.actions button {
+  width: 100%; /* щоб кнопки займали всю ширину */
+}
+@media only screen and (min-width: 768px) {
+  .actions {
+    flex-direction: row;
+  }
 }
 @media only screen and (min-width: 1440px) {
   .modal {
