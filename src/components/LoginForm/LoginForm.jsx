@@ -35,7 +35,8 @@ export default function LoginForm() {
       try {
         await dispatch(fetchLoginUser(values)).unwrap();
         navigate("/");
-      } finally {
+      } 
+      finally {
         actions.setSubmitting(false);
       }
     },

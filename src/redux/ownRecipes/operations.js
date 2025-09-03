@@ -17,7 +17,7 @@ export const fetchOwnRecipes = createAsyncThunk(
         },
       });
 
-      return { recipes: res.data.data || [], totalItems: res.data.total ?? 0 };
+      return { recipes: res.data.data || [], totalItems: res.data.totalItems ?? 0 };
     } catch (err) {
       if (err.response?.status === 404) {
         return thunkAPI.fulfillWithValue({
