@@ -6,7 +6,6 @@ import { selectCategories } from "../../redux/categories/selectors";
 export const useCategoryManager = () => {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
-  console.log("Categories:", categories);
 
   useEffect(() => {
     dispatch(fetchCategories());
