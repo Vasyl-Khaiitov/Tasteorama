@@ -15,7 +15,7 @@ export const fetchRegisterUser = createAsyncThunk(
       const { accessToken } = res.data.data; // <-- виправлено
       setAuthorizationToken(accessToken);
 
-      const dataUser = await apiClient.get("/currentUser");
+      const dataUser = await apiClient.get("/users/currentUser");
       return {
         user: dataUser.data.data.info, // тут точно лежить { name, email, id, ... }
         token: accessToken,
@@ -38,7 +38,7 @@ export const fetchLoginUser = createAsyncThunk(
       const { accessToken } = res.data.data;
       setAuthorizationToken(accessToken);
 
-      const dataUser = await apiClient.get("/currentUser");
+      const dataUser = await apiClient.get("/users/currentUser");
       thunkAPI.dispatch(
         fetchFavoriteRecipes({
           userId: dataUser.data.data.info.id,
@@ -76,7 +76,7 @@ export const fetchCurrentUser = createAsyncThunk(
   "auth/fetchCurrentUser",
   async (_, thunkAPI) => {
     try {
-      const res = await apiClient.get("/currentUser");
+      const res = await apiClient.get("/users/currentUser");
       console.log("API /users response:", res);
       return res.data.data.info;
     } catch (err) {
