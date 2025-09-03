@@ -15,14 +15,14 @@ export const fetchRecipes = createAsyncThunk(
         },
       });
 
-      const { result } = res.data; // беремо саме поле "result"
+      const { data } = res.data; // беремо саме поле "result"
 
       return {
-        items: result.data, // масив рецептів
-        page: result.page,
-        perPage: result.perPage,
-        hasNextPage: result.hasNextPage,
-        total: result.totalItems,
+        items: data.data, // масив рецептів
+        page: data.page,
+        perPage: data.perPage,
+        hasNextPage: data.hasNextPage,
+        total: data.totalItems,
       };
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -44,14 +44,14 @@ export const loadMoreRecipes = createAsyncThunk(
         },
       });
 
-      const { result } = res.data;
+      const { data } = res.data;
 
       return {
-        items: result.data,
-        page: result.page,
-        perPage: result.perPage,
-        hasNextPage: result.hasNextPage,
-        total: result.totalItems,
+        items: data.data,
+        page: data.page,
+        perPage: data.perPage,
+        hasNextPage: data.hasNextPage,
+        total: data.totalItems,
       };
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
