@@ -10,7 +10,6 @@ export const fetchRegisterUser = createAsyncThunk(
   async (newUser, thunkAPI) => {
     try {
       const res = await apiClient.post("/auth/register", newUser);
-      console.log("REGISTER RESPONSE:", res);
 
       const { accessToken } = res.data.data; // <-- виправлено
       setAuthorizationToken(accessToken);
@@ -30,10 +29,8 @@ export const fetchRegisterUser = createAsyncThunk(
 export const fetchLoginUser = createAsyncThunk(
   "auth/fetchLoginUser",
   async (credentials, thunkAPI) => {
-    console.log("THUNK STARTED", credentials);
     try {
       const res = await apiClient.post("/auth/login", credentials);
-      console.log("LOGIN RESPONSE:", res);
 
       const { accessToken } = res.data.data;
       setAuthorizationToken(accessToken);
@@ -77,7 +74,6 @@ export const fetchCurrentUser = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await apiClient.get("/users/currentUser");
-      console.log("API /users response:", res);
       return res.data.data.info;
     } catch (err) {
       if (err.response?.status === 401) {

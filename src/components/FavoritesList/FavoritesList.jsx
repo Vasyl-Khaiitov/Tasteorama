@@ -52,7 +52,6 @@ export default function FavoritesList() {
       setLocalPage((prev) => prev + 1);
     }
   };
-  console.log("🚀 ~ total:", total);
 
   return (
     <>
