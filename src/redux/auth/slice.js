@@ -40,8 +40,6 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchLoginUser.fulfilled, (state, { payload }) => {
-        state.isLoading = true;
-
         state.error = null;
         state.user = payload.user;
         state.token = payload.token;
