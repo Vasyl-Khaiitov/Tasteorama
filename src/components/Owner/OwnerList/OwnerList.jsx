@@ -43,17 +43,15 @@ export default function OwnerList() {
       <ul className={style.list}>
         {ownRecipes.map((recipe) => (
           <li className={style.item} key={recipe._id}>
-            <div className={style.cardWrapper}>
-              <RecipeCard
-                recipeId={recipe._id}
-                dishPhoto={recipe.thumb}
-                recipeName={recipe.title}
-                recipeDescription={recipe.description}
-                recipeTime={recipe.time}
-                hideFavoriteButton
-                fullWidthBtn
-              />
-            </div>
+            <RecipeCard
+              recipeId={recipe._id}
+              dishPhoto={recipe.thumb}
+              recipeName={recipe.title}
+              recipeDescription={recipe.description}
+              recipeTime={recipe.time}
+              hideFavoriteButton
+              fullWidthBtn
+            />
           </li>
         ))}
       </ul>
