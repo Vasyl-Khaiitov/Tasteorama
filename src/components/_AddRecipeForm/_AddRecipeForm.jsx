@@ -19,6 +19,7 @@ import { toast } from "react-toastify";
 import { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { resetCreatedRecipe } from "../../redux/addRecipes/slice";
+import { fetchOwnRecipes } from "../../redux/ownRecipes/operations";
 
 export default function AddRecipeForm() {
   const formikRef = useRef(null);
@@ -43,10 +44,10 @@ export default function AddRecipeForm() {
 
     formData.append("title", values.title);
     formData.append("category", values.category);
-    formData.append("calories", String(values.calories || ""));
+    formData.append("calories", Number(values.calories || ""));
     formData.append("instructions", values.instructions);
     formData.append("description", values.description);
-    formData.append("time", String(values.time));
+    formData.append("time", Number(values.time));
     formData.append("ingredients", JSON.stringify(cleanedIngredients));
 
     if (values.thumb) {
@@ -59,6 +60,7 @@ export default function AddRecipeForm() {
   useEffect(() => {
     if (createdRecipe && !error) {
       toast.success("Recipe successfully added!");
+      dispatch(fetchOwnRecipes({ page: 1, perPage: 12 }));
       navigate("/profile/owner", { replace: true });
       dispatch(resetCreatedRecipe());
     } else if (error) {

@@ -1,3 +1,4 @@
+import React from "react";
 import css from "./Button.module.css";
 import { clsx } from "clsx";
 
@@ -13,14 +14,18 @@ export default function Button({
   children,
   className,
 }) {
+  const adjustedPaddingsY =
+    typeof name !== "string" && React.isValidElement(name)
+      ? paddingsY + 8
+      : paddingsY;
+
   return (
     <button
       className={clsx(css.button, styleType && css[styleType], className)}
       type={type}
       disabled={disabled}
       style={{
-        padding: `${paddingsY}px ${paddingsX}px`,
-        // maxWidth: maxWidth,
+        padding: `${adjustedPaddingsY}px ${paddingsX}px`,
       }}
       onClick={onClick}
     >

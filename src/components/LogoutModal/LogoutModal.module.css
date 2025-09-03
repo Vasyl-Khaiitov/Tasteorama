@@ -7,6 +7,7 @@
   white-space: nowrap;
   cursor: pointer;
 }
+
 @media only screen and (min-width: 768px) {
   .btnWrapper {
     flex-direction: row;

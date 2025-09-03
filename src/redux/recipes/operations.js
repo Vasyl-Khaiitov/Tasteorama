@@ -6,43 +6,53 @@ export const fetchRecipes = createAsyncThunk(
   async ({ page, perPage, title, category, ingredient }, thunkAPI) => {
     try {
       const res = await apiClient.get("/recipes", {
-        params: { page, perPage, title: title || "", category: category || "",
-          ingredients: ingredient || "" },
+        params: {
+          page,
+          perPage,
+          title: title || "",
+          category: category || "",
+          ingredients: ingredient || "",
+        },
       });
 
-      const { data } = res.data; // беремо саме поле "data"
+      const { result } = res.data; // беремо саме поле "result"
 
       return {
-        items: data.data, // масив рецептів
-        page: data.page,
-        perPage: data.perPage,
-        hasNextPage: data.hasNextPage,
-        total: data.totalItems,
+        items: result.data, // масив рецептів
+        page: result.page,
+        perPage: result.perPage,
+        hasNextPage: result.hasNextPage,
+        total: result.totalItems,
       };
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
-  
-  });
+  }
+);
 
 export const loadMoreRecipes = createAsyncThunk(
   "recipes/loadMoreRecipes",
   async ({ page, perPage, title, category, ingredient }, thunkAPI) => {
     try {
       const res = await apiClient.get("/recipes", {
-        params: { page, perPage, title: title || "", category: category || "",
-          ingredients: ingredient || "" },
+        params: {
+          page,
+          perPage,
+          title: title || "",
+          category: category || "",
+          ingredients: ingredient || "",
+        },
       });
       
 
-      const { data } = res.data;
+      const { result } = res.data;
 
       return {
-        items: data.data,
-        page: data.page,
-        perPage: data.perPage,
-        hasNextPage: data.hasNextPage,
-        total: data.totalItems,
+        items: result.data,
+        page: result.page,
+        perPage: result.perPage,
+        hasNextPage: result.hasNextPage,
+        total: result.totalItems,
       };
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);

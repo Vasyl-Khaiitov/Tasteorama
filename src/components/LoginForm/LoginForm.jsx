@@ -8,6 +8,7 @@ import Button from "../../common/Button/Button";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchLoginUser } from "../../redux/auth/operations";
+import Loader from "../Loader/Loader";
 
 const initialValues = {
   email: "",
@@ -52,34 +53,56 @@ export default function LoginForm() {
         onSubmit={handleSubmit}
       >
         {({ isValid, dirty, isSubmitting }) => (
-          <Form className={css.form}>
-            <div className={css.inputContainer}>
-              <Input
-                name="email"
-                type="email"
-                placeholder="email@gmail.com"
-                labelText="Enter your email address"
-              />
+          <>
+            {/* {isSubmitting && (
+              <div className={css.loaderOverlay}>
+                <Loader />
+              </div>
+            )} */}
+            <Form className={css.form}>
+              <div className={css.inputContainer}>
+                <Input
+                  name="email"
+                  type="email"
+                  placeholder="email@gmail.com"
+                  labelText="Enter your email address"
+                />
 
-              <Input
-                name="password"
-                type="password"
-                placeholder="********"
-                labelText="Create a strong password"
-                showToggle={true}
-                show={showPassword}
-                onToggle={() => setShowPassword(!showPassword)}
-              />
-            </div>
+                <Input
+                  name="password"
+                  type="password"
+                  placeholder="********"
+                  labelText="Create a strong password"
+                  showToggle={true}
+                  show={showPassword}
+                  onToggle={() => setShowPassword(!showPassword)}
+                />
+              </div>
 
-            <Button
-              type="submit"
-              styleType="brown"
-              paddingsY={8}
-              name="Login"
-              disabled={!isValid || !dirty || isSubmitting}
-            />
-          </Form>
+              <Button
+                type="submit"
+                styleType="brown"
+                paddingsY={8}
+                name={
+                  isSubmitting ? (
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        height: "100%",
+                      }}
+                    >
+                      <Loader size={20} />
+                    </div>
+                  ) : (
+                    "Login"
+                  )
+                }
+                disabled={!isValid || !dirty || isSubmitting}
+              />
+            </Form>
+          </>
         )}
       </Formik>
       <p className={css.footer}>

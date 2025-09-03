@@ -8,6 +8,7 @@ import Button from "../../common/Button/Button";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchRegisterUser } from "../../redux/auth/operations";
+import Loader from "../Loader/Loader";
 
 const initialValues = {
   name: "",
@@ -106,7 +107,22 @@ export default function RegistrationForm() {
               type="submit"
               styleType="brown"
               paddingsY={8}
-              name="Create account"
+              name={
+                isSubmitting ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "100%",
+                    }}
+                  >
+                    <Loader size={20} />
+                  </div>
+                ) : (
+                  "Create account"
+                )
+              }
               disabled={!isValid || !dirty || isSubmitting}
             />
           </Form>
