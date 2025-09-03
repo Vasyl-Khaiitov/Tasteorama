@@ -68,8 +68,6 @@ export default function RecipeDetails() {
     setShowModal(false);
   };
 
-  console.log(recipe, user);
-
   return (
     <>
       <div className={styles.wrapperImgh}>
