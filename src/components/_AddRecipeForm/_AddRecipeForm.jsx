@@ -43,10 +43,10 @@ export default function AddRecipeForm() {
 
     formData.append("title", values.title);
     formData.append("category", values.category);
-    formData.append("calories", String(values.calories || ""));
+    formData.append("calories", Number(values.calories || ""));
     formData.append("instructions", values.instructions);
     formData.append("description", values.description);
-    formData.append("time", String(values.time));
+    formData.append("time", Number(values.time));
     formData.append("ingredients", JSON.stringify(cleanedIngredients));
 
     if (values.thumb) {
