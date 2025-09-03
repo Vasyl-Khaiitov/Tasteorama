@@ -25,7 +25,9 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchRegisterUser.pending, handlePending)
+      .addCase(fetchRegisterUser.pending, (state) => {
+        state.error = null;
+      })
       .addCase(fetchRegisterUser.fulfilled, (state, { payload }) => {
         state.error = null;
         state.user = payload.user;
@@ -34,8 +36,9 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(fetchRegisterUser.rejected, handleError)
-
-      .addCase(fetchLoginUser.pending, handlePending)
+      .addCase(fetchLoginUser.pending, (state) => {
+        state.error = null;
+      })
       .addCase(fetchLoginUser.fulfilled, (state, { payload }) => {
         state.error = null;
         state.user = payload.user;
