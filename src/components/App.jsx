@@ -49,7 +49,7 @@ export default function App() {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <strong>Refreshing user...</strong>
+    <strong>Please wait refreshing user...</strong>
   ) : (
     <div className={styles.appWrapper}>
       <Header />
